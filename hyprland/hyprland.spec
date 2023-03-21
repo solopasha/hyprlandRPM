@@ -12,7 +12,7 @@
 
 Name:           hyprland
 Version:        0.23.0^5.git%{hyprland_shortcommit}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 License:        BSD-3-Clause AND MIT AND BSD-2-Clause
@@ -65,9 +65,11 @@ BuildRequires:  pkgconfig(xwayland)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  pkgconfig(libdisplay-info)
+BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
 
 Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       pango%{?_isa}
+Requires:       libliftoff%{?_isa} >= 0.4.1
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
