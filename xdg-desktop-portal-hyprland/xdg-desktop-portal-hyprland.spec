@@ -7,7 +7,7 @@
 
 Name:           xdg-desktop-portal-hyprland
 Version:        0.6.0^2.git%{portal_shortcommit}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
