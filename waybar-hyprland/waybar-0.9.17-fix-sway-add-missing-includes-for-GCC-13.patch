@@ -1,0 +1,39 @@
+From 338ce3b909a48e00679a1ca266c2f9f88d325659 Mon Sep 17 00:00:00 2001
+From: Aleksei Bavshin <alebastr89@gmail.com>
+Date: Mon, 16 Jan 2023 10:27:21 -0800
+Subject: [PATCH] fix(sway): add missing includes for GCC 13
+
+See also: https://gcc.gnu.org/gcc-13/porting_to.html
+---
+ include/modules/sway/ipc/client.hpp | 1 +
+ src/modules/sway/ipc/client.cpp     | 2 ++
+ 2 files changed, 3 insertions(+)
+
+diff --git a/include/modules/sway/ipc/client.hpp b/include/modules/sway/ipc/client.hpp
+index 77dab08..a6705ea 100644
+--- a/include/modules/sway/ipc/client.hpp
++++ b/include/modules/sway/ipc/client.hpp
+@@ -8,6 +8,7 @@
+ #include <cstring>
+ #include <memory>
+ #include <mutex>
++#include <string>
+ 
+ #include "ipc.hpp"
+ #include "util/sleeper_thread.hpp"
+diff --git a/src/modules/sway/ipc/client.cpp b/src/modules/sway/ipc/client.cpp
+index 4d6495c..5c3df7b 100644
+--- a/src/modules/sway/ipc/client.cpp
++++ b/src/modules/sway/ipc/client.cpp
+@@ -2,6 +2,8 @@
+ 
+ #include <fcntl.h>
+ 
++#include <stdexcept>
++
+ namespace waybar::modules::sway {
+ 
+ Ipc::Ipc() {
+-- 
+2.39.0
+

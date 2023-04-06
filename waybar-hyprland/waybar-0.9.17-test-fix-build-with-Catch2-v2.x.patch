@@ -1,0 +1,118 @@
+From 82d6c25b19ea810a308dd0f51daa4bca6426c527 Mon Sep 17 00:00:00 2001
+From: Aleksei Bavshin <alebastr89@gmail.com>
+Date: Mon, 16 Jan 2023 11:04:56 -0800
+Subject: [PATCH] test: fix build with Catch2 v2.x
+
+Use smaller includes for Catch2 v3.
+---
+ meson.build          |  2 +-
+ test/SafeSignal.cpp  |  6 +++++-
+ test/config.cpp      |  6 +++++-
+ test/main.cpp        | 15 +++++++++++++--
+ test/waybar_time.cpp |  7 ++++++-
+ 5 files changed, 30 insertions(+), 6 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index ebf68d4..7b63181 100644
+--- a/meson.build
++++ b/meson.build
+@@ -447,7 +447,7 @@ endif
+ 
+ catch2 = dependency(
+     'catch2',
+-    version: '>=3.0.0',
++    version: '>=2.0.0',
+     fallback: ['catch2', 'catch2_dep'],
+     required: get_option('tests'),
+ )
+diff --git a/test/SafeSignal.cpp b/test/SafeSignal.cpp
+index 7ff6f2a..f496d7a 100644
+--- a/test/SafeSignal.cpp
++++ b/test/SafeSignal.cpp
+@@ -2,7 +2,11 @@
+ 
+ #include <glibmm.h>
+ 
+-#include <catch2/catch_all.hpp>
++#if __has_include(<catch2/catch_test_macros.hpp>)
++#include <catch2/catch_test_macros.hpp>
++#else
++#include <catch2/catch.hpp>
++#endif
+ #include <thread>
+ #include <type_traits>
+ 
+diff --git a/test/config.cpp b/test/config.cpp
+index cdc96b0..3d0f007 100644
+--- a/test/config.cpp
++++ b/test/config.cpp
+@@ -1,6 +1,10 @@
+ #include "config.hpp"
+ 
+-#include <catch2/catch_all.hpp>
++#if __has_include(<catch2/catch_test_macros.hpp>)
++#include <catch2/catch_test_macros.hpp>
++#else
++#include <catch2/catch.hpp>
++#endif
+ 
+ TEST_CASE("Load simple config", "[config]") {
+   waybar::Config conf;
+diff --git a/test/main.cpp b/test/main.cpp
+index 7970c26..daeee69 100644
+--- a/test/main.cpp
++++ b/test/main.cpp
+@@ -3,8 +3,13 @@
+ #include <spdlog/sinks/stdout_sinks.h>
+ #include <spdlog/spdlog.h>
+ 
++#if __has_include(<catch2/catch_all.hpp>)
+ #include <catch2/catch_all.hpp>
+ #include <catch2/reporters/catch_reporter_tap.hpp>
++#else
++#include <catch2/catch.hpp>
++#include <catch2/catch_reporter_tap.hpp>
++#endif
+ #include <memory>
+ 
+ int main(int argc, char* argv[]) {
+@@ -13,10 +18,16 @@ int main(int argc, char* argv[]) {
+ 
+   session.applyCommandLine(argc, argv);
+   const auto logger = spdlog::default_logger();
++#if CATCH_VERSION_MAJOR >= 3
+   for (const auto& spec : session.config().getReporterSpecs()) {
+-    if (spec.name() == "tap") {
++    const auto& reporter_name = spec.name();
++#else
++  {
++    const auto& reporter_name = session.config().getReporterName();
++#endif
++    if (reporter_name == "tap") {
+       spdlog::set_pattern("# [%l] %v");
+-    } else if (spec.name() == "compact") {
++    } else if (reporter_name == "compact") {
+       logger->sinks().clear();
+     } else {
+       logger->sinks().assign({std::make_shared<spdlog::sinks::stderr_sink_st>()});
+diff --git a/test/waybar_time.cpp b/test/waybar_time.cpp
+index 79469d4..9f9f5dc 100644
+--- a/test/waybar_time.cpp
++++ b/test/waybar_time.cpp
+@@ -3,7 +3,12 @@
+ #include <date/date.h>
+ #include <date/tz.h>
+ 
+-#include <catch2/catch_all.hpp>
++#if __has_include(<catch2/catch_test_macros.hpp>)
++#include <catch2/catch_test_macros.hpp>
++#include <catch2/matchers/catch_matchers_all.hpp>
++#else
++#include <catch2/catch.hpp>
++#endif
+ #include <chrono>
+ #include <stdexcept>
+ 
+-- 
+2.39.0
+
