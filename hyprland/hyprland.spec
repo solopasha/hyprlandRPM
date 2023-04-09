@@ -12,7 +12,7 @@
 
 Name:           hyprland
 Version:        0.24.1^1.git%{hyprland_shortcommit}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 License:        BSD-3-Clause AND MIT AND BSD-2-Clause
@@ -128,7 +128,7 @@ mv udis86-%{udis86_commit}/* subprojects/udis86
 %{_libdir}/libwlroots.a
 %{_libdir}/pkgconfig/wlroots.pc
 %{_datadir}/pkgconfig/hyprland-protocols.pc
-%{_datadir}/protocols/hyprland-toplevel-export-*.xml
+%{_datadir}/protocols/hyprland-*.xml
 
 
 %changelog
