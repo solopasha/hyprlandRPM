@@ -6,7 +6,7 @@
 
 
 Name:           xdg-desktop-portal-hyprland
-Version:        0.6.0^3.git%{portal_shortcommit}
+Version:        0.6.0^4.git%{portal_shortcommit}
 Release:        1%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
