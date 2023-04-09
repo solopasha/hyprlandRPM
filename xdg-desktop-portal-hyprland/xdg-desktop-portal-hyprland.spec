@@ -1,7 +1,7 @@
-%global portal_commit 803c00db1191604d50766358dbc5be2de4fcb4e7
+%global portal_commit 510257c0e9a2311d1d4087b29a80eb57d25c6105
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
 
-%global protocols_commit b8f55e02a328c47ed373133c52483bbfa20a1b75
+%global protocols_commit d7d403b711b60e8136295b0d4229e89a115e80cc
 %global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
 
 
