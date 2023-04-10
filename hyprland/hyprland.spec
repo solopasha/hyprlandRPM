@@ -4,7 +4,7 @@
 %global wlroots_commit 7abda952d0000b72d240fe1d41457b9288f0b6e5
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
-%global protocols_commit d7d403b711b60e8136295b0d4229e89a115e80cc
+%global protocols_commit 4d29e48433270a2af06b8bc711ca1fe5109746cd
 %global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
 
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86

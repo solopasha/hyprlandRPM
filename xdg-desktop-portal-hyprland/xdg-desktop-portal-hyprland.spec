@@ -1,12 +1,13 @@
-%global portal_commit 510257c0e9a2311d1d4087b29a80eb57d25c6105
+%global portal_commit 04f579377a32781ce57c9cf4ba2a5bcb7f53fa97
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
 
-%global protocols_commit d7d403b711b60e8136295b0d4229e89a115e80cc
+%global protocols_commit 4d29e48433270a2af06b8bc711ca1fe5109746cd
 %global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
 
 
 Name:           xdg-desktop-portal-hyprland
-Version:        0.6.0^4.git%{portal_shortcommit}
+Epoch:          1
+Version:        0.2.1^1.git%{portal_shortcommit}
 Release:        1%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
@@ -35,6 +36,7 @@ BuildRequires:  cmake
 BuildRequires:  ninja-build
 BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  pkgconfig(xkbcommon)
+BuildRequires:  pkgconfig(uuid)
 
 Requires:       dbus
 # required for Screenshot portal implementation
@@ -98,6 +100,6 @@ cd hyprland-share-picker
 
 %files devel
 %{_datadir}/pkgconfig/hyprland-protocols.pc
-%{_datadir}/protocols/
+%{_datadir}/hyprland-protocols/
 
 %changelog
