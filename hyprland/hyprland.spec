@@ -1,4 +1,4 @@
-%global hyprland_commit c03db1a1cd620fe30d7b186a4d20fbbbd47df446
+%global hyprland_commit 33d06fb0e5033412638edec5a8d78cbec844132a
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
 
 %global wlroots_commit 7abda952d0000b72d240fe1d41457b9288f0b6e5
@@ -11,7 +11,7 @@
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
 Name:           hyprland
-Version:        0.24.1^1.git%{hyprland_shortcommit}
+Version:        0.24.1^2.git%{hyprland_shortcommit}
 Release:        2%{?dist}
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
@@ -128,7 +128,7 @@ mv udis86-%{udis86_commit}/* subprojects/udis86
 %{_libdir}/libwlroots.a
 %{_libdir}/pkgconfig/wlroots.pc
 %{_datadir}/pkgconfig/hyprland-protocols.pc
-%{_datadir}/protocols/hyprland-*.xml
+%{_datadir}/hyprland-protocols/
 
 
 %changelog
