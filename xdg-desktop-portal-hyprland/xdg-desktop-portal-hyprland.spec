@@ -1,4 +1,4 @@
-%global portal_commit 04f579377a32781ce57c9cf4ba2a5bcb7f53fa97
+%global portal_commit 2366b4d415900b72c4001770ed8456bcfff569f4
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
 
 %global protocols_commit 4d29e48433270a2af06b8bc711ca1fe5109746cd
@@ -7,7 +7,7 @@
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        0.2.1^1.git%{portal_shortcommit}
+Version:        0.2.1^2.git%{portal_shortcommit}
 Release:        1%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
