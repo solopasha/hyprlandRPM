@@ -1,20 +1,15 @@
-%global portal_commit 2366b4d415900b72c4001770ed8456bcfff569f4
+%global portal_commit bf035bf3d5b56fd3da9d11966ad0b3c57f852d78
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
-
-%global protocols_commit 4d29e48433270a2af06b8bc711ca1fe5109746cd
-%global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
-
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        0.2.1^2.git%{portal_shortcommit}
+Version:        0.2.1^3.git%{portal_shortcommit}
 Release:        1%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
 URL:            https://github.com/hyprwm/%{name}
 Source0:        %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
-Source1:        https://github.com/hyprwm/hyprland-protocols/archive/%{protocols_commit}/protocols-%{protocols_shortcommit}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  meson
@@ -37,6 +32,7 @@ BuildRequires:  ninja-build
 BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(uuid)
+BuildRequires:  pkgconfig(hyprland-protocols)
 
 Requires:       dbus
 # required for Screenshot portal implementation
@@ -52,20 +48,10 @@ Supplements:    (hyprland and (flatpak or snapd))
 
 %description
 %{summary}.
-This project seeks to add support for the screenshot, screencast, and possibly
-remote-desktop xdg-desktop-portal interfaces for wlroots based compositors.
 
-%package devel
-Summary:    Devel files for the %{name}
-Requires:   %{name}%{?_isa} = %{version}-%{release}
-
-%description devel
-%{summary}.
 
 %prep
 %autosetup -n %{name}-%{portal_commit}
-%setup -qn %{name}-%{portal_commit} -DT -a1
-mv hyprland-protocols-%{protocols_commit}/* subprojects/hyprland-protocols
 
 
 %build
@@ -98,8 +84,5 @@ cd hyprland-share-picker
 %{_datadir}/dbus-1/services/*.service
 %{_userunitdir}/%{name}.service
 
-%files devel
-%{_datadir}/pkgconfig/hyprland-protocols.pc
-%{_datadir}/hyprland-protocols/
 
 %changelog
