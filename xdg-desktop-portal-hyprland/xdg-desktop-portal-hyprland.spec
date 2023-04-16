@@ -4,7 +4,7 @@
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
 Version:        0.2.1^3.git%{portal_shortcommit}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
@@ -38,10 +38,8 @@ Requires:       dbus
 # required for Screenshot portal implementation
 Requires:       grim
 Requires:       xdg-desktop-portal
-# required for Screencast output selection.
-# xdpw will try to use first available of the 3 utilities
-Recommends:     (slurp or wofi or bemenu)
-Suggests:       slurp
+# required for  hyprland-share-picker
+Requires:       slurp
 
 Enhances:       hyprland
 Supplements:    (hyprland and (flatpak or snapd))
