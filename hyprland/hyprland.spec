@@ -1,4 +1,4 @@
-%global hyprland_commit c86f06caa0be207882266947da67125177bba5af
+%global hyprland_commit 6e58428336e55cf218812729ed99652d80f6f19b
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
 
 %global wlroots_commit 7abda952d0000b72d240fe1d41457b9288f0b6e5
@@ -11,7 +11,7 @@
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
 Name:           hyprland
-Version:        0.24.1^5.git%{hyprland_shortcommit}
+Version:        0.24.1^6.git%{hyprland_shortcommit}
 Release:        1%{?dist}
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
@@ -74,11 +74,11 @@ Requires:       libliftoff%{?_isa} >= 0.4.1
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
 sacrifice on its looks.  It supports multiple layouts, fancy effects, has a
-very flexible IPC model allowing for a lot of customization, and more.
+very flexible IPC model allowing for a lot of customization, a powerful 
+plugin system and more.
 
 %package devel
 Summary:        Static library and header files for the %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
 Recommends:     pkgconfig(xcb-icccm)
 Suggests:       gcc
 Suggests:       meson >= 0.58.0
