@@ -12,12 +12,12 @@ BuildRequires:  gcc-c++
 BuildRequires:  pkgconfig
 
 BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(libjpeg)
 BuildRequires:  pkgconfig(pango)
 BuildRequires:  pkgconfig(pangocairo)
-BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(wayland-client)
-BuildRequires:  pkgconfig(libjpeg)
-BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(wayland-protocols)
 
 %description
 Hyprpaper is a blazing fast wallpaper utility for Hyprland with the ability
@@ -42,7 +42,6 @@ install -m0755 -Dp %{__cmake_builddir}/%{name} %{buildroot}%{_bindir}/%{name}
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
-
 
 
 %changelog
