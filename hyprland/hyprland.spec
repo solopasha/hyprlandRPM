@@ -1,4 +1,4 @@
-%global hyprland_commit 67c73ec10036c5ff9bda392390ecc7af48d4feee
+%global hyprland_commit 1a91c6ee603e3e779f288ad9189992faeda944f8
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
 
 %global wlroots_commit 00489b11a0d926058d23584e2ad0e2b64f5b7406
@@ -11,7 +11,7 @@
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
 Name:           hyprland
-Version:        0.24.1^11.git%{hyprland_shortcommit}
+Version:        0.24.1^12.git%{hyprland_shortcommit}
 Release:        1%{?dist}
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
@@ -70,6 +70,7 @@ BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
 Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       pango%{?_isa}
 Requires:       libliftoff%{?_isa} >= 0.4.1
+Requires:       libwayland-server%{?_isa} >= 1.22.0
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
