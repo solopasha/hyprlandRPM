@@ -23,7 +23,7 @@ if [[ $oldWlrootsCommit != "$newWlrootsCommit" ]]; then
 fi
 
 if [[ $modified -ge 1 ]]; then
-    perl -pe 's/(?<=\^)(\d+)/$1 + 1/ge' -i hyprland.spec
+    perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland.spec
 fi
 
 git --no-pager diff
