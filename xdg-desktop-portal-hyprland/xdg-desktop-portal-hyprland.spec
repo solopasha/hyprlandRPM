@@ -1,10 +1,10 @@
-%global portal_commit bf035bf3d5b56fd3da9d11966ad0b3c57f852d78
+%global portal_commit f9f08c802e96ede147f25f724977a156324a4cf4
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        0.2.1^3.git%{portal_shortcommit}
-Release:        2%{?dist}
+Version:        0.3.0^1.git%{portal_shortcommit}
+Release:        1%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
