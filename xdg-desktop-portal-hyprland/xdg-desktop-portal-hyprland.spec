@@ -1,15 +1,20 @@
 %global portal_commit c0e233955568fbea4e859336f6d3d14d51294d7c
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
+%global bumpver 2
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        0.3.0^2.git%{portal_shortcommit}
+Version:        0.3.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
 Release:        1%{?dist}
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
 URL:            https://github.com/hyprwm/%{name}
-Source0:        %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
+%if 0%{?bumpver}
+Source:         %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
+%else
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+%endif
 
 BuildRequires:  gcc
 BuildRequires:  meson
@@ -49,7 +54,7 @@ Supplements:    (hyprland and (flatpak or snapd))
 
 
 %prep
-%autosetup -n %{name}-%{portal_commit}
+%autosetup %{?bumpver:-n %{name}-%{portal_commit}}
 
 
 %build

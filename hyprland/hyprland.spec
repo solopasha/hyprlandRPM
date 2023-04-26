@@ -39,7 +39,7 @@ BuildRequires:  meson
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  jq
-BuildRequires:  git
+BuildRequires:  git-core
 
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(pango)
@@ -82,11 +82,11 @@ BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
 # https://github.com/hyprwm/Hyprland/issues/302
-Provides:       bundled(wlroots) = 0.17.0~^1.%{wlroots_shortcommit}
+Provides:       bundled(wlroots) = 0.17.0~^1.%{?bumpver:%{wlroots_shortcommit}}%{!?bumpver:7abda95}
 
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
-Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
+Provides:       bundled(udis86) = 1.7.2^1.%{?bumpver:%{udis86_shortcommit}}%{!?bumpver:5336633}
 
 Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       pango%{?_isa}
