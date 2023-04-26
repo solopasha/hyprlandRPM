@@ -1,11 +1,11 @@
 %global portal_commit c0e233955568fbea4e859336f6d3d14d51294d7c
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
-%global bumpver 2
+#global bumpver 2
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        0.3.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
-Release:        1%{?dist}
+Version:        0.3.1%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
+Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
@@ -16,11 +16,14 @@ Source:         %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 %endif
 
+BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  meson
-BuildRequires:  systemd-rpm-macros
+BuildRequires:  ninja-build
 
+BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  pkgconfig(gbm)
+BuildRequires:  pkgconfig(hyprland-protocols)
 BuildRequires:  pkgconfig(inih)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpipewire-0.3)
@@ -28,22 +31,19 @@ BuildRequires:  pkgconfig(libspa-0.2)
 BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(scdoc)
 BuildRequires:  pkgconfig(systemd)
+BuildRequires:  pkgconfig(uuid)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.24
 BuildRequires:  pkgconfig(wayland-scanner)
-
-BuildRequires:  cmake
-BuildRequires:  ninja-build
-BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  pkgconfig(xkbcommon)
-BuildRequires:  pkgconfig(uuid)
-BuildRequires:  pkgconfig(hyprland-protocols)
+BuildRequires:  systemd-rpm-macros
+
 
 Requires:       dbus
 # required for Screenshot portal implementation
 Requires:       grim
 Requires:       xdg-desktop-portal
-# required for  hyprland-share-picker
+# required for hyprland-share-picker
 Requires:       slurp
 
 Enhances:       hyprland
@@ -89,3 +89,4 @@ cd hyprland-share-picker
 
 
 %changelog
+%autochangelog
