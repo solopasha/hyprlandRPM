@@ -100,7 +100,7 @@ very flexible IPC model allowing for a lot of customization, a powerful
 plugin system and more.
 
 %package        protocols-devel
-Summary:        Protocol files for the for the %{name}
+Summary:        Protocol files for the %{name}
 License:        BSD-3-Clause
 
 %description    protocols-devel
