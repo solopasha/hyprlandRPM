@@ -99,21 +99,12 @@ sacrifice on its looks.  It supports multiple layouts, fancy effects, has a
 very flexible IPC model allowing for a lot of customization, a powerful
 plugin system and more.
 
-%package devel
-Summary:        Static library and header files for the %{name}
-Recommends:     pkgconfig(xcb-icccm)
-Suggests:       gcc
-Suggests:       meson >= 0.58.0
-Suggests:       pkgconfig(libpng)
-Suggests:       pkgconfig(libavutil)
-Suggests:       pkgconfig(libavcodec)
-Suggests:       pkgconfig(libavformat)
-Suggests:       pkgconfig(wayland-egl)
-Conflicts:      wlroots-devel
+%package        protocols-devel
+Summary:        Protocol files for the for the %{name}
+License:        BSD-3-Clause
 
-%description devel
-The %{name}-devel package contains API documentation for
-developing %{name}.
+%description    protocols-devel
+%{summary}.
 
 
 %prep
@@ -141,19 +132,21 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 %install
 %meson_install
 
+rm -r %{buildroot}%{_includedir}/wlr
+rm -r %{buildroot}%{_libdir}/libwlroots.a
+rm -r %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
+
 %files
-%license LICENSE LICENSE-hyprland-protocols LICENSE-udis86 LICENSE-wlroots
+%license LICENSE LICENSE-udis86 LICENSE-wlroots
 %{_bindir}/Hyprland
 %{_bindir}/hyprctl
 %{_mandir}/man1/Hyprland.1*
 %{_mandir}/man1/hyprctl.1*
-%{_datadir}/%{name}/
+%{_datadir}/hyprland/
 %{_datadir}/wayland-sessions/hyprland.desktop
 
-%files devel
-%{_includedir}/wlr/
-%{_libdir}/libwlroots.a
-%{_libdir}/pkgconfig/wlroots.pc
+%files protocols-devel
+%license LICENSE-hyprland-protocols
 %{_datadir}/pkgconfig/hyprland-protocols.pc
 %{_datadir}/hyprland-protocols/
 
