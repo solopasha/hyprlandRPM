@@ -1,8 +1,8 @@
-%global hyprland_commit 28ca434fb52befa2058a6c23b21566c280654e03
+%global hyprland_commit 72d2f33b34951b7f5be6cdbc302b1c6a33cbf60f
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 14
+%global bumpver 15
 
-%global wlroots_commit 00489b11a0d926058d23584e2ad0e2b64f5b7406
+%global wlroots_commit 6830bfc17fd94709e2cdd4da0af989f102a26e59
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
 %global protocols_commit 4d29e48433270a2af06b8bc711ca1fe5109746cd
@@ -13,11 +13,11 @@
 
 Name:           hyprland
 Version:        0.24.1%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
-Release:        1%{?dist}
+Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
-# subprojects/hyprland-protocols BSD-3-Clause
+# subprojects/hyprland-protocols: BSD-3-Clause
 # subprojects/wlroots: MIT
 # subproject/udis86: BSD-2-Clause
 # protocols/ext-workspace-unstable-v1.xml: HPND-sell-variant
@@ -35,30 +35,33 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 
-BuildRequires:  meson
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  jq
 BuildRequires:  git-core
+BuildRequires:  glslang
+BuildRequires:  jq
+BuildRequires:  meson
 
 BuildRequires:  pkgconfig(cairo)
-BuildRequires:  pkgconfig(pango)
-BuildRequires:  pkgconfig(pangocairo)
-
-BuildRequires:  glslang
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(gbm)
 BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(hwdata)
+BuildRequires:  pkgconfig(libdisplay-info)
+BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libinput)
+BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
 BuildRequires:  pkgconfig(libseat)
 BuildRequires:  pkgconfig(libudev)
-BuildRequires:  pkgconfig(pixman-1)
+BuildRequires:  pkgconfig(pango)
+BuildRequires:  pkgconfig(pangocairo)
+BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(wayland-scanner)
-BuildRequires:  pkgconfig(wayland-server)
+BuildRequires:  pkgconfig(wayland-server) >= 1.22.0
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-composite)
 BuildRequires:  pkgconfig(xcb-dri3)
@@ -74,10 +77,6 @@ BuildRequires:  pkgconfig(xcb-xfixes)
 BuildRequires:  pkgconfig(xcb-xinput)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xwayland)
-BuildRequires:  pkgconfig(libdrm)
-BuildRequires:  pkgconfig(hwdata)
-BuildRequires:  pkgconfig(libdisplay-info)
-BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
 
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
@@ -92,6 +91,11 @@ Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       pango%{?_isa}
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       libwayland-server%{?_isa} >= 1.22.0
+Requires:       xorg-x11-server-Xwayland%{?_isa}
+
+# Both are used in the default configuration
+Recommends:     kitty
+Recommends:     wofi
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
@@ -99,11 +103,11 @@ sacrifice on its looks.  It supports multiple layouts, fancy effects, has a
 very flexible IPC model allowing for a lot of customization, a powerful
 plugin system and more.
 
-%package        protocols-devel
-Summary:        Protocol files for the %{name}
+%package        devel
+Summary:        Header and protocol files for the %{name}
 License:        BSD-3-Clause
 
-%description    protocols-devel
+%description    devel
 %{summary}.
 
 
@@ -124,10 +128,12 @@ cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp subprojects/udis86/LICENSE LICENSE-udis86
 cp subprojects/wlroots/LICENSE LICENSE-wlroots
 
+
 %build
 %meson  -Dwlroots:examples=false \
         -Dwlroots:xcb-errors=disabled
 %meson_build
+
 
 %install
 %meson_install
@@ -135,6 +141,7 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 rm -r %{buildroot}%{_includedir}/wlr
 rm -r %{buildroot}%{_libdir}/libwlroots.a
 rm -r %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
+
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-wlroots
@@ -145,10 +152,12 @@ rm -r %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 %{_datadir}/hyprland/
 %{_datadir}/wayland-sessions/hyprland.desktop
 
-%files protocols-devel
-%license LICENSE-hyprland-protocols
-%{_datadir}/pkgconfig/hyprland-protocols.pc
+%files devel
+%license LICENSE LICENSE-hyprland-protocols
+%{_includedir}/hyprland/
+%{_datadir}/pkgconfig/hyprland*.pc
 %{_datadir}/hyprland-protocols/
 
 
 %changelog
+%autochangelog
