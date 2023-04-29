@@ -1,6 +1,6 @@
-%global hyprland_commit 72d2f33b34951b7f5be6cdbc302b1c6a33cbf60f
+%global hyprland_commit 5a3e3deb33060fc15c47bebb4a288cc4aff95bbb
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 15
+%global bumpver 16
 
 %global wlroots_commit 6830bfc17fd94709e2cdd4da0af989f102a26e59
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -99,7 +99,7 @@ Recommends:     wofi
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
-sacrifice on its looks.  It supports multiple layouts, fancy effects, has a
+sacrifice on its looks. It supports multiple layouts, fancy effects, has a
 very flexible IPC model allowing for a lot of customization, a powerful
 plugin system and more.
 
