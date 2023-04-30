@@ -15,10 +15,10 @@ URL:            https://github.com/hyprwm/hyprland-plugins
 Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
 Patch:          fix-paths.patch
 
-BuildRequires:  meson
 BuildRequires:  gcc-c++
-BuildRequires:  pkgconfig(hyprland)
+BuildRequires:  meson
 BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(hyprland)
 
 %description
 %{summary}.
