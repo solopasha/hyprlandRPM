@@ -1,13 +1,13 @@
 %global commit0 5c383dc5bc91afabe7dbcafdfd17f577fe4dcf96
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global __provides_exclude_from ^(%{_libdir}/hyprland-plugins/.*\\.so.*)$
+%global __provides_exclude_from ^(%{_libdir}/hyprland-plugins/.*\\.so)$
 
 %global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars}
 
 Name:           hyprland-plugins
 Version:        0.1
-Release:        %autorelease
+Release:        %autorelease -b 2
 Summary:        Official plugins for Hyprland
 
 License:        BSD-3-Clause
