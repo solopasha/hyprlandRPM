@@ -1,4 +1,4 @@
-%global commit0 5c383dc5bc91afabe7dbcafdfd17f577fe4dcf96
+%global commit0 f1e1fc439e208a06593ed58813405af8cdd56645
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
@@ -6,19 +6,19 @@
 %global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars}
 
 Name:           hyprland-plugins
-Version:        0.1
-Release:        %autorelease -b 3
+Version:        0.1^1.git%{shortcommit0}
+Release:        %autorelease
 Summary:        Official plugins for Hyprland
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprland-plugins
 Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
-Patch:          fix-paths.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  meson
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(hyprland)
+BuildRequires:  pkgconfig(pangocairo)
 
 %description
 %{summary}.
