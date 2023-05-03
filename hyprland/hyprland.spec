@@ -1,6 +1,6 @@
 %global hyprland_commit 2e28e88dfdca3d836c5dbedb916e0f629fc6a540
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 21
+#global bumpver 21
 
 %global wlroots_commit 6830bfc17fd94709e2cdd4da0af989f102a26e59
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -14,7 +14,7 @@
 %global __provides_exclude_from ^(%{_libdir}/pkgconfig/.*\\.pc)$
 
 Name:           hyprland
-Version:        0.24.1%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
+Version:        0.25.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
@@ -80,7 +80,7 @@ BuildRequires:  pkgconfig(xwayland)
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
 # https://github.com/hyprwm/Hyprland/issues/302
-Provides:       bundled(wlroots) = 0.17.0~^1.%{?bumpver:%{wlroots_shortcommit}}%{!?bumpver:7abda95}
+Provides:       bundled(wlroots) = 0.17.0~^1.%{?bumpver:%{wlroots_shortcommit}}%{!?bumpver:6830bfc}
 
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
@@ -123,6 +123,8 @@ mv udis86-%{udis86_commit}/* subprojects/udis86
 
 sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
 sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
+%else
+sed -i 's/\(.*GIT_COMMIT_HASH \)\(.*\)/\1"\2"/' src/defines.hpp
 %endif
 cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp subprojects/udis86/LICENSE LICENSE-udis86
