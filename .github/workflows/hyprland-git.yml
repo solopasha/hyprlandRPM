@@ -15,12 +15,13 @@ jobs:
       - name: Prepare
         run: |
           dnf -y up
-          dnf -y install git-core rpm-build curl perl-interpreter
+          dnf -y install git rpm-build curl perl-interpreter jq
 
       - uses: actions/checkout@v3
 
       - name: Run updater
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           pushd hyprland-git > /dev/null
