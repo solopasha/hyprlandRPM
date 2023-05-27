@@ -20,12 +20,17 @@ newProtocolsCommit="$(curl -L \
             https://api.github.com/repos/hyprwm/Hyprland/contents/subprojects/hyprland-protocols | jq -r '.sha')"
 
 sed -i "s/$oldHyprlandCommit/$newHyprlandCommit/" hyprland-git.spec
-
 sed -i "s/$oldWlrootsCommit/$newWlrootsCommit/" hyprland-git.spec
-
 sed -i "s/$oldProtocolsCommit/$newProtocolsCommit/" hyprland-git.spec
 
-sed -i "/^Version:/s/$oldTag/$newTag/" hyprland-git.spec
+rpmdev-vercmp $oldTag $newTag; ec=$?
+case $ec in
+    0) ;;
+    12)
+        perl -pe 's/(?<=bumpver\s)(\d+)/1/' -i hyprland-git.spec
+        sed -i "/^Version:/s/$oldTag/$newTag/" hyprland-git.spec ;;
+    *) exit 1
+esac
 
 git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec && \
