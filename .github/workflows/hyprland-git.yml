@@ -8,11 +8,16 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    container:
+      image: "registry.fedoraproject.org/fedora:38"
+    
     steps:
       - uses: actions/checkout@v3
 
       - name: Run updater
         run: |
+          dnf -y up
+          dnf -y install git-core rpm-build
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           pushd hyprland-git > /dev/null
