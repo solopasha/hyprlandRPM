@@ -11,6 +11,8 @@
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
+%global __provides_exclude_from ^(%{_libdir}/pkgconfig/wlroots\.pc)$
+
 
 Name:           hyprland-git
 Version:        0.25.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
@@ -124,8 +126,6 @@ mv udis86-%{udis86_commit}/* subprojects/udis86
 
 sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
 sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
-%else
-sed -i 's/\(.*GIT_COMMIT_HASH \)\(.*\)/\1"\2"/' src/defines.hpp
 %endif
 cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp subprojects/udis86/LICENSE LICENSE-udis86
