@@ -3,10 +3,10 @@ set -eux
 
 modified=0
 
-oldHyprlandCommit="$(sed -n 's/.*hyprland_commit \(.*\)/\1/p' hyprland.spec)"
+oldHyprlandCommit="$(sed -n 's/.*hyprland_commit \(.*\)/\1/p' hyprland-git.spec)"
 newHyprlandCommit="$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/hyprwm/Hyprland/commits/main")"
 
-oldWlrootsCommit="$(sed -n 's/.*wlroots_commit \(.*\)/\1/p' hyprland.spec)"
+oldWlrootsCommit="$(sed -n 's/.*wlroots_commit \(.*\)/\1/p' hyprland-git.spec)"
 newWlrootsCommit="$(curl -L \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
@@ -14,16 +14,16 @@ newWlrootsCommit="$(curl -L \
 
 if [[ $oldHyprlandCommit != "$newHyprlandCommit" ]]; then
     modified+=1
-    sed -i "s/$oldHyprlandCommit/$newHyprlandCommit/" hyprland.spec
+    sed -i "s/$oldHyprlandCommit/$newHyprlandCommit/" hyprland-git.spec
 fi
 
 if [[ $oldWlrootsCommit != "$newWlrootsCommit" ]]; then
     modified+=1
-    sed -i "s/$oldWlrootsCommit/$newWlrootsCommit/" hyprland.spec
+    sed -i "s/$oldWlrootsCommit/$newWlrootsCommit/" hyprland-git.spec
 fi
 
 if [[ $modified -ge 1 ]]; then
-    perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland.spec
+    perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec
 fi
 
 git --no-pager diff
