@@ -1,4 +1,4 @@
-%global commit0 f1e1fc439e208a06593ed58813405af8cdd56645
+%global commit0 e368bd15e4bfd560baa9333ad47415340c563458
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
@@ -6,7 +6,7 @@
 %global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars}
 
 Name:           hyprland-plugins
-Version:        0.1^1.git%{shortcommit0}
+Version:        0.1^2.git%{shortcommit0}
 Release:        %autorelease
 Summary:        Official plugins for Hyprland
 
