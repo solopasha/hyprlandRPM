@@ -1,6 +1,6 @@
-%global portal_commit c0e233955568fbea4e859336f6d3d14d51294d7c
+%global portal_commit ca077cc05c370879a6df90eac43a3c2ee6768306
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
-#global bumpver 2
+%global bumpver 1
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
