@@ -28,6 +28,6 @@ sed -i "s/$oldProtocolsCommit/$newProtocolsCommit/" hyprland-git.spec
 sed -i "/^Version:/s/$oldTag/$newTag/" hyprland-git.spec
 
 git diff --quiet || \
-perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec && \
+{ perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec && \
 git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" && \
-git push
+git push; }
