@@ -3,7 +3,7 @@ name: Update hyprland-git revision
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron:  "45 5,13,21 * * *"
 
 jobs:
   main:
