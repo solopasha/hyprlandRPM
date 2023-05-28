@@ -3,14 +3,14 @@ name: Update hyprland-git revision
 on:
   workflow_dispatch:
   schedule:
-    - cron:  "45 5,13,21 * * *"
+    - cron: "45 5,13,21 * * *"
 
 jobs:
   main:
     runs-on: ubuntu-latest
     container:
       image: "registry.fedoraproject.org/fedora:38"
-    
+
     steps:
       - name: Prepare
         run: |
