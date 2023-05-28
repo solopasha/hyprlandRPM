@@ -9,13 +9,13 @@ jobs:
   main:
     runs-on: ubuntu-latest
     container:
-      image: "registry.fedoraproject.org/fedora:38"
+      image: "registry.fedoraproject.org/fedora-minimal:latest"
 
     steps:
       - name: Prepare
         run: |
-          dnf -y up
-          dnf -y install git rpm-build curl perl-interpreter jq rpmdevtools
+          microdnf -y install --nodocs --setopt=install_weak_deps=0 \
+            git-core rpm-build curl perl-interpreter jq rpmdevtools
 
       - uses: actions/checkout@v3
 
