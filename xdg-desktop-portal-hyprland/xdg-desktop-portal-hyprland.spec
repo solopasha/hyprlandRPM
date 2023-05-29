@@ -1,10 +1,10 @@
 %global portal_commit ca077cc05c370879a6df90eac43a3c2ee6768306
 %global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
-%global bumpver 1
+#global bumpver 1
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        0.3.1%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
+Version:        0.4.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
 Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
