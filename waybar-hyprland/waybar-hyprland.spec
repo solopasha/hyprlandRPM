@@ -1,6 +1,6 @@
 Name:           waybar-hyprland
-Version:        0.9.17
-Release:        2%{?dist}
+Version:        0.9.18
+Release:        1%{?dist}
 Summary:        Highly customizable Wayland bar for Sway and Wlroots based compositors, with workspaces support for Hyprland
 # Source files/overall project licensed as MIT, but
 # - BSL-1.0
@@ -17,8 +17,6 @@ License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 # https://github.com/Alexays/Waybar/pull/1959
-Patch0:         waybar-0.9.17-test-fix-build-with-Catch2-v2.x.patch
-Patch1:         waybar-0.9.17-fix-sway-add-missing-includes-for-GCC-13.patch
 Patch2:         hyprland.patch
 
 BuildRequires:  gcc
@@ -69,6 +67,7 @@ Suggests:       font(fontawesome5free)
 %build
 %meson \
     -Dsndio=disabled \
+    -Dcava=disabled \
     -Dexperimental=true
 %meson_build
 
