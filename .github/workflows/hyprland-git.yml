@@ -24,5 +24,4 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          pushd hyprland-git > /dev/null
-          bash update.sh
+          find -name "update.sh" -execdir {} \;
