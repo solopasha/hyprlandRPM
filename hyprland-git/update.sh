@@ -27,7 +27,7 @@ rpmdev-vercmp $oldTag $newTag; ec=$?
 case $ec in
     0) ;;
     12)
-        perl -pe 's/(?<=bumpver\s)(\d+)/1/' -i hyprland-git.spec
+        perl -pe 's/(?<=bumpver\s)(\d+)/0/' -i hyprland-git.spec
         sed -i "/^Version:/s/$oldTag/$newTag/" hyprland-git.spec ;;
     *) exit 1
 esac
