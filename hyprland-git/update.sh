@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 set -eux
 
+ec=0
+
 oldTag="$(rpmspec -q --qf "%{version}\n" hyprland-git.spec | head -1 | sed 's/\^.*//')"
 newTag="$(curl "https://api.github.com/repos/hyprwm/Hyprland/tags" | jq -r '.[0].name' | sed 's/^v//')"
 
@@ -23,7 +25,7 @@ sed -i "s/$oldHyprlandCommit/$newHyprlandCommit/" hyprland-git.spec
 sed -i "s/$oldWlrootsCommit/$newWlrootsCommit/" hyprland-git.spec
 sed -i "s/$oldProtocolsCommit/$newProtocolsCommit/" hyprland-git.spec
 
-rpmdev-vercmp $oldTag $newTag; ec=$?
+rpmdev-vercmp $oldTag $newTag || ec=$?
 case $ec in
     0) ;;
     12)

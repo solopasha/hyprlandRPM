@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 set -eux
 
+ec=0
+
 SPEC=waybar-git.spec
 
 oldTag="$(rpmspec -q --qf "%{version}\n" $SPEC | head -1 | sed 's/\^.*//')"
@@ -12,7 +14,7 @@ newCommit="$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://ap
 
 sed -i "s/$oldCommit/$newCommit/" $SPEC
 
-rpmdev-vercmp "$oldTag" "$newTag"; ec=$?
+rpmdev-vercmp "$oldTag" "$newTag" || ec=$?
 case $ec in
     0) ;;
     12)
