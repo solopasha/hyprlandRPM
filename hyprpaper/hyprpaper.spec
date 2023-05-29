@@ -1,6 +1,6 @@
 Name:           hyprpaper
-Version:        0.2.0
-Release:        1%{?dist}
+Version:        0.3.0
+Release:        %autorelease
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
 
 License:        BSD-3-Clause
@@ -45,5 +45,4 @@ install -m0755 -Dp %{__cmake_builddir}/%{name} %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
-* Wed Apr 19 2023 Pavel Solovev <daron439@gmail.com> - 0.2.0-1
-- Initial packaging
+%autochangelog

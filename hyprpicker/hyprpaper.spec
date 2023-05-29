@@ -1,6 +1,6 @@
 Name:           hyprpicker
-Version:        0.1.0
-Release:        2%{?dist}
+Version:        0.1.1
+Release:        %autorelease
 Summary:        A wlroots-compatible Wayland color picker
 
 License:        BSD-3-Clause
@@ -43,5 +43,4 @@ install -m0755 -Dp %{__cmake_builddir}/%{name} %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
-* Sun Apr 30 2023 Pavel Solovev <daron439@gmail.com> - 0.1.0-2
-- Initial packaging
+%autochangelog
