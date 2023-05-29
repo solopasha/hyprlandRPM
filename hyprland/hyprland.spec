@@ -14,7 +14,7 @@
 %global __provides_exclude_from ^(%{_libdir}/pkgconfig/.*\\.pc)$
 
 Name:           hyprland
-Version:        0.25.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
+Version:        0.26.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
@@ -51,7 +51,7 @@ BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  pkgconfig(libdisplay-info)
 BuildRequires:  pkgconfig(libdrm)
-BuildRequires:  pkgconfig(libinput)
+BuildRequires:  pkgconfig(libinput) >= 1.23.0
 BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
 BuildRequires:  pkgconfig(libseat)
 BuildRequires:  pkgconfig(libudev)
@@ -91,6 +91,7 @@ Requires:       pango%{?_isa}
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       libwayland-server%{?_isa} >= 1.22.0
 Requires:       xorg-x11-server-Xwayland%{?_isa}
+Requires:       libinput%{?_isa} >= 1.23.0
 
 # Both are used in the default configuration
 Recommends:     kitty
@@ -123,8 +124,6 @@ mv udis86-%{udis86_commit}/* subprojects/udis86
 
 sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
 sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
-%else
-sed -i 's/\(.*GIT_COMMIT_HASH \)\(.*\)/\1"\2"/' src/defines.hpp
 %endif
 cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp subprojects/udis86/LICENSE LICENSE-udis86
