@@ -6,7 +6,7 @@
 %global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars}
 
 Name:           hyprland-plugins
-Version:        0.1^2.git%{shortcommit0}
+Version:        0.1^3.git%{shortcommit0}
 Release:        %autorelease
 Summary:        Official plugins for Hyprland
 
