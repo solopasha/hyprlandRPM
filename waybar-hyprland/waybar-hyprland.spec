@@ -16,8 +16,7 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-# https://github.com/Alexays/Waybar/pull/1959
-Patch2:         hyprland.patch
+Patch0:         hyprland.patch
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
