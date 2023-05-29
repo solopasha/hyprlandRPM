@@ -1,6 +1,6 @@
 Name:           waybar-hyprland
 Version:        0.9.18
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Highly customizable Wayland bar for Sway and Wlroots based compositors, with workspaces support for Hyprland
 # Source files/overall project licensed as MIT, but
 # - BSL-1.0
@@ -16,7 +16,6 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-Patch0:         hyprland.patch
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
