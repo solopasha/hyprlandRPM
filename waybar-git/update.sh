@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-set -eux
+set -euxo pipefail
 
 ec=0
 
