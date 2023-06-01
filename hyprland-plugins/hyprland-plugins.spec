@@ -6,7 +6,7 @@
 %global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars}
 
 Name:           hyprland-plugins
-Version:        0.1^3.git%{shortcommit0}
+Version:        0.1^4.git%{shortcommit0}
 Release:        %autorelease
 Summary:        Official plugins for Hyprland
 
@@ -20,13 +20,15 @@ BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(hyprland)
 BuildRequires:  pkgconfig(pangocairo)
 
+Recommends:     hyprland-plugin-borders-plus-plus
+Recommends:     hyprland-plugin-csgo-vulkan-fix
+Recommends:     hyprland-plugin-hyprbars
+
 %description
 %{summary}.
 
 %define _package() \%package -n hyprland-plugin-%1\
 Summary:       %1 plugin for hyprland\
-Requires:      hyprland\
-Requires:      \%{name} = \%{version}-\%{release}\
 \%description  -n hyprland-plugin-%1\
 \%{summary}.\
 \%files -n     hyprland-plugin-%1\
