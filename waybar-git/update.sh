@@ -25,5 +25,5 @@ esac
 
 git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i $SPEC && \
-git commit -am "up rev waybar-git-${newTag}+${newHyprlandCommit:0:7}" && \
+git commit -am "up rev waybar-git-${newTag}+${newCommit:0:7}" && \
 git push; }
