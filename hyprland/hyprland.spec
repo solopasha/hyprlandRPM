@@ -94,7 +94,7 @@ Conflicts:      wlroots-devel
 
 
 %prep
-%autosetup -n %{name}-source -p1
+%autosetup -n hyprland-source -p1
 
 cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp subprojects/udis86/LICENSE LICENSE-udis86

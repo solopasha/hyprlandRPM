@@ -1,0 +1,40 @@
+Submodule subprojects/wlroots contains modified content
+diff --git a/subprojects/wlroots/render/gles2/renderer.c b/subprojects/wlroots/render/gles2/renderer.c
+index 1c8b4878..5806722b 100644
+--- a/subprojects/wlroots/render/gles2/renderer.c
++++ b/subprojects/wlroots/render/gles2/renderer.c
+@@ -165,7 +165,7 @@ static bool gles2_bind_buffer(struct wlr_renderer *wlr_renderer,
+ 		assert(wlr_egl_is_current(renderer->egl));
+ 
+ 		push_gles2_debug(renderer);
+-		glFlush();
++		glFinish();
+ 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+ 		pop_gles2_debug(renderer);
+ 
+diff --git a/subprojects/wlroots/types/output/render.c b/subprojects/wlroots/types/output/render.c
+index c33103da..cf5c0151 100644
+--- a/subprojects/wlroots/types/output/render.c
++++ b/subprojects/wlroots/types/output/render.c
+@@ -225,20 +225,5 @@ struct wlr_drm_format *output_pick_format(struct wlr_output *output,
+ }
+ 
+ uint32_t wlr_output_preferred_read_format(struct wlr_output *output) {
+-	struct wlr_renderer *renderer = output->renderer;
+-	assert(renderer != NULL);
+-
+-	if (!renderer->impl->preferred_read_format || !renderer->impl->read_pixels) {
+-		return DRM_FORMAT_INVALID;
+-	}
+-
+-	if (!output_attach_back_buffer(output, &output->pending, NULL)) {
+-		return false;
+-	}
+-
+-	uint32_t fmt = renderer->impl->preferred_read_format(renderer);
+-
+-	output_clear_back_buffer(output);
+-
+-	return fmt;
++	return DRM_FORMAT_XRGB8888;
+ }
