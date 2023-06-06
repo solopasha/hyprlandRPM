@@ -1,20 +1,5 @@
-%global hyprland_commit 2e28e88dfdca3d836c5dbedb916e0f629fc6a540
-%global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-#global bumpver 21
-
-%global wlroots_commit 6830bfc17fd94709e2cdd4da0af989f102a26e59
-%global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
-
-%global protocols_commit 4d29e48433270a2af06b8bc711ca1fe5109746cd
-%global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
-
-%global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
-%global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
-
-%global __provides_exclude_from ^(%{_libdir}/pkgconfig/.*\\.pc)$
-
 Name:           hyprland
-Version:        0.26.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
+Version:        0.26.0
 Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
@@ -28,14 +13,7 @@ Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its 
 # protocols/idle.xml: LGPL-2.1-or-later
 License:        BSD-3-Clause AND MIT AND BSD-2-Clause AND HPND-sell-variant AND LGPL-2.1-or-later
 URL:            https://github.com/hyprwm/Hyprland
-%if 0%{?bumpver}
-Source0:        %{url}/archive/%{hyprland_commit}/%{name}-%{hyprland_shortcommit}.tar.gz
-Source1:        https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/%{wlroots_commit}/wlroots-%{wlroots_shortcommit}.tar.gz
-Source2:        https://github.com/hyprwm/hyprland-protocols/archive/%{protocols_commit}/protocols-%{protocols_shortcommit}.tar.gz
-Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_commit}/udis86-%{udis86_shortcommit}.tar.gz
-%else
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
-%endif
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -80,14 +58,13 @@ BuildRequires:  pkgconfig(xwayland)
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
 # https://github.com/hyprwm/Hyprland/issues/302
-Provides:       bundled(wlroots) = 0.17.0~^1.%{?bumpver:%{wlroots_shortcommit}}%{!?bumpver:6830bfc}
+Provides:       bundled(wlroots) = 0.17.0~^1.6830bfc
 
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
-Provides:       bundled(udis86) = 1.7.2^1.%{?bumpver:%{udis86_shortcommit}}%{!?bumpver:5336633}
+Provides:       bundled(udis86) = 1.7.2^1.5336633
 
 Requires:       pixman%{?_isa} >= 0.42.0
-Requires:       pango%{?_isa}
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       libwayland-server%{?_isa} >= 1.22.0
 Requires:       xorg-x11-server-Xwayland%{?_isa}
@@ -96,6 +73,10 @@ Requires:       libinput%{?_isa} >= 1.23.0
 # Both are used in the default configuration
 Recommends:     kitty
 Recommends:     wofi
+# Lack of graphical drivers may hurt the common use case
+Recommends:     mesa-dri-drivers
+# Logind needs polkit to create a graphical session
+Recommends:     polkit
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
@@ -104,8 +85,8 @@ very flexible IPC model allowing for a lot of customization, a powerful
 plugin system and more.
 
 %package        devel
-Summary:        Header and protocol files for the %{name}
-License:        BSD-3-Clause
+Summary:        Header and protocol files for %{name}
+License:        BSD-3-Clause AND MIT
 Conflicts:      wlroots-devel
 
 %description    devel
@@ -113,31 +94,23 @@ Conflicts:      wlroots-devel
 
 
 %prep
-%autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:%{name}-source} -p1
-%if 0%{?bumpver}
-%setup -qn Hyprland-%{hyprland_commit} -DT -a1
-%setup -qn Hyprland-%{hyprland_commit} -DT -a2
-%setup -qn Hyprland-%{hyprland_commit} -DT -a3
-mv hyprland-protocols-%{protocols_commit}/* subprojects/hyprland-protocols
-mv wlroots-%{wlroots_commit}/* subprojects/wlroots
-mv udis86-%{udis86_commit}/* subprojects/udis86
+%autosetup -n %{name}-source -p1
 
-sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
-sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
-%endif
 cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp subprojects/udis86/LICENSE LICENSE-udis86
 cp subprojects/wlroots/LICENSE LICENSE-wlroots
 
 
 %build
-%meson  -Dwlroots:examples=false \
-        -Dwlroots:xcb-errors=disabled
+%meson -Dwlroots:examples=false \
+       -Dwlroots:xcb-errors=disabled
 %meson_build
 
 
 %install
 %meson_install
+rm %{buildroot}%{_libdir}/libwlroots.a
+rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 
 
 %files
@@ -150,9 +123,7 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 %{_datadir}/wayland-sessions/hyprland.desktop
 
 %files devel
-%license LICENSE LICENSE-hyprland-protocols
-%{_libdir}/libwlroots.a
-%{_libdir}/pkgconfig/wlroots.pc
+%license LICENSE-hyprland-protocols LICENSE-wlroots
 %{_includedir}/wlr/
 %{_includedir}/hyprland/
 %{_datadir}/pkgconfig/hyprland*.pc
