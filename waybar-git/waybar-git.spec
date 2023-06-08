@@ -1,6 +1,6 @@
 %global commit0 c5379fa52d5862f5186082d0b414e44bb466da15
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 7
+%global bumpver 8
 
 
 Name:           waybar-git
@@ -57,6 +57,7 @@ BuildRequires:  pkgconfig(xkbregistry)
 
 Conflicts:      waybar
 Conflicts:      waybar-hyprland
+Provides:       waybar
 
 Enhances:       hyprland
 Recommends:     (font(fontawesome5free) or font(fontawesome))
