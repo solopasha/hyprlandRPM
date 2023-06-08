@@ -1,6 +1,6 @@
 Name:           waybar-hyprland
 Version:        0.9.18
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Highly customizable Wayland bar for Sway and Wlroots based compositors, with workspaces support for Hyprland
 # Source files/overall project licensed as MIT, but
 # - BSL-1.0
@@ -51,6 +51,7 @@ BuildRequires:  pkgconfig(wireplumber-0.4)
 BuildRequires:  pkgconfig(xkbregistry)
 
 Conflicts:      waybar
+Provides:       waybar
 
 Enhances:       hyprland
 Recommends:     (font(fontawesome5free) or font(fontawesome))
