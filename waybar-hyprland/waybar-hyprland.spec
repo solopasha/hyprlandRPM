@@ -50,7 +50,7 @@ BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(wireplumber-0.4)
 BuildRequires:  pkgconfig(xkbregistry)
 
-Conflicts:      waybar
+Provides:       waybar
 
 Enhances:       hyprland
 Recommends:     (font(fontawesome5free) or font(fontawesome))
