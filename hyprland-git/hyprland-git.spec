@@ -11,9 +11,6 @@
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
-%global __provides_exclude_from ^(%{_libdir}/pkgconfig/wlroots\.pc)$
-
-
 Name:           hyprland-git
 Version:        0.26.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
@@ -52,7 +49,7 @@ BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  pkgconfig(libdisplay-info)
 BuildRequires:  pkgconfig(libdrm)
-BuildRequires:  pkgconfig(libinput)
+BuildRequires:  pkgconfig(libinput) >= 1.23.0
 BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
 BuildRequires:  pkgconfig(libseat)
 BuildRequires:  pkgconfig(libudev)
@@ -88,7 +85,6 @@ Provides:       bundled(wlroots) = 0.17.0~^1.%{?bumpver:%{wlroots_shortcommit}}%
 Provides:       bundled(udis86) = 1.7.2^1.%{?bumpver:%{udis86_shortcommit}}%{!?bumpver:5336633}
 
 Requires:       pixman%{?_isa} >= 0.42.0
-Requires:       pango%{?_isa}
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       libwayland-server%{?_isa} >= 1.22.0
 Requires:       xorg-x11-server-Xwayland%{?_isa}
@@ -98,6 +94,10 @@ Conflicts:      hyprland
 # Both are used in the default configuration
 Recommends:     kitty
 Recommends:     wofi
+# Lack of graphical drivers may hurt the common use case
+Recommends:     mesa-dri-drivers
+# Logind needs polkit to create a graphical session
+Recommends:     polkit
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
@@ -107,7 +107,7 @@ plugin system and more.
 
 %package        devel
 Summary:        Header and protocol files for %{name}
-License:        BSD-3-Clause
+License:        BSD-3-Clause AND MIT
 Conflicts:      wlroots-devel
 
 %description    devel
@@ -133,13 +133,15 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 
 
 %build
-%meson  -Dwlroots:examples=false \
-        -Dwlroots:xcb-errors=disabled
+%meson -Dwlroots:examples=false \
+       -Dwlroots:xcb-errors=disabled
 %meson_build
 
 
 %install
 %meson_install
+rm %{buildroot}%{_libdir}/libwlroots.a
+rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 
 
 %files
@@ -152,9 +154,7 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 %{_datadir}/wayland-sessions/hyprland.desktop
 
 %files devel
-%license LICENSE LICENSE-hyprland-protocols
-%{_libdir}/libwlroots.a
-%{_libdir}/pkgconfig/wlroots.pc
+%license LICENSE-hyprland-protocols LICENSE-wlroots
 %{_includedir}/wlr/
 %{_includedir}/hyprland/
 %{_datadir}/pkgconfig/hyprland*.pc
