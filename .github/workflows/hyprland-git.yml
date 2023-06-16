@@ -21,7 +21,7 @@ jobs:
         env:
           COPR_CONF: ${{ secrets.COPR_CONFIG }}
         run: |
-          mkdir -p ~/.config/copr
+          mkdir -p ~/.config
           echo "$COPR_CONF" > ~/.config/copr
 
       - uses: actions/checkout@v3
