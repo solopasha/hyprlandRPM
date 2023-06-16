@@ -1,4 +1,4 @@
-name: Update hyprland-git revision
+name: Update revisions
 
 on:
   workflow_dispatch:
@@ -15,7 +15,13 @@ jobs:
       - name: Prepare
         run: |
           microdnf -y install --nodocs --setopt=install_weak_deps=0 \
-            git-core rpm-build curl perl-interpreter jq rpmdevtools
+            git-core rpm-build curl perl-interpreter jq rpmdevtools copr-cli
+
+      - name: Copr config
+        env:
+          COPR_CONF: ${{ secrets.COPR_CONFIG }}
+        run: |
+          echo "$COPR_CONF" > ~/.config/copr
 
       - uses: actions/checkout@v3
 
