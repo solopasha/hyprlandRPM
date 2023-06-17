@@ -117,19 +117,16 @@ Conflicts:      wlroots-devel
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:%{name}-source} -p1
 %if 0%{?bumpver}
-%setup -qn Hyprland-%{hyprland_commit} -DT -a1
-%setup -qn Hyprland-%{hyprland_commit} -DT -a2
-%setup -qn Hyprland-%{hyprland_commit} -DT -a3
-mv hyprland-protocols-%{protocols_commit}/* subprojects/hyprland-protocols
-mv wlroots-%{wlroots_commit}/* subprojects/wlroots
-mv udis86-%{udis86_commit}/* subprojects/udis86
+tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
+tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
+tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
 
 sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
 sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
 %endif
-cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
-cp subprojects/udis86/LICENSE LICENSE-udis86
-cp subprojects/wlroots/LICENSE LICENSE-wlroots
+cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
+cp -p subprojects/udis86/LICENSE LICENSE-udis86
+cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
 
 
 %build
