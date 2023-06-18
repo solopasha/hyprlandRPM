@@ -34,6 +34,7 @@ make build
 %doc README.md
 %{_bindir}/%{name}
 %{_userunitdir}/%{name}.service
+%{_datadir}/%{name}/
 
 
 %post
