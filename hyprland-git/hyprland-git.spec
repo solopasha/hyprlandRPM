@@ -1,6 +1,6 @@
 %global hyprland_commit fc59cef1ee573a950c5d5f3bacf1b51142fd56db
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 30
+%global bumpver 31
 
 %global wlroots_commit 7e7633abf09b362d0bad9e3fc650fd692369291d
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -88,6 +88,7 @@ Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       libwayland-server%{?_isa} >= 1.22.0
 Requires:       xorg-x11-server-Xwayland%{?_isa}
+Requires:       libinput%{?_isa} >= 1.23.0
 
 Conflicts:      hyprland
 
