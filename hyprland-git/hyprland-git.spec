@@ -1,6 +1,6 @@
 %global hyprland_commit 990ad854bd1b17117e00e0b2dc26aefff5e30ed2
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 40
+%global bumpver 41
 
 %global wlroots_commit 7e7633abf09b362d0bad9e3fc650fd692369291d
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -99,6 +99,9 @@ Recommends:     wofi
 Recommends:     mesa-dri-drivers
 # Logind needs polkit to create a graphical session
 Recommends:     polkit
+
+Recommends:     (qt5-qtwayland if qt5-qtbase-gui)
+Recommends:     (qt6-qtwayland if qt6-qtbase-gui)
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't

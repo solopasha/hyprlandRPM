@@ -1,6 +1,6 @@
 Name:           hyprland
 Version:        0.26.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -77,6 +77,9 @@ Recommends:     wofi
 Recommends:     mesa-dri-drivers
 # Logind needs polkit to create a graphical session
 Recommends:     polkit
+
+Recommends:     (qt5-qtwayland if qt5-qtbase-gui)
+Recommends:     (qt6-qtwayland if qt6-qtbase-gui)
 
 %description
 Hyprland is a dynamic tiling Wayland compositor based on wlroots that doesn't
