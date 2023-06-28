@@ -5,7 +5,7 @@
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
 Version:        0.4.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
@@ -45,6 +45,7 @@ Requires:       grim
 Requires:       xdg-desktop-portal
 # required for hyprland-share-picker
 Requires:       slurp
+Requires:       qt6-qtwayland
 
 Enhances:       hyprland
 Supplements:    hyprland
