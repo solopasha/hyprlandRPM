@@ -1,6 +1,6 @@
 %global hyprland_commit 50755d26d4662f7392895f35a67502bc8c842a2d
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 46
+%global bumpver 47
 
 %global wlroots_commit 7e7633abf09b362d0bad9e3fc650fd692369291d
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -87,7 +87,7 @@ Provides:       bundled(udis86) = 1.7.2^1.%{?bumpver:%{udis86_shortcommit}}%{!?b
 Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       libwayland-server%{?_isa} >= 1.22.0
-Requires:       xorg-x11-server-Xwayland%{?_isa}
+Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 Requires:       libinput%{?_isa} >= 1.23.0
 
 Conflicts:      hyprland
