@@ -48,6 +48,7 @@ BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(playerctl)
 BuildRequires:  pkgconfig(sigc++-2.0)
 BuildRequires:  pkgconfig(spdlog) >= 1.10.0
+BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(upower-glib)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
@@ -60,8 +61,7 @@ Conflicts:      waybar-hyprland
 Provides:       waybar
 
 Enhances:       hyprland
-Recommends:     (font(fontawesome5free) or font(fontawesome))
-Suggests:       font(fontawesome5free)
+Recommends:     (font(fontawesome6free) or font(fontawesome5free))
 
 %description
 %{summary}.

@@ -1,6 +1,6 @@
 Name:           waybar-hyprland
-Version:        0.9.18
-Release:        4%{?dist}
+Version:        0.9.19
+Release:        1%{?dist}
 Summary:        Highly customizable Wayland bar for Sway and Wlroots based compositors, with workspaces support for Hyprland
 # Source files/overall project licensed as MIT, but
 # - BSL-1.0
@@ -43,6 +43,7 @@ BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(playerctl)
 BuildRequires:  pkgconfig(sigc++-2.0)
 BuildRequires:  pkgconfig(spdlog) >= 1.10.0
+BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(upower-glib)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
@@ -54,8 +55,7 @@ Conflicts:      waybar
 Provides:       waybar
 
 Enhances:       hyprland
-Recommends:     (font(fontawesome5free) or font(fontawesome))
-Suggests:       font(fontawesome5free)
+Recommends:     (font(fontawesome6free) or font(fontawesome5free))
 
 %description
 %{summary}.
