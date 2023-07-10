@@ -1,0 +1,32 @@
+diff --git a/gen-go-code.py b/gen-go-code.py
+index 76218c42d..3433fe70a 100755
+--- a/gen-go-code.py
++++ b/gen-go-code.py
+@@ -10,6 +10,7 @@
+ import subprocess
+ import sys
+ import tarfile
++import shutil
+ from contextlib import contextmanager, suppress
+ from functools import lru_cache
+ from itertools import chain
+@@ -757,6 +758,7 @@ def main() -> None:
+             generate_unicode_names(src, dest)
+     generate_ssh_kitten_data()
+ 
++    shutil.copy('constants_generated.go','src/kitty')
+     update_completion()
+     update_at_commands()
+     kitten_clis()
+diff --git a/setup.py b/setup.py
+index d42905aad..af843973a 100755
+--- a/setup.py
++++ b/setup.py
+@@ -916,6 +916,7 @@ def build_static_kittens(
+         raise SystemExit(f'The version of go on this system ({current_go_version}) is too old. go >= {required_go_version} is needed')
+     if not for_platform:
+         update_go_generated_files(args, os.path.join(launcher_dir, appname))
++    return
+     cmd = [go, 'build', '-v']
+     vcs_rev = args.vcs_rev or get_vcs_rev()
+     ld_flags = [f"-X 'kitty.VCSRevision={vcs_rev}'"]
