@@ -1,6 +1,6 @@
 Name:           hyprland
-Version:        0.26.0
-Release:        %autorelease -b2
+Version:        0.27.0
+Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -67,7 +67,7 @@ Provides:       bundled(udis86) = 1.7.2^1.5336633
 Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       libwayland-server%{?_isa} >= 1.22.0
-Requires:       xorg-x11-server-Xwayland%{?_isa}
+Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 Requires:       libinput%{?_isa} >= 1.23.0
 
 # Both are used in the default configuration
