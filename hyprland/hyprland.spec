@@ -2,7 +2,7 @@
 
 Name:           hyprland
 Version:        0.27.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -92,7 +92,6 @@ plugin system and more.
 %package        devel
 Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause AND MIT
-Conflicts:      wlroots-devel
 
 %description    devel
 %{summary}.
@@ -116,6 +115,8 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 %meson_install
 rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
+mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr
+mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 
 
 %files
@@ -129,7 +130,6 @@ rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 
 %files devel
 %license LICENSE-hyprland-protocols LICENSE-wlroots
-%{_includedir}/wlr/
 %{_includedir}/hyprland/
 %{_datadir}/pkgconfig/hyprland*.pc
 %{_datadir}/hyprland-protocols/

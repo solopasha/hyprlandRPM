@@ -1,6 +1,6 @@
 %global hyprland_commit 70dae78c1b5b17288a3e343b87ca6d10244ee937
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 2
+%global bumpver 3
 
 %global wlroots_commit 7e7633abf09b362d0bad9e3fc650fd692369291d
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -112,7 +112,6 @@ plugin system and more.
 %package        devel
 Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause AND MIT
-Conflicts:      wlroots-devel
 
 %description    devel
 %{summary}.
@@ -143,7 +142,8 @@ cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
 %meson_install
 rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
-
+mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr
+mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-wlroots
@@ -156,7 +156,6 @@ rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 
 %files devel
 %license LICENSE-hyprland-protocols LICENSE-wlroots
-%{_includedir}/wlr/
 %{_includedir}/hyprland/
 %{_datadir}/pkgconfig/hyprland*.pc
 %{_datadir}/hyprland-protocols/
