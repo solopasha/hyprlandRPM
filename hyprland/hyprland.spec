@@ -1,3 +1,5 @@
+%global _default_patch_fuzz 2
+
 Name:           hyprland
 Version:        0.27.0
 Release:        %autorelease
@@ -58,7 +60,7 @@ BuildRequires:  pkgconfig(xwayland)
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
 # https://github.com/hyprwm/Hyprland/issues/302
-Provides:       bundled(wlroots) = 0.17.0~^1.6830bfc
+Provides:       bundled(wlroots) = 0.17.0~^1.7e7633a
 
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
