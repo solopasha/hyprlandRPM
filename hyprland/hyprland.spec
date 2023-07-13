@@ -2,7 +2,7 @@
 
 Name:           hyprland
 Version:        0.27.0
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -99,6 +99,7 @@ License:        BSD-3-Clause AND MIT
 
 %prep
 %autosetup -n hyprland-source -p1
+sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
 
 cp subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp subprojects/udis86/LICENSE LICENSE-udis86
