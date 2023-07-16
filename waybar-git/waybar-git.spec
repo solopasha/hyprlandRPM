@@ -1,6 +1,6 @@
-%global commit0 2211a798408adce99679c28bb25dc772da416b1d
+%global commit0 85b4ff4f8144a17f988363ad5537df0326f4214c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 8
+%global bumpver 9
 
 
 Name:           waybar-git
