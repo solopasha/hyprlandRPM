@@ -10,7 +10,7 @@
 %bcond_without doc
 
 Name:           kitty
-Version:        0.29.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.29.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
