@@ -1,8 +1,8 @@
-%global hyprland_commit 7f47655f60be2c54dfa0e1758cbff20ab38217fc
+%global hyprland_commit 16fd9084eab7ed698e8855a7824f48ac1bd759da
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 8
+%global bumpver 9
 
-%global wlroots_commit 7e7633abf09b362d0bad9e3fc650fd692369291d
+%global wlroots_commit 7791ffe0584c4ac13c170e1661ce33bdbd4a9b9e
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
 %global protocols_commit 4d29e48433270a2af06b8bc711ca1fe5109746cd
