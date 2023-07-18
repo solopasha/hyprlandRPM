@@ -1,9 +1,9 @@
 Submodule subprojects/wlroots contains modified content
 diff --git a/subprojects/wlroots/render/gles2/renderer.c b/subprojects/wlroots/render/gles2/renderer.c
-index 1c8b4878..5806722b 100644
+index 9fe934f7..9662d4ee 100644
 --- a/subprojects/wlroots/render/gles2/renderer.c
 +++ b/subprojects/wlroots/render/gles2/renderer.c
-@@ -165,7 +165,7 @@ static bool gles2_bind_buffer(struct wlr_renderer *wlr_renderer,
+@@ -176,7 +176,7 @@ static bool gles2_bind_buffer(struct wlr_renderer *wlr_renderer,
  		assert(wlr_egl_is_current(renderer->egl));
  
  		push_gles2_debug(renderer);
@@ -13,10 +13,10 @@ index 1c8b4878..5806722b 100644
  		pop_gles2_debug(renderer);
  
 diff --git a/subprojects/wlroots/types/output/render.c b/subprojects/wlroots/types/output/render.c
-index c33103da..cf5c0151 100644
+index a185d844..01df6ffc 100644
 --- a/subprojects/wlroots/types/output/render.c
 +++ b/subprojects/wlroots/types/output/render.c
-@@ -225,20 +225,5 @@ struct wlr_drm_format *output_pick_format(struct wlr_output *output,
+@@ -240,22 +240,7 @@ bool output_pick_format(struct wlr_output *output,
  }
  
  uint32_t wlr_output_preferred_read_format(struct wlr_output *output) {
@@ -27,7 +27,7 @@ index c33103da..cf5c0151 100644
 -		return DRM_FORMAT_INVALID;
 -	}
 -
--	if (!output_attach_back_buffer(output, &output->pending, NULL)) {
+-	if (!wlr_output_attach_render(output, NULL)) {
 -		return false;
 -	}
 -
@@ -38,3 +38,5 @@ index c33103da..cf5c0151 100644
 -	return fmt;
 +	return DRM_FORMAT_XRGB8888;
  }
+ 
+ struct wlr_render_pass *wlr_output_begin_render_pass(struct wlr_output *output,
