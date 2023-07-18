@@ -1,5 +1,5 @@
 Name:           waybar-hyprland
-Version:        0.9.19
+Version:        0.9.20
 Release:        1%{?dist}
 Summary:        Highly customizable Wayland bar for Sway and Wlroots based compositors, with workspaces support for Hyprland
 # Source files/overall project licensed as MIT, but
