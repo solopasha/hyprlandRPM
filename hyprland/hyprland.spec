@@ -1,8 +1,8 @@
 %global _default_patch_fuzz 2
 
 Name:           hyprland
-Version:        0.27.0
-Release:        %autorelease -b3
+Version:        0.27.1
+Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -60,7 +60,7 @@ BuildRequires:  pkgconfig(xwayland)
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
 # https://github.com/hyprwm/Hyprland/issues/302
-Provides:       bundled(wlroots) = 0.17.0~^1.7e7633a
+Provides:       bundled(wlroots) = 0.17.0~^1.7791ffe
 
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
