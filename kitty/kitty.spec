@@ -10,7 +10,7 @@
 %bcond_without doc
 
 Name:           kitty
-Version:        0.29.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.29.2%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -35,7 +35,6 @@ Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444
 # Don't build kitten inside setup.py, use gobuild macro in the spec instead to build with fedora flags
 Patch0:         kitty-do-not-build-kitten.patch
 ## upstream patches
-
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -122,6 +121,7 @@ Provides:       %{name}-fish-integration = %{version}-%{release}
 # kitty as per the maintainers suggestion. Install the terminfo file on the remote
 # machine.
 Requires:       %{name}-terminfo = %{version}-%{release}
+Requires:       %{name}-shell-integration = %{version}-%{release}
 
 # Very weak dependencies, these are required to enable all features of kitty's
 # "kittens" functions install separately
@@ -173,6 +173,12 @@ Cross-platform, fast, feature full, GPU based terminal emulator.
 
 The terminfo file for Kitty Terminal.
 
+%package        shell-integration
+Summary:        Shell integration scripts for %{name}
+BuildArch:      noarch
+
+%description    shell-integration
+%{summary}.
 
 # doc package
 %if %{with doc}
@@ -198,6 +204,7 @@ This package contains the documentation for %{name}.
 %{gpgverify} --keyring='%{SOURCE5}' --signature='%{SOURCE4}' --data='%{SOURCE0}'
 %endif
 %autosetup -p1 %{?bumpver:-n %{name}-%{commit0}}
+export GOPROXY=direct
 go mod vendor
 
 # Changing sphinx theme to classic
@@ -268,6 +275,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/*/*.{png,svg}
 %{_libdir}/%{name}/
+%exclude %{_libdir}/%{name}/shell-integration
 %if %{with doc}
 %{_mandir}/man{1,5}/*.{1,5}*
 %endif
@@ -276,6 +284,10 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 %files terminfo
 %license LICENSE
 %{_datadir}/terminfo/x/xterm-%{name}
+
+%files shell-integration
+%license LICENSE
+%{_libdir}/%{name}/shell-integration/
 
 %if %{with doc}
 %files doc
