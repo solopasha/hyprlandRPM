@@ -1,6 +1,8 @@
+%global _default_patch_fuzz 2
+
 %global commit0 86b3e456e1ed20627310326d1a595a08ebc8b596
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 11
+%global bumpver 12
 
 
 Name:           waybar-git
@@ -21,6 +23,7 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Patch0:         hyprland.patch
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
