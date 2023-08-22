@@ -111,7 +111,7 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 %build
 %meson -Dwlroots:examples=false \
        -Dwlroots:xcb-errors=disabled \
-       -Dwlroots:legacy_renderer=enabled
+       -Dlegacy_renderer=enabled
 %meson_build
 
 
