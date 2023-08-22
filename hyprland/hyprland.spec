@@ -1,5 +1,7 @@
 %global _default_patch_fuzz 2
 
+%bcond legacyrenderer 0
+
 Name:           hyprland
 Version:        0.28.0
 Release:        %autorelease
@@ -107,7 +109,11 @@ cp subprojects/wlroots/LICENSE LICENSE-wlroots
 
 
 %build
-%meson -Dwlroots:examples=false \
+%meson \
+%if %{with legacyrenderer}
+       -Dlegacy_renderer=enabled \
+%endif
+       -Dwlroots:examples=false \
        -Dwlroots:xcb-errors=disabled
 %meson_build
 
