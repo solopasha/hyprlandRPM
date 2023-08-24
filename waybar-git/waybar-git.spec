@@ -1,8 +1,8 @@
 %global _default_patch_fuzz 2
 
-%global commit0 b7a527b122831235fb36f661d415f5f3ed378d92
+%global commit0 b66584308545e3da9fc4433529a684443b5eebe9
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 4
+%global bumpver 5
 
 
 Name:           waybar-git
