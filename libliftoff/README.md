@@ -1,3 +1,0 @@
-# libliftoff
-
-The libliftoff package
