@@ -1,6 +1,6 @@
-%global hyprland_commit 299d201e562c0d0d1530d1559ff33802a1470815
+%global hyprland_commit 4a41d013a27c9919ed41a50c43c4224d8443a415
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 39
+%global bumpver 40
 
 %global wlroots_commit 717ded9bb0191ea31bf4368be32e7a15fe1b8294
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -152,6 +152,7 @@ mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 %{_mandir}/man1/Hyprland.1*
 %{_mandir}/man1/hyprctl.1*
 %{_datadir}/hyprland/
+%{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 %{_datadir}/wayland-sessions/hyprland.desktop
 
 %files devel
