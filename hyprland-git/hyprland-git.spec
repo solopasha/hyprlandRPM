@@ -118,11 +118,12 @@ License:        BSD-3-Clause AND MIT
 
 
 %prep
-%autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:%{name}-source} -p1
+%autosetup -N -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:%{name}-source} -p1
 %if 0%{?bumpver}
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
+%autopatch -p1
 
 sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
 sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
