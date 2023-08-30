@@ -13,6 +13,8 @@
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
+%bcond legacyrenderer 0
+
 Name:           hyprland-git
 Version:        0.29.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
@@ -80,11 +82,11 @@ BuildRequires:  pkgconfig(xwayland)
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
 # https://github.com/hyprwm/Hyprland/issues/302
-Provides:       bundled(wlroots) = 0.17.0~^1.%{?bumpver:%{wlroots_shortcommit}}%{!?bumpver:6830bfc}
+Provides:       bundled(wlroots) = 0.17.0~^1.%{wlroots_shortcommit}
 
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
-Provides:       bundled(udis86) = 1.7.2^1.%{?bumpver:%{udis86_shortcommit}}%{!?bumpver:5336633}
+Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
 Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       libliftoff%{?_isa} >= 0.4.1
@@ -138,7 +140,11 @@ cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
 
 
 %build
-%meson -Dwlroots:examples=false \
+%meson \
+%if %{with legacyrenderer}
+       -Dlegacy_renderer=enabled \
+%endif
+       -Dwlroots:examples=false \
        -Dwlroots:xcb-errors=disabled
 %meson_build
 
@@ -157,8 +163,8 @@ mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 %{_mandir}/man1/Hyprland.1*
 %{_mandir}/man1/hyprctl.1*
 %{_datadir}/hyprland/
-%{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 %{_datadir}/wayland-sessions/hyprland.desktop
+%{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 
 %files devel
 %license LICENSE-hyprland-protocols LICENSE-wlroots

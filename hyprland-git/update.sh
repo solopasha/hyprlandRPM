@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 ec=0
+newRelease=0
 
 oldTag="$(rpmspec -q --qf "%{version}\n" hyprland-git.spec | head -1 | sed 's/\^.*//')"
 newTag="$(curl "https://api.github.com/repos/hyprwm/Hyprland/tags" | jq -r '.[0].name' | sed 's/^v//')"
@@ -37,7 +38,8 @@ case $ec in
     0) ;;
     12)
         perl -pe 's/(?<=bumpver\s)(\d+)/0/' -i hyprland-git.spec
-        sed -i "/^Version:/s/$oldTag/$newTag/" hyprland-git.spec ;;
+        sed -i "/^Version:/s/$oldTag/$newTag/" hyprland-git.spec
+        newRelease=1 ;;
     *) exit 1
 esac
 
@@ -45,3 +47,12 @@ git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec && \
 git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" && \
 git push; }
+
+if [[ $newRelease == "1" ]]; then
+    hyprlandBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
+    perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i ../hyprland-plugins/hyprland-plugins.spec
+    git commit -am "rebuild plugins"
+    git push
+    copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins --after-build-id "$hyprlandBuildId"
+    parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{-nvidia,-legacyrenderer}
+fi

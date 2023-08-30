@@ -3,19 +3,21 @@ name: Update revisions
 on:
   workflow_dispatch:
   schedule:
-    - cron: "45 5,13,21 * * *"
+    - cron: '45 */6 * * *'
 
 jobs:
   main:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     container:
-      image: "registry.fedoraproject.org/fedora-minimal:latest"
+      image: 'registry.fedoraproject.org/fedora-minimal:latest'
 
     steps:
       - name: Prepare
         run: |
           microdnf -y install --nodocs --setopt=install_weak_deps=0 \
-            git-core rpm-build curl perl-interpreter jq rpmdevtools copr-cli
+            git-core rpm-build curl perl-interpreter jq rpmdevtools copr-cli parallel
 
       - name: Copr config
         env:

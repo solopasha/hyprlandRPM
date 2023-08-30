@@ -1,0 +1,31 @@
+name: Build hyprland
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'hyprland-git/**'
+
+jobs:
+  main:
+    if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build]') }}
+    runs-on: ubuntu-latest
+    container:
+      image: 'registry.fedoraproject.org/fedora-minimal:latest'
+
+    steps:
+      - name: Prepare
+        run: |
+          microdnf -y install --nodocs --setopt=install_weak_deps=0 \
+             copr-cli parallel
+
+      - name: Copr config
+        env:
+          COPR_CONF: ${{ secrets.COPR_CONFIG }}
+        run: |
+          mkdir -p ~/.config
+          echo "$COPR_CONF" > ~/.config/copr
+
+      - name: Build hyprland
+        run: |
+          parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{,-nvidia,-legacyrenderer}
