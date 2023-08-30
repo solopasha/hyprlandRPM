@@ -5,10 +5,16 @@ on:
   push:
     paths:
       - 'hyprland-git/**'
+      - '.copr/**'
 
 jobs:
   main:
-    if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build]') }}
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.head_commit.message, '[build-all]') ||
+      contains(github.event.head_commit.message, '[build-hyprland]') ||
+      contains(github.event.head_commit.message, '[build-nvidia]') ||
+      contains(github.event.head_commit.message, '[build-legacyrenderer]')
     runs-on: ubuntu-latest
     container:
       image: 'registry.fedoraproject.org/fedora-minimal:latest'
@@ -26,6 +32,22 @@ jobs:
           mkdir -p ~/.config
           echo "$COPR_CONF" > ~/.config/copr
 
-      - name: Build hyprland
+      - name: Build all
+        if: contains(github.event.head_commit.message, '[build-all]')
         run: |
           parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{,-nvidia,-legacyrenderer}
+
+      - name: Build hyprland
+        if: contains(github.event.head_commit.message, '[build-hyprland]')
+        run: |
+          copr-cli build-package solopasha/hyprland --nowait --name hyprland
+
+      - name: Build hyprland-nvidia
+        if: contains(github.event.head_commit.message, '[build-nvidia]')
+        run: |
+          copr-cli build-package solopasha/hyprland --nowait --name hyprland
+
+      - name: Build hyprland-legacyrenderer
+        if: contains(github.event.head_commit.message, '[build-legacyrenderer]')
+        run: |
+          copr-cli build-package solopasha/hyprland --nowait --name hyprland
