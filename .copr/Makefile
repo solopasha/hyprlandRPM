@@ -14,7 +14,6 @@ endif
 ifeq ($(specfile),hyprland-nvidia.spec)
 	python3 nvidia.py > $(specfile)
 	sed -e '1i Epoch: 1' \
-		-e'/hyprland-portals.conf/d' \
 		-e '/%global bumpver/s/[[:digit:]]\+/0/' \
 		-i $(specfile)
 endif
