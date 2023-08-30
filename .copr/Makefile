@@ -8,19 +8,19 @@ srpm: prepare
 	
 ifeq ($(specfile),hyprland.spec)
 	sed -e '/Name:/s/hyprland-git/$${specfile//.spec/}/' \
-		-e '/%global bumpver/s/[[:digit:]]\+/0/' \
+		-e 's/%global bumpver/#%&/' \
 		hyprland-git.spec > $(specfile)
 endif
 ifeq ($(specfile),hyprland-nvidia.spec)
 	python3 nvidia.py > $(specfile)
 	sed -e '1i Epoch: 1' \
-		-e '/%global bumpver/s/[[:digit:]]\+/0/' \
+		-e 's/%global bumpver/#%&/' \
 		-i $(specfile)
 endif
 ifeq ($(specfile),hyprland-legacyrenderer.spec)
 	sed -e '/legacyrenderer/s/0/1/' \
 		-e '/Name:/s/hyprland-git/$${specfile//.spec/}/' \
-		-e '/%global bumpver/s/[[:digit:]]\+/0/' \
+		-e 's/%global bumpver/#%&/' \
 		hyprland-git.spec > $(specfile)
 endif
 ifeq ($(specfile),hyprland-nvidia-git.spec)
