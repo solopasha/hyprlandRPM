@@ -50,9 +50,9 @@ git push; }
 
 if [[ $newRelease == "1" ]]; then
     hyprlandBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
+    parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{-nvidia,-legacyrenderer}
     perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i ../hyprland-plugins/hyprland-plugins.spec
     git commit -am "rebuild plugins"
     git push
     copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins --after-build-id "$hyprlandBuildId"
-    parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{-nvidia,-legacyrenderer}
 fi
