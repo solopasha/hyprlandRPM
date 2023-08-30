@@ -122,7 +122,7 @@ License:        BSD-3-Clause AND MIT
 
 
 %prep
-%autosetup -N -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:%{name}-source} -p1
+%autosetup -N -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -p1
 
 %if 0%{?bumpver}
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
