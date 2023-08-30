@@ -21,9 +21,16 @@ newProtocolsCommit="$(curl -L \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/hyprwm/Hyprland/contents/subprojects/hyprland-protocols | jq -r '.sha')"
 
-sed -i "s/$oldHyprlandCommit/$newHyprlandCommit/" hyprland-git.spec
-sed -i "s/$oldWlrootsCommit/$newWlrootsCommit/" hyprland-git.spec
-sed -i "s/$oldProtocolsCommit/$newProtocolsCommit/" hyprland-git.spec
+oldUdis86Commit="$(sed -n 's/.*udis86_commit \(.*\)/\1/p' hyprland-git.spec)"
+newUdis86Commit="$(curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/hyprwm/Hyprland/contents/subprojects/udis86 | jq -r '.sha')"
+
+sed -e "s/$oldHyprlandCommit/$newHyprlandCommit/" \
+    -e "s/$oldWlrootsCommit/$newWlrootsCommit/" \
+    -e "s/$oldProtocolsCommit/$newProtocolsCommit/" \
+    -e "s/$oldUdis86Commit/$newUdis86Commit/" -i hyprland-git.spec
 
 rpmdev-vercmp $oldTag $newTag || ec=$?
 case $ec in

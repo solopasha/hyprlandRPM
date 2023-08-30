@@ -8,6 +8,9 @@ ifeq ($(specfile),hyprland-nvidia.spec)
 	sed '1i Epoch: 1' -i $(specfile)
 	sed '/hyprland-portals.conf/d' -i $(specfile)
 endif
+ifeq ($(specfile),hyprland-nvidia-git.spec)
+	python3 nvidia.py > $(specfile)
+endif
 ifeq ($(specfile),hyprland-legacyrenderer.spec)
 	sed '/legacyrenderer/s/0/1/;/Name:/s/hyprland/hyprland-legacyrenderer/' hyprland.spec > $(specfile)
 endif
