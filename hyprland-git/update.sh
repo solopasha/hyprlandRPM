@@ -45,8 +45,9 @@ esac
 
 git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec && \
-git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" -m "[build-git-all]" && \
-git push; }
+git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" && \
+git push && \
+parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland-{,nvidia-}git; }
 
 if [[ $newRelease == "1" ]]; then
     hyprlandBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
