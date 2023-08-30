@@ -1,11 +1,11 @@
 .PHONY: srpm
-specfile = $(notdir $(spec))
+export specfile = $(notdir $(spec))
 
 prepare:
 	dnf install -y rpm-build rpmdevtools python3-specfile
 
 srpm: prepare
-	export SPECFILE=$(specfile)
+	
 ifeq ($(specfile),hyprland.spec)
 	sed -e '/Name:/s/hyprland-git/$${specfile//.spec/}/' \
 		-e '/%global bumpver/s/[[:digit:]]\+/0/' \
