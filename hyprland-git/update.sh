@@ -45,7 +45,7 @@ esac
 
 git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec && \
-git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" && \
+git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" -m "[build-git-all]" && \
 git push; }
 
 if [[ $newRelease == "1" ]]; then
