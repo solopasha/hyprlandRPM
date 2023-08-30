@@ -7,7 +7,7 @@ prepare:
 srpm: prepare
 	
 ifeq ($(specfile),hyprland.spec)
-	sed -e '/Name:/s/hyprland-git/$${specfile//.spec/}/' \
+	sed -e "/Name:/s/hyprland-git/$${specfile//.spec/}/" \
 		-e 's/%global bumpver/#%&/' \
 		hyprland-git.spec > $(specfile)
 endif
@@ -19,7 +19,7 @@ ifeq ($(specfile),hyprland-nvidia.spec)
 endif
 ifeq ($(specfile),hyprland-legacyrenderer.spec)
 	sed -e '/legacyrenderer/s/0/1/' \
-		-e '/Name:/s/hyprland-git/$${specfile//.spec/}/' \
+		-e "/Name:/s/hyprland-git/$${specfile//.spec/}/" \
 		-e 's/%global bumpver/#%&/' \
 		hyprland-git.spec > $(specfile)
 endif
