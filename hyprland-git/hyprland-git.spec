@@ -1,3 +1,5 @@
+%global _default_patch_fuzz 2
+
 %global hyprland_commit c98a00678c1f3b051c2440b72f58cd9ecfdae70d
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
 %global bumpver 4
@@ -119,15 +121,17 @@ License:        BSD-3-Clause AND MIT
 
 %prep
 %autosetup -N -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:%{name}-source} -p1
+
 %if 0%{?bumpver}
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
-%autopatch -p1
-
 sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
-sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
 %endif
+
+%autopatch -p1
+sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
+
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
 cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
