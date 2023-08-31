@@ -2,29 +2,21 @@
 export specfile = $(notdir $(spec))
 
 prepare:
-	dnf install -y rpm-build rpmdevtools python3-specfile
+	dnf install -y rpm-build rpmdevtools
 
 srpm: prepare
-	
-ifeq ($(specfile),hyprland.spec)
-	sed -e "/Name:/s/hyprland-git/$${specfile//.spec/}/" \
-		-e 's/%global bumpver/#%&/' \
-		hyprland-git.spec > $(specfile)
+	sed -e "/Name:/s/hyprland-git/$${specfile//.spec/}/" hyprland-git.spec > $(specfile)
+ifneq ($(findstring git,$(specfile)),git)
+	sed 's/%global bumpver/#%&/' \
+		-i $(specfile)
 endif
 ifeq ($(specfile),hyprland-nvidia.spec)
-	python3 nvidia.py > $(specfile)
 	sed -e '1i Epoch: 1' \
-		-e 's/%global bumpver/#%&/' \
 		-i $(specfile)
 endif
 ifeq ($(specfile),hyprland-legacyrenderer.spec)
 	sed -e '/legacyrenderer/s/0/1/' \
-		-e "/Name:/s/hyprland-git/$${specfile//.spec/}/" \
-		-e 's/%global bumpver/#%&/' \
-		hyprland-git.spec > $(specfile)
-endif
-ifeq ($(specfile),hyprland-nvidia-git.spec)
-	python3 nvidia.py > $(specfile)
+		-i $(specfile)
 endif
 	spectool -g ./$(specfile)
 	rpmbuild -bs --define "_sourcedir ${PWD}" --define "_specdir ${PWD}" \

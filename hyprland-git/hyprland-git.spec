@@ -38,6 +38,14 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 %else
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
+%{lua:
+if string.match(rpm.expand('%{name}'), 'nvidia%-git$') then
+    print('Patch: https://raw.githubusercontent.com/hyprwm/Hyprland/main/nix/patches/wlroots-nvidia.patch#/wlroots-nvidia-git.patch')
+end
+if string.match(rpm.expand('%{name}'), 'nvidia$') then
+       print(rpm.expand('Patch: https://raw.githubusercontent.com/hyprwm/Hyprland/v%{version}/nix/patches/wlroots-nvidia.patch#/wlroots-nvidia-stable.patch'))
+end
+}
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -131,7 +139,7 @@ tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
 sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
 %endif
 
-%autopatch -p1
+%{?PATCH0:patch -d subprojects/wlroots -Np1 -i %{PATCH0}}
 sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
