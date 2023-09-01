@@ -5,7 +5,7 @@
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
 Version:        0.5.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
-Release:        %autorelease -b3
+Release:        %autorelease -b4
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        MIT
@@ -49,8 +49,10 @@ Requires:       qt6-qtwayland
 
 Enhances:       hyprland
 Supplements:    hyprland
-Supplements:    hyprland-git
 Supplements:    hyprland-nvidia
+Supplements:    hyprland-legacyrenderer
+Supplements:    hyprland-git
+Supplements:    hyprland-nvidia-git
 
 %description
 %{summary}.
