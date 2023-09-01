@@ -1,6 +1,6 @@
 Name:           hyprpicker
 Version:        0.1.1
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        A wlroots-compatible Wayland color picker
 
 License:        BSD-3-Clause
@@ -9,7 +9,6 @@ Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  pkgconfig
 
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(glesv2)

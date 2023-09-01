@@ -1,6 +1,6 @@
 Name:           hyprpaper
 Version:        0.4.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
 
 License:        BSD-3-Clause
@@ -9,7 +9,6 @@ Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  pkgconfig
 
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(libmagic)
