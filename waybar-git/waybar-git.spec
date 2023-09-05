@@ -1,9 +1,6 @@
-%global _default_patch_fuzz 2
-
 %global commit0 f7ff005dd5dc8dcf0a5020f147b2010953b7ba67
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 8
-
+%global bumpver 9
 
 Name:           waybar-git
 Version:        0.9.22%{?bumpver:^%{bumpver}.git%{shortcommit0}}
@@ -23,7 +20,6 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
-Patch0:         hyprland.patch
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
@@ -60,7 +56,6 @@ BuildRequires:  pkgconfig(wireplumber-0.4)
 BuildRequires:  pkgconfig(xkbregistry)
 
 Conflicts:      waybar
-Conflicts:      waybar-hyprland
 Provides:       waybar
 
 Enhances:       hyprland
@@ -75,8 +70,7 @@ Recommends:     (font(fontawesome6free) or font(fontawesome5free))
 %build
 %meson \
     -Dsndio=disabled \
-    -Dcava=disabled \
-    -Dexperimental=true
+    -Dcava=disabled
 %meson_build
 
 %install
