@@ -4,7 +4,7 @@
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
-%global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars}
+%global plugins %{expand:csgo-vulkan-fix}
 
 Name:           hyprland-plugins
 Version:        0.1^%{bumpver}.git%{shortcommit0}
@@ -51,9 +51,11 @@ BuildRequires:  pkgconfig(xcb-xinput)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xwayland)
 
-Recommends:     hyprland-plugin-borders-plus-plus
+Obsoletes:			hyprland-plugin-borders-plus-plus < 0.1^9.git74a845f-1
+Obsoletes:			hyprland-plugin-hyprbars < 0.1^9.git74a845f-1
+#Recommends:     hyprland-plugin-borders-plus-plus
 Recommends:     hyprland-plugin-csgo-vulkan-fix
-Recommends:     hyprland-plugin-hyprbars
+#Recommends:     hyprland-plugin-hyprbars
 
 %description
 %{summary}.
@@ -66,9 +68,9 @@ Summary:       %1 plugin for hyprland\
 \%{_libdir}/hyprland/lib%1.so\
 
 
-%_package borders-plus-plus
+#_package borders-plus-plus
 %_package csgo-vulkan-fix
-%_package hyprbars
+#_package hyprbars
 
 %prep
 %autosetup -n %{name}-%{commit0} -p1
