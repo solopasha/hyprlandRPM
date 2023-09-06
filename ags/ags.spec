@@ -32,10 +32,14 @@ Requires:       gjs
 Requires:       gtk-layer-shell
 Recommends:     libdbusmenu-gtk3
 
+Provides:       bundled(gi-typescript-definitions) = 0^1.git%{gi_types_commit}
+Provides:       bundled(libgnome-volume-control) = 0^1.git%{gvc_commit}
+
 %description
 This program is essentially a library for gjs which allows defining GTK widgets
 in a declarative way in JavaScript. It also provides services to interact with
 the system so that these widgets can have functionality.
+
 
 %prep
 %autosetup -n %{name}-%{ver}
