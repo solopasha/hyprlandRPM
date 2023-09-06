@@ -1,6 +1,6 @@
 %global ver 1.1.0
 
-%global __provides_exclude_from ^(%{_libdir}/%{name}/.*\\.so)$
+%global __provides_exclude_from ^(%{_libdir}/ags/.*\\.so)$
 
 %global gi_types_commit eb2a87a25c5e2fb580b605fbec0bd312fe34c492
 %global gi_types_shortcommit %(c=%{gi_types_commit}; echo ${c:0:7})
@@ -10,7 +10,7 @@
 
 Name:           aylurs-gtk-shell
 Version:        %{ver}~beta
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        A customizable and extensible shell
 
 License:        GPL-3.0-or-later
