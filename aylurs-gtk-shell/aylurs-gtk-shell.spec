@@ -8,7 +8,7 @@
 %global gvc_commit 8e7a5a4c3e51007ce6579292642517e3d3eb9c50
 %global gvc_shortcommit %(c=%{gvc_commit}; echo ${c:0:7})
 
-Name:           ags
+Name:           aylurs-gtk-shell
 Version:        %{ver}~beta
 Release:        %autorelease
 Summary:        A customizable and extensible shell
@@ -42,7 +42,7 @@ the system so that these widgets can have functionality.
 
 
 %prep
-%autosetup -n %{name}-%{ver}
+%autosetup -n ags-%{ver}
 cp %{SOURCE3} .
 tar -xf %{SOURCE1} -C gi-types --strip=1
 tar -xf %{SOURCE2} -C subprojects/gvc --strip=1
@@ -61,9 +61,9 @@ npm install
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/%{name}
-%{_datadir}/%{name}/
-%{_libdir}/%{name}/
+%{_bindir}/ags
+%{_datadir}/ags/
+%{_libdir}/ags/
 
 
 %changelog
