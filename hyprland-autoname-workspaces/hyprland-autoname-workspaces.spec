@@ -1,12 +1,11 @@
 Name:           hyprland-autoname-workspaces
-Version:        1.1.7
-Release:        %autorelease -b2
+Version:        1.1.9
+Release:        %autorelease
 Summary:        Hyprland autoname workspaces
 
 License:        ISC
 URL:            https://github.com/hyprland-community/hyprland-autoname-workspaces
 Source:         %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-Patch:          fix-lock.diff
 
 BuildRequires:  rust-packaging >= 21
 BuildRequires:  systemd-rpm-macros
