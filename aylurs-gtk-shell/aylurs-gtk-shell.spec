@@ -1,4 +1,4 @@
-%global ver 1.1.0
+%global ver 1.2.0
 
 %global __provides_exclude_from ^(%{_libdir}/ags/.*\\.so)$
 
@@ -18,7 +18,6 @@ URL:            https://github.com/Aylur/ags
 Source0:        %{url}/archive/v%{ver}/%{name}-%{version_no_tilde}.tar.gz
 Source1:        https://gitlab.gnome.org/BrainBlasted/gi-typescript-definitions/-/archive/%{gi_types_commit}/gi-types-%{gi_types_shortcommit}.tar.gz
 Source2:        https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive/%{gvc_commit}/gvc-%{gvc_shortcommit}.tar.gz
-Source3:        https://raw.githubusercontent.com/Aylur/ags/main/LICENSE
 
 BuildRequires:  meson
 BuildRequires:  /usr/bin/npm
@@ -43,7 +42,6 @@ the system so that these widgets can have functionality.
 
 %prep
 %autosetup -n ags-%{ver}
-cp %{SOURCE3} .
 tar -xf %{SOURCE1} -C gi-types --strip=1
 tar -xf %{SOURCE2} -C subprojects/gvc --strip=1
 
