@@ -10,7 +10,7 @@
 
 Name:           aylurs-gtk-shell
 Version:        %{ver}~beta
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        A customizable and extensible shell
 
 License:        GPL-3.0-or-later
@@ -30,6 +30,7 @@ BuildRequires:  pkgconfig(libpulse)
 Requires:       gjs
 Requires:       gtk-layer-shell
 Recommends:     libdbusmenu-gtk3
+Recommends:     gnome-bluetooth-libs
 
 Provides:       bundled(gi-typescript-definitions) = 0^1.git%{gi_types_shortcommit}
 Provides:       bundled(libgnome-volume-control) = 0^1.git%{gvc_shortcommit}
