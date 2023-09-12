@@ -23,7 +23,7 @@ jobs:
     container:
       image: 'registry.fedoraproject.org/fedora-minimal:latest'
     env:
-      chroots: (-r fedora-rawhide-x86_64 -r fedora-rawhide-aarch64 -r fedora-39-x86_64 -r fedora-39-aarch64 -r fedora-38-aarch64 -r fedora-38-x86_64)
+      chroots: -r fedora-rawhide-x86_64 -r fedora-rawhide-aarch64 -r fedora-39-x86_64 -r fedora-39-aarch64 -r fedora-38-aarch64 -r fedora-38-x86_64
 
     steps:
       - name: Prepare
@@ -41,34 +41,34 @@ jobs:
       - name: Build all
         if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build-all]')
         run: |
-          parallel copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name ::: hyprland{,-nvidia,-legacyrenderer}
+          parallel copr-cli build-package solopasha/hyprland $chroots --nowait --name ::: hyprland{,-nvidia,-legacyrenderer}
 
       - name: Build hyprland
         if: contains(github.event.head_commit.message, '[build-hyprland]')
         run: |
-          copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name hyprland
+          copr-cli build-package solopasha/hyprland $chroots --nowait --name hyprland
 
       - name: Build hyprland-nvidia
         if: contains(github.event.head_commit.message, '[build-nvidia]')
         run: |
-          copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name hyprland-nvidia
+          copr-cli build-package solopasha/hyprland $chroots --nowait --name hyprland-nvidia
 
       - name: Build hyprland-legacyrenderer
         if: contains(github.event.head_commit.message, '[build-legacyrenderer]')
         run: |
-          copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name hyprland-legacyrenderer
+          copr-cli build-package solopasha/hyprland $chroots --nowait --name hyprland-legacyrenderer
 
       - name: Build all (git)
         if: contains(github.event.head_commit.message, '[build-git-all]')
         run: |
-          parallel copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name ::: hyprland-{,nvidia-}git
+          parallel copr-cli build-package solopasha/hyprland $chroots --nowait --name ::: hyprland-{,nvidia-}git
 
       - name: Build hyprland-git
         if: contains(github.event.head_commit.message, '[build-git-hyprland]')
         run: |
-          copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name hyprland-git
+          copr-cli build-package solopasha/hyprland $chroots --nowait --name hyprland-git
 
       - name: Build hyprland-nvidia-git
         if: contains(github.event.head_commit.message, '[build-git-nvidia]')
         run: |
-          copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name hyprland-nvidia-git
+          copr-cli build-package solopasha/hyprland $chroots --nowait --name hyprland-nvidia-git
