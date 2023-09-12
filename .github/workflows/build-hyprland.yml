@@ -6,6 +6,7 @@ on:
     paths:
       - 'hyprland-git/**'
       - '.copr/**'
+      - '.github/**'
 
 jobs:
   main:
