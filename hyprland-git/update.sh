@@ -3,6 +3,7 @@ set -euxo pipefail
 
 ec=0
 newRelease=0
+chroots=(-r fedora-rawhide-x86_64 -r fedora-rawhide-aarch64 -r fedora-39-x86_64 -r fedora-39-aarch64 -r fedora-38-aarch64 -r fedora-38-x86_64)
 
 oldTag="$(rpmspec -q --qf "%{version}\n" hyprland-git.spec | head -1 | sed 's/\^.*//')"
 newTag="$(curl "https://api.github.com/repos/hyprwm/Hyprland/tags" | jq -r '.[0].name' | sed 's/^v//')"
@@ -50,8 +51,8 @@ git push && \
 parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland-{,nvidia-}git; }
 
 if [[ $newRelease == "1" ]]; then
-    hyprlandBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
-    parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{-nvidia,-legacyrenderer}
+    hyprlandBuildId=$(copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
+    parallel copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name ::: hyprland{-nvidia,-legacyrenderer}
     perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i ../hyprland-plugins/hyprland-plugins.spec
     git commit -am "rebuild plugins"
     git push
