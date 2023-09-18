@@ -2,18 +2,18 @@
 
 %global commit0 588da9f1dc7a14089bc8971d622c63e47a027c1f
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1
+#global bumpver 1
 
 %bcond test 1
 %bcond doc 1
-%bcond bundled 0
+%bcond bundled 1
 
 %if %{with bundled}
 %global gomodulesmode GO111MODULE=on
 %endif
 
 Name:           kitty
-Version:        0.29.2%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.30.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
