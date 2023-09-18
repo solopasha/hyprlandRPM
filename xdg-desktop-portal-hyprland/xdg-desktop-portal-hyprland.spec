@@ -4,11 +4,11 @@
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        0.5.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
-Release:        %autorelease -b4
+Version:        1.1.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
+Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
-License:        MIT
+License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/%{name}
 %if 0%{?bumpver}
 Source:         %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
@@ -24,18 +24,13 @@ BuildRequires:  ninja-build
 BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  pkgconfig(gbm)
 BuildRequires:  pkgconfig(hyprland-protocols)
-BuildRequires:  pkgconfig(inih)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpipewire-0.3)
-BuildRequires:  pkgconfig(libspa-0.2)
-BuildRequires:  pkgconfig(libsystemd)
-BuildRequires:  pkgconfig(scdoc)
+BuildRequires:  pkgconfig(sdbus-c++)
 BuildRequires:  pkgconfig(systemd)
-BuildRequires:  pkgconfig(uuid)
 BuildRequires:  pkgconfig(wayland-client)
-BuildRequires:  pkgconfig(wayland-protocols) >= 1.24
+BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(wayland-scanner)
-BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  systemd-rpm-macros
 
 
@@ -63,18 +58,13 @@ Supplements:    hyprland-nvidia-git
 
 
 %build
-%meson \
-    -Dsd-bus-provider=libsystemd
+%meson
 %meson_build
-cd hyprland-share-picker
-%cmake -G Ninja
-%cmake_build
 
 
 %install
 %meson_install
-cd hyprland-share-picker
-%cmake_install
+
 
 %post
 %systemd_user_post %{name}.service
