@@ -16,23 +16,20 @@ Source:         %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 %endif
 
-BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  meson
-BuildRequires:  ninja-build
+BuildRequires:  systemd-rpm-macros
 
-BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  pkgconfig(gbm)
 BuildRequires:  pkgconfig(hyprland-protocols)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpipewire-0.3)
+BuildRequires:  pkgconfig(Qt6Widgets)
 BuildRequires:  pkgconfig(sdbus-c++)
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(wayland-scanner)
-BuildRequires:  systemd-rpm-macros
-
 
 Requires:       dbus
 # required for Screenshot portal implementation
