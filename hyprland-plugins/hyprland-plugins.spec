@@ -1,6 +1,6 @@
 %global commit0 f9578d28d272fb61753417e175b0fcd5bedc1443
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 10
+%global bumpver 11
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
@@ -61,14 +61,17 @@ Recommends:     hyprland-plugin-hyprbars
 %define _package() \%package -n hyprland-plugin-%1\
 Summary:       %1 plugin for hyprland\
 \%description  -n hyprland-plugin-%1\
-\%{summary}.\
+\%1 plugin for hyprland.\
 \%files -n     hyprland-plugin-%1\
+\%%license LICENSE\
+\%dir %{_libdir}/hyprland\
 \%{_libdir}/hyprland/lib%1.so\
 
 
 %_package borders-plus-plus
 %_package csgo-vulkan-fix
 %_package hyprbars
+
 
 %prep
 %autosetup -n %{name}-%{commit0} -p1
@@ -94,9 +97,7 @@ done
 
 
 %files
-%dir %{_libdir}/hyprland
-%license LICENSE
-%doc README.md
+
 
 %changelog
 %autochangelog
