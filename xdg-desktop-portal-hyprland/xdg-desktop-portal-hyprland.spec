@@ -16,7 +16,7 @@ Source:         %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 %endif
 
-BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  meson
 BuildRequires:  systemd-rpm-macros
 
