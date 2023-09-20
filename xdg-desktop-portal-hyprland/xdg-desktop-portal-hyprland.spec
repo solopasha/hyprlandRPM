@@ -7,7 +7,7 @@
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
 Version:        1.1.0%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        BSD-3-Clause
@@ -30,7 +30,9 @@ BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(Qt6Widgets)
-# BuildRequires:  pkgconfig(sdbus-c++)
+%if %{fedora} >= 40
+BuildRequires:  pkgconfig(sdbus-c++)
+%endif
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
@@ -59,10 +61,12 @@ Provides:       bundled(sdbus-cpp) = %{sdbus_version}
 
 %prep
 %autosetup %{?bumpver:-n %{name}-%{portal_commit}}
+%if %{fedora} < 40
 tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
-
+%endif
 
 %build
+%if %{fedora} < 40
 pushd subprojects/sdbus-cpp
 %cmake -G Ninja \
     -DCMAKE_INSTALL_PREFIX=%{_builddir}/sdbus \
@@ -72,6 +76,7 @@ pushd subprojects/sdbus-cpp
 cmake --install %{__cmake_builddir}
 popd
 export PKG_CONFIG_PATH=%{_builddir}/sdbus/lib64/pkgconfig
+%endif
 %meson
 %meson_build
 
