@@ -53,7 +53,9 @@ Supplements:    hyprland-legacyrenderer
 Supplements:    hyprland-git
 Supplements:    hyprland-nvidia-git
 
+%if %{fedora} < 40
 Provides:       bundled(sdbus-cpp) = %{sdbus_version}
+%endif
 
 %description
 %{summary}.
@@ -64,6 +66,7 @@ Provides:       bundled(sdbus-cpp) = %{sdbus_version}
 %if %{fedora} < 40
 tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
 %endif
+
 
 %build
 %if %{fedora} < 40
