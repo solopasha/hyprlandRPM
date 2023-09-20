@@ -1,4 +1,4 @@
-%global ver 1.2.0
+%global ver 1.3.0
 
 %global __provides_exclude_from ^(%{_libdir}/ags/.*\\.so)$
 
@@ -10,7 +10,7 @@
 
 Name:           aylurs-gtk-shell
 Version:        %{ver}~beta
-Release:        %autorelease -b3
+Release:        %autorelease
 Summary:        A customizable and extensible shell
 
 License:        GPL-3.0-or-later
@@ -20,15 +20,17 @@ Source1:        https://gitlab.gnome.org/BrainBlasted/gi-typescript-definitions/
 Source2:        https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive/%{gvc_commit}/gvc-%{gvc_shortcommit}.tar.gz
 
 BuildRequires:  meson
-BuildRequires:  /usr/bin/npm
 BuildRequires:  typescript
-BuildRequires:  pkgconfig(gobject-introspection-1.0)
+BuildRequires:  /usr/bin/npm
 BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(gjs-1.0)
+BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libpulse)
+
 Requires:       gjs
 Requires:       gtk-layer-shell
+
 Recommends:     libdbusmenu-gtk3
 Recommends:     gnome-bluetooth-libs
 
