@@ -1,8 +1,8 @@
 %global _default_patch_fuzz 2
 
-%global hyprland_commit ea5d9584dafc73412489b96369ffb090f51edb4d
+%global hyprland_commit fb80cbe415835a7e0c64e2038d0fc56e8aba0ab4
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 47
+%global bumpver 1
 
 %global wlroots_commit 98a745d926d8048bc30aef11b421df207a01c279
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -16,7 +16,7 @@
 %bcond legacyrenderer 0
 
 Name:           hyprland-git
-Version:        0.29.1%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
+Version:        0.30.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
