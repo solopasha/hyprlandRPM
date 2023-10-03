@@ -1,8 +1,8 @@
 %global optflags %{optflags} -Wno-array-bounds
 
-%global commit0 588da9f1dc7a14089bc8971d622c63e47a027c1f
+%global commit0 d1d888ce193493414bdddbc14b7c1e77e9f2cda8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-#global bumpver 1
+#global bumpver 2
 
 %bcond test 1
 %bcond doc 1
@@ -22,7 +22,30 @@ Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 # LGPL-2.1-or-later: kitty/iqsort.h
 # BSD-1-Clause: kitty/uthash.h
 # MIT: docs/_static/custom.css, shell-integration/ssh/bootstrap-utils.sh
-License:        GPL-3.0-only AND LGPL-2.1-or-later AND Zlib AND BSD-1-Clause AND MIT
+# Go dependencies:
+# github.com/alecthomas/chroma: MIT
+# github.com/ALTree/bigfloat: MIT
+# github.com/bmatcuk/doublestar: MIT
+# github.com/disintegration/imaging: MIT
+# github.com/dlclark/regexp2: MIT
+# github.com/google/go-cmp/cmp: BSD-3-Clause
+# github.com/google/uuid: BSD-3-Clause
+# github.com/klauspost/cpuid: MIT
+# github.com/go-ole/go-ole: MIT
+# github.com/lufia/plan9stats: BSD-3-Clause
+# github.com/power-devops/perfstat: MIT
+# github.com/seancfoley/bintree: Apache-2.0
+# github.com/seancfoley/ipaddress-go/ipaddr: Apache-2.0
+# github.com/shirou/gopsutil: BSD-3-Clause
+# github.com/shoenig/go-m1cpu: MPL-2.0
+# github.com/tklauser/go-sysconf: BSD-3-Clause
+# github.com/tklauser/numcpus: Apache-2.0
+# github.com/zeebo/xxh3: BSD-2-Clause
+# golang.org/x/exp: BSD-3-Clause
+# golang.org/x/image: BSD-3-Clause
+# golang.org/x/sys: BSD-3-Clause
+# howett.net/plist: BSD-2-Clause AND BSD-3-Clause
+License:        GPL-3.0-only AND LGPL-2.1-or-later AND Zlib AND BSD-1-Clause
 URL:            https://sw.kovidgoyal.net/kitty
 %if 0%{?bumpver}
 Source0:        https://github.com/kovidgoyal/kitty/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
@@ -31,6 +54,7 @@ Source0:        https://github.com/kovidgoyal/kitty/releases/download/v%{version
 Source4:        https://github.com/kovidgoyal/kitty/releases/download/v%{version}/%{name}-%{version}.tar.xz.sig
 Source5:        https://calibre-ebook.com/signatures/kovid.gpg
 %endif
+
 # Add AppData manifest file
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
@@ -38,11 +62,14 @@ Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444
 # Don't build kitten inside setup.py, use gobuild macro in the spec instead to build with fedora flags
 Patch0:         kitty-do-not-build-kitten.patch
 ## upstream patches
+Patch:          https://github.com/kovidgoyal/kitty/commit/4b41a7d182e72b920ebe098778f83afc80042e59.patch#/fix-overflow.patch
+Patch:          https://github.com/kovidgoyal/kitty/commit/d9cd92d4ed5854631d904665abffdec94cbdb27d.patch#/fix-overflow-2.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
 
-BuildRequires:  golang >= 1.20.0
+BuildRequires:  golang >= 1.21.0
+BuildRequires:  go-rpm-macros
 BuildRequires:  git-core
 
 BuildRequires:  gnupg2
@@ -86,9 +113,9 @@ BuildRequires:  golang(github.com/disintegration/imaging)
 BuildRequires:  golang(github.com/dlclark/regexp2)
 BuildRequires:  golang(github.com/google/go-cmp/cmp)
 BuildRequires:  golang(github.com/google/uuid)
-BuildRequires:  golang(github.com/jamesruan/go-rfc1924/base85)
 BuildRequires:  golang(github.com/seancfoley/ipaddress-go/ipaddr)
 BuildRequires:  golang(github.com/shirou/gopsutil/v3/process)
+BuildRequires:  golang(github.com/zeebo/xxh3)
 BuildRequires:  golang(golang.org/x/exp/constraints)
 BuildRequires:  golang(golang.org/x/exp/maps)
 BuildRequires:  golang(golang.org/x/exp/rand)
@@ -98,7 +125,6 @@ BuildRequires:  golang(golang.org/x/image/tiff)
 BuildRequires:  golang(golang.org/x/image/webp)
 BuildRequires:  golang(golang.org/x/sys/unix)
 BuildRequires:  golang(howett.net/plist)
-BuildRequires:  golang(github.com/zeebo/xxh3)
 %endif
 
 %if %{with test}
@@ -128,6 +154,7 @@ Provides:       %{name}-fish-integration = %{version}-%{release}
 # machine.
 Requires:       %{name}-terminfo = %{version}-%{release}
 Requires:       %{name}-shell-integration = %{version}-%{release}
+Requires:       %{name}-kitten%{?_isa} = %{version}-%{release}
 
 # Very weak dependencies, these are required to enable all features of kitty's
 # "kittens" functions install separately
@@ -170,6 +197,7 @@ Suggests:       ImageMagick%{?_isa}
 # terminfo package
 %package        terminfo
 Summary:        The terminfo file for Kitty Terminal
+License:        GPL-3.0-only
 BuildArch:      noarch
 
 Requires:       ncurses-base
@@ -182,15 +210,27 @@ The terminfo file for Kitty Terminal.
 # shell-integration package
 %package        shell-integration
 Summary:        Shell integration scripts for %{name}
+License:        GPL-3.0-only AND MIT
 BuildArch:      noarch
 
+Recommends:     %{name}-kitten
+
 %description    shell-integration
+%{summary}.
+
+# kitten package
+%package        kitten
+Summary:        The kitten executable
+License:        GPL-3.0-only AND MIT AND BSD-3-Clause AND BSD-2-Clause AND Apache-2.0 AND MPL-2.0 AND (BSD-2-Clause AND BSD-3-Clause)
+
+%description    kitten
 %{summary}.
 
 # doc package
 %if %{with doc}
 %package        doc
 Summary:        Documentation for %{name}
+License:        GPL-3.0-only AND MIT
 BuildArch:      noarch
 
 BuildRequires:  python3dist(sphinx)
@@ -224,9 +264,8 @@ find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python3|%{python3}|g'    
                                     -e 's|/usr/bin/env -S kitty|/usr/bin/kitty|g' \
                                     -i "{}" \;
 
-mkdir -p src/kitty
-ln -s ../../tools src/kitty/tools
-ln -s ../../kittens src/kitty/kittens
+mkdir src
+ln -s ../ src/kitty
 
 
 %build
@@ -242,7 +281,7 @@ export GOPATH=$(pwd):%{gopath}
 %endif
 unset LDFLAGS
 mkdir -p _build/bin
-%gobuild -o _build/bin/kitten ./src/kitty/tools/cmd
+%gobuild -o _build/bin/kitten ./tools/cmd
 
 %install
 # rpmlint fixes
@@ -269,6 +308,12 @@ sed '/def test_ssh_shell_integration/a \
 sed '/def test_ssh_leading_data/a \
 \        self.skipTest("Skipping a failing test")' -i kitty_tests/ssh.py
 %endif
+%ifarch ppc64le
+for test in test_transfer_receive test_transfer_send; do
+sed "/def $test/a \
+\        self.skipTest(\"Skipping a failing test\")" -i kitty_tests/file_transmission.py
+done
+%endif
 export %{gomodulesmode}
 %if %{without bundled}
 export GOPATH=$(pwd):%{gopath}
@@ -278,7 +323,7 @@ mkdir -p kitty/launcher
 ln -s %{buildroot}%{_bindir}/%{name} kitty/launcher/
 export PATH=%{buildroot}%{_bindir}:$PATH
 export PYTHONPATH=$(pwd)
-%{__python3} setup.py test          \
+%{python3} setup.py test          \
     --prefix=%{buildroot}%{_prefix}
 %endif
 
@@ -293,7 +338,6 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 %endif
 %license LICENSE
 %{_bindir}/%{name}
-%{_bindir}/kitten
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/*/*.{png,svg}
 %{_libdir}/%{name}/
@@ -302,6 +346,10 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 %{_mandir}/man{1,5}/*.{1,5}*
 %endif
 %{_metainfodir}/*.xml
+
+%files kitten
+%license LICENSE
+%{_bindir}/kitten
 
 %files terminfo
 %license LICENSE
