@@ -13,8 +13,8 @@
 %endif
 
 Name:           kitty
-Version:        0.30.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease -b2
+Version:        0.30.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
@@ -54,7 +54,12 @@ Source0:        https://github.com/kovidgoyal/kitty/releases/download/v%{version
 Source4:        https://github.com/kovidgoyal/kitty/releases/download/v%{version}/%{name}-%{version}.tar.xz.sig
 Source5:        https://calibre-ebook.com/signatures/kovid.gpg
 %endif
-
+# git clone https://github.com/kovidgoyal/kitty.git
+# cd kitty
+# git checkout v%%{version}
+# go mod vendor
+# tar czf kitty-%%{version}-vendor.tar.gz vendor
+#Source6:        kitty-%{version}-vendor.tar.gz
 # Add AppData manifest file
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
@@ -62,8 +67,6 @@ Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444
 # Don't build kitten inside setup.py, use gobuild macro in the spec instead to build with fedora flags
 Patch0:         kitty-do-not-build-kitten.patch
 ## upstream patches
-Patch:          https://github.com/kovidgoyal/kitty/commit/4b41a7d182e72b920ebe098778f83afc80042e59.patch#/fix-overflow.patch
-Patch:          https://github.com/kovidgoyal/kitty/commit/d9cd92d4ed5854631d904665abffdec94cbdb27d.patch#/fix-overflow-2.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
