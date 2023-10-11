@@ -1,8 +1,8 @@
 %global _default_patch_fuzz 2
 
-%global hyprland_commit d537815d43c74a4e9214c4e7480c20047d297307
+%global hyprland_commit d83357f4976a240a4418a1a0a16641518a47da25
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 34
+%global bumpver 35
 
 %global wlroots_commit 3406c1b17a4a7e6d4e2a7d9c1176affa72bce1bc
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
