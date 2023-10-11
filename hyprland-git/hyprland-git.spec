@@ -2,7 +2,7 @@
 
 %global hyprland_commit d83357f4976a240a4418a1a0a16641518a47da25
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 35
+%global bumpver 36
 
 %global wlroots_commit 3406c1b17a4a7e6d4e2a7d9c1176affa72bce1bc
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -49,7 +49,6 @@ end
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  git-core
 BuildRequires:  glslang
 BuildRequires:  jq
 BuildRequires:  meson
@@ -95,11 +94,8 @@ Provides:       bundled(wlroots) = 0.17.0~^1.%{wlroots_shortcommit}
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
-Requires:       pixman%{?_isa} >= 0.42.0
 Requires:       libliftoff%{?_isa} >= 0.4.1
-Requires:       libwayland-server%{?_isa} >= 1.22.0
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
-Requires:       libinput%{?_isa} >= 1.23.0
 
 Conflicts:      hyprland
 
@@ -135,11 +131,10 @@ License:        BSD-3-Clause AND MIT
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
-sed -i 's|^GIT_COMMIT_HASH =.*|GIT_COMMIT_HASH = '\''%{hyprland_commit}'\''|' meson.build
+sed -i 's|^HASH=.*|HASH=%{hyprland_commit}|' scripts/generateVersion.sh
 %endif
 
 %{?PATCH0:patch -d subprojects/wlroots -Np1 -i %{PATCH0}}
-sed -i 's|^GIT_DIRTY =.*|GIT_DIRTY = '\'''\''|' meson.build
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
