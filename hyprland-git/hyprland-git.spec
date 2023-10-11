@@ -135,6 +135,7 @@ sed -i 's|^HASH=.*|HASH=%{hyprland_commit}|' scripts/generateVersion.sh
 %endif
 
 %{?PATCH0:patch -d subprojects/wlroots -Np1 -i %{PATCH0}}
+sed -i 's|DIRTY=.*|DIRTY=|' scripts/generateVersion.sh
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
