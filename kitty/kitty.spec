@@ -12,9 +12,11 @@
 %global gomodulesmode GO111MODULE=on
 %endif
 
+%global goipath kitty
+
 Name:           kitty
 Version:        0.30.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
@@ -59,7 +61,7 @@ Source5:        https://calibre-ebook.com/signatures/kovid.gpg
 # git checkout v%%{version}
 # go mod vendor
 # tar czf kitty-%%{version}-vendor.tar.gz vendor
-#Source6:        kitty-%{version}-vendor.tar.gz
+#Source6:        kitty-%%{version}-vendor.tar.gz
 # Add AppData manifest file
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
@@ -105,30 +107,6 @@ BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(libcrypto)
 BuildRequires:  pkgconfig(libxxhash)
-
-%if %{without bundled}
-BuildRequires:  golang(github.com/alecthomas/chroma/v2)
-BuildRequires:  golang(github.com/alecthomas/chroma/v2/lexers)
-BuildRequires:  golang(github.com/alecthomas/chroma/v2/styles)
-BuildRequires:  golang(github.com/ALTree/bigfloat)
-BuildRequires:  golang(github.com/bmatcuk/doublestar/v4)
-BuildRequires:  golang(github.com/disintegration/imaging)
-BuildRequires:  golang(github.com/dlclark/regexp2)
-BuildRequires:  golang(github.com/google/go-cmp/cmp)
-BuildRequires:  golang(github.com/google/uuid)
-BuildRequires:  golang(github.com/seancfoley/ipaddress-go/ipaddr)
-BuildRequires:  golang(github.com/shirou/gopsutil/v3/process)
-BuildRequires:  golang(github.com/zeebo/xxh3)
-BuildRequires:  golang(golang.org/x/exp/constraints)
-BuildRequires:  golang(golang.org/x/exp/maps)
-BuildRequires:  golang(golang.org/x/exp/rand)
-BuildRequires:  golang(golang.org/x/exp/slices)
-BuildRequires:  golang(golang.org/x/image/bmp)
-BuildRequires:  golang(golang.org/x/image/tiff)
-BuildRequires:  golang(golang.org/x/image/webp)
-BuildRequires:  golang(golang.org/x/sys/unix)
-BuildRequires:  golang(howett.net/plist)
-%endif
 
 %if %{with test}
 # For tests:
@@ -270,6 +248,11 @@ find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python3|%{python3}|g'    
 mkdir src
 ln -s ../ src/kitty
 
+%if %{without bundled}
+%generate_buildrequires
+export GOPATH=$(pwd):%{gopath}
+%go_generate_buildrequires
+%endif
 
 %build
 %set_build_flags
@@ -284,7 +267,7 @@ export GOPATH=$(pwd):%{gopath}
 %endif
 unset LDFLAGS
 mkdir -p _build/bin
-%gobuild -o _build/bin/kitten ./tools/cmd
+%gobuild -o _build/bin/kitten %{?with_bundled:./tools/cmd}%{!?with_bundled:./src/kitty/tools/cmd}
 
 %install
 # rpmlint fixes
@@ -335,10 +318,6 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 
 
 %files
-%if %{with bundled}
-# Go bundled provides generator
-%license vendor/modules.txt
-%endif
 %license LICENSE
 %{_bindir}/%{name}
 %{_datadir}/applications/*.desktop
@@ -351,6 +330,10 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 %{_metainfodir}/*.xml
 
 %files kitten
+%if %{with bundled}
+# Go bundled provides generator
+%license vendor/modules.txt
+%endif
 %license LICENSE
 %{_bindir}/kitten
 
