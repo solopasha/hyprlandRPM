@@ -132,10 +132,10 @@ tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
 sed -i 's|^HASH=.*|HASH=%{hyprland_commit}|' scripts/generateVersion.sh
+sed -i 's|DIRTY=.*|DIRTY=|' scripts/generateVersion.sh
 %endif
 
 %{?PATCH0:patch -d subprojects/wlroots -Np1 -i %{PATCH0}}
-sed -i 's|DIRTY=.*|DIRTY=|' scripts/generateVersion.sh
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
