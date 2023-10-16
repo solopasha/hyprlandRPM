@@ -56,5 +56,5 @@ if [[ $newRelease == "1" ]]; then
     perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i ../hyprland-plugins/hyprland-plugins.spec
     git commit -am "rebuild plugins"
     git push
-    copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins --after-build-id "$hyprlandBuildId"
+    copr-cli build-package solopasha/hyprland "${chroots[@]}" --nowait --name hyprland-plugins --after-build-id "$hyprlandBuildId"
 fi
