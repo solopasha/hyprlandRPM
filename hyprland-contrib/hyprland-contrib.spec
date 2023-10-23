@@ -1,6 +1,6 @@
 %global commit0 84c0fdbb662c04e08ecedd1e5d2be62099443364
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 13
+%global bumpver 14
 
 Name:           hyprland-contrib
 Version:        0.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
@@ -20,6 +20,7 @@ Recommends:     shellevents
 Recommends:     scratchpad
 Recommends:     hyprprop
 Recommends:     grimblast
+Recommends:     hdrop
 
 %description
 %{summary}.
@@ -82,12 +83,25 @@ Recommends:     /usr/bin/notify-send
 %files -n try_swap_workspace
 %{_bindir}/try_swap_workspace
 
+
+%package -n hdrop
+Summary:        This script emulates the main feature of tdrop (https://github.com/noctuid/tdrop) in Hyprland
+Requires:       jq
+Recommends:     /usr/bin/notify-send
+
+%description -n hdrop
+%{summary}.
+
+%files -n hdrop
+%{_bindir}/hdrop
+
+
 %prep
 %autosetup -n contrib-%{commit0}
 
 
 %install
-for script in grimblast hyprprop scratchpad shellevents try_swap_workspace
+for script in grimblast hyprprop scratchpad shellevents try_swap_workspace hdrop
 do
 pushd $script
 %make_install DESTDIR=%{buildroot} PREFIX=%{buildroot}%{_prefix}
