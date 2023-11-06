@@ -52,11 +52,7 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xwayland)
 
 # print Recommends: for each plugin
-%{lua:do
-    temp = "Recommends: hyprland-plugin-"
-    plugins = rpm.expand('%plugins')
-    for w in plugins:gmatch("%S+") do print(temp..w..'\n') end
-end}
+%{lua:for w in rpm.expand('%plugins'):gmatch("%S+") do print("Recommends: hyprland-plugin-"..w..'\n') end}
 
 %description
 %{summary}.
@@ -72,11 +68,7 @@ Requires:      hyprland = %_hyprland_version\
 \%{_libdir}/hyprland/lib%1.so\
 
 # expand %%_package for each plugin
-%{lua:do
-    temp = "%_package "
-    plugins = rpm.expand('%plugins')
-    for w in plugins:gmatch("%S+") do print(rpm.expand(temp..w)..'\n\n') end
-end}
+%{lua:for w in rpm.expand('%plugins'):gmatch("%S+") do print(rpm.expand("%_package "..w)..'\n\n') end}
 
 
 %prep
