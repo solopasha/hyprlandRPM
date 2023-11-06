@@ -1,10 +1,10 @@
-%global commit0 097706a6c19ea40d430b5e51a5676e24f54023bf
+%global commit0 dbac31172965f22a3725e55cf20b17c8d2f38961
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global bumpver 15
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
-%global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars}
+%global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars hyprtrails}
 
 Name:           hyprland-plugins
 Version:        0.1^%{bumpver}.git%{shortcommit0}
@@ -54,6 +54,7 @@ BuildRequires:  pkgconfig(xwayland)
 Recommends:     hyprland-plugin-borders-plus-plus
 Recommends:     hyprland-plugin-csgo-vulkan-fix
 Recommends:     hyprland-plugin-hyprbars
+Recommends:     hyprland-plugin-hyprtrails
 
 %description
 %{summary}.
@@ -71,6 +72,7 @@ Summary:       %1 plugin for hyprland\
 %_package borders-plus-plus
 %_package csgo-vulkan-fix
 %_package hyprbars
+%_package hyprtrails
 
 
 %prep
