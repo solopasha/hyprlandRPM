@@ -1,8 +1,10 @@
 %global optflags %{optflags} -Wno-array-bounds
 
-%global commit0 d1d888ce193493414bdddbc14b7c1e77e9f2cda8
+%global commit0 8dfe1fcca945192c03a0e8cbbf41560919892043
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-#global bumpver 2
+#global bumpver 1
+
+%global go_vendor_archive %{lua: print("vendor-"..(rpm.isdefined('bumpver') and rpm.expand('%shortcommit0') or rpm.expand('%version'))..".tar.gz")}
 
 %bcond test 1
 %bcond doc 1
@@ -56,12 +58,8 @@ Source0:        https://github.com/kovidgoyal/kitty/releases/download/v%{version
 Source4:        https://github.com/kovidgoyal/kitty/releases/download/v%{version}/%{name}-%{version}.tar.xz.sig
 Source5:        https://calibre-ebook.com/signatures/kovid.gpg
 %endif
-# git clone https://github.com/kovidgoyal/kitty.git
-# cd kitty
-# git checkout v%%{version}
-# go mod vendor
-# tar czf kitty-%%{version}-vendor.tar.gz vendor
-#Source6:        kitty-%%{version}-vendor.tar.gz
+# bash bundle_go_deps_for_rpm.sh kitty.spec
+Source6:        %{go_vendor_archive}
 # Add AppData manifest file
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
@@ -80,13 +78,8 @@ BuildRequires:  git-core
 BuildRequires:  gnupg2
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc
-%if 0%{?el8}
-BuildRequires:  go-srpm-macros
-BuildRequires:  python38-devel
-%else
 BuildRequires:  go-rpm-macros
 BuildRequires:  python3-devel
-%endif
 BuildRequires:  lcms2-devel
 BuildRequires:  libappstream-glib
 BuildRequires:  ncurses
@@ -117,11 +110,7 @@ BuildRequires:  /usr/bin/rg
 BuildRequires:  python3dist(pillow)
 %endif
 
-%if 0%{?el8}
-Requires:       python38%{?_isa}
-%else
 Requires:       python3%{?_isa}
-%endif
 Requires:       hicolor-icon-theme
 
 Obsoletes:      %{name}-bash-integration < 0.28.1-3
@@ -227,13 +216,12 @@ This package contains the documentation for %{name}.
 
 
 %prep
-%if 0%{?bumpver}
-%else
+%if ! 0%{?bumpver}
 %{gpgverify} --keyring='%{SOURCE5}' --signature='%{SOURCE4}' --data='%{SOURCE0}'
 %endif
 %autosetup -p1 %{?bumpver:-n %{name}-%{commit0}}
 %if %{with bundled}
-go mod vendor
+%autosetup -NDT -a6
 %endif
 
 # Changing sphinx theme to classic
