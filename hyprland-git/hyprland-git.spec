@@ -35,10 +35,10 @@ Source0:        %{url}/archive/%{hyprland_commit}/%{name}-%{hyprland_shortcommit
 Source1:        https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/%{wlroots_commit}/wlroots-%{wlroots_shortcommit}.tar.gz
 Source2:        https://github.com/hyprwm/hyprland-protocols/archive/%{protocols_commit}/protocols-%{protocols_shortcommit}.tar.gz
 Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_commit}/udis86-%{udis86_shortcommit}.tar.gz
-Source4:        macros.hyprland
 %else
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
+Source4:        macros.hyprland
 %{lua:
 if string.match(rpm.expand('%{name}'), 'nvidia%-git$') then
     print('Patch: https://raw.githubusercontent.com/hyprwm/Hyprland/main/nix/patches/wlroots-nvidia.patch#/wlroots-nvidia-git.patch')
