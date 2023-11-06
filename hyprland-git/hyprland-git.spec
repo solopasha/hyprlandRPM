@@ -35,6 +35,7 @@ Source0:        %{url}/archive/%{hyprland_commit}/%{name}-%{hyprland_shortcommit
 Source1:        https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/%{wlroots_commit}/wlroots-%{wlroots_shortcommit}.tar.gz
 Source2:        https://github.com/hyprwm/hyprland-protocols/archive/%{protocols_commit}/protocols-%{protocols_shortcommit}.tar.gz
 Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_commit}/udis86-%{udis86_shortcommit}.tar.gz
+Source4:        macros.hyprland
 %else
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
@@ -97,7 +98,15 @@ Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
-Conflicts:      hyprland
+%{lua:do
+if string.match(rpm.expand('%{name}'), '%-git$') then
+    print(rpm.expand('Provides: hyprland-git = %{version}-%{release}')..'\n')
+    print('Conflicts: hyprland'..'\n')
+elseif not string.match(rpm.expand('%{name}'), 'hyprland$') then
+    print(rpm.expand('Provides: hyprland = %{version}-%{release}')..'\n')
+    print('Conflicts: hyprland'..'\n')
+end
+end}
 
 # Both are used in the default configuration
 Recommends:     kitty
@@ -141,6 +150,10 @@ cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
 cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
 
+sed -i \
+  -e "s|@@HYPRLAND_VERSION@@|%{version}|g" \
+  %{SOURCE4}
+
 
 %build
 %meson \
@@ -154,6 +167,7 @@ cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
 
 %install
 %meson_install
+install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr
@@ -171,6 +185,7 @@ mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 
 %files devel
 %license LICENSE-hyprland-protocols LICENSE-wlroots
+%{_rpmconfigdir}/macros.d/macros.hyprland
 %{_includedir}/hyprland/
 %{_datadir}/pkgconfig/hyprland*.pc
 %{_datadir}/hyprland-protocols/

@@ -51,16 +51,19 @@ BuildRequires:  pkgconfig(xcb-xinput)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xwayland)
 
-Recommends:     hyprland-plugin-borders-plus-plus
-Recommends:     hyprland-plugin-csgo-vulkan-fix
-Recommends:     hyprland-plugin-hyprbars
-Recommends:     hyprland-plugin-hyprtrails
+# print Recommends: for each plugin
+%{lua:do
+    temp = "Recommends: hyprland-plugin-"
+    plugins = rpm.expand('%plugins')
+    for w in plugins:gmatch("%S+") do print(temp..w..'\n') end
+end}
 
 %description
 %{summary}.
 
 %define _package() \%package -n hyprland-plugin-%1\
 Summary:       %1 plugin for hyprland\
+Requires:      hyprland = %_hyprland_version\
 \%description  -n hyprland-plugin-%1\
 \%1 plugin for hyprland.\
 \%files -n     hyprland-plugin-%1\
@@ -68,11 +71,12 @@ Summary:       %1 plugin for hyprland\
 \%dir %{_libdir}/hyprland\
 \%{_libdir}/hyprland/lib%1.so\
 
-
-%_package borders-plus-plus
-%_package csgo-vulkan-fix
-%_package hyprbars
-%_package hyprtrails
+# expand %%_package for each plugin
+%{lua:do
+    temp = "%_package "
+    plugins = rpm.expand('%plugins')
+    for w in plugins:gmatch("%S+") do print(rpm.expand(temp..w)..'\n\n') end
+end}
 
 
 %prep
