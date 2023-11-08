@@ -1,5 +1,5 @@
 diff --git a/setup.py b/setup.py
-index 5d866c993..3174fc47f 100755
+index 6c2849045..b1db90478 100755
 --- a/setup.py
 +++ b/setup.py
 @@ -970,6 +970,7 @@ def build_static_kittens(
@@ -9,4 +9,4 @@ index 5d866c993..3174fc47f 100755
 +    return
      cmd = [go, 'build', '-v']
      vcs_rev = args.vcs_rev or get_vcs_rev()
-     ld_flags = [f"-X 'kitty.VCSRevision={vcs_rev}'"]
+     ld_flags: List[str] = []
