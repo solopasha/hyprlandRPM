@@ -9,6 +9,10 @@ goprep:
 	go env -w GOPROXY=https://proxy.golang.org,direct
 	go env -w GOSUMDB=sum.golang.org
 
+hyprland-plugins-git.spec:
+	mv hyprland-plugins.spec hyprland-plugins-git.spec
+	sed -e '/%global build_for/s/release/git/' -i $(specfile)
+
 hyprland%spec:
 	sed -e "/Name:/s/hyprland-git/$(basename $(specfile))/" hyprland-git.spec > $(specfile)
     ifneq ($(findstring git,$(specfile)),git)

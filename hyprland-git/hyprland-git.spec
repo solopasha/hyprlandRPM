@@ -2,7 +2,7 @@
 
 %global hyprland_commit 9e3dccca76ca3af4e96ac80c2ddef4774dc1354b
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 7
+%global bumpver 8
 
 %global wlroots_commit 5de9e1a99d6642c2d09d589aa37ff0a8945dcee1
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -50,41 +50,52 @@ end
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  glslang
 BuildRequires:  jq
 BuildRequires:  meson
 
-BuildRequires:  pkgconfig(cairo)
-BuildRequires:  pkgconfig(egl)
-BuildRequires:  pkgconfig(gbm)
-BuildRequires:  pkgconfig(glesv2)
-BuildRequires:  pkgconfig(hwdata)
-BuildRequires:  pkgconfig(libdisplay-info)
-BuildRequires:  pkgconfig(libdrm)
-BuildRequires:  pkgconfig(libinput) >= 1.23.0
-BuildRequires:  pkgconfig(libliftoff) >= 0.4.1
-BuildRequires:  pkgconfig(libseat)
-BuildRequires:  pkgconfig(libudev)
-BuildRequires:  pkgconfig(pango)
-BuildRequires:  pkgconfig(pangocairo)
-BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
-BuildRequires:  pkgconfig(wayland-client)
-BuildRequires:  pkgconfig(wayland-protocols)
-BuildRequires:  pkgconfig(wayland-scanner)
-BuildRequires:  pkgconfig(wayland-server) >= 1.22.0
-BuildRequires:  pkgconfig(xcb)
-BuildRequires:  pkgconfig(xcb-composite)
-BuildRequires:  pkgconfig(xcb-dri3)
-BuildRequires:  pkgconfig(xcb-icccm)
-BuildRequires:  pkgconfig(xcb-present)
-BuildRequires:  pkgconfig(xcb-render)
-BuildRequires:  pkgconfig(xcb-renderutil)
-BuildRequires:  pkgconfig(xcb-res)
-BuildRequires:  pkgconfig(xcb-shm)
-BuildRequires:  pkgconfig(xcb-xfixes)
-BuildRequires:  pkgconfig(xcb-xinput)
-BuildRequires:  pkgconfig(xkbcommon)
-BuildRequires:  pkgconfig(xwayland)
+%{lua:
+hyprdeps = {
+    "pkgconfig(cairo)",
+    "pkgconfig(egl)",
+    "pkgconfig(gbm)",
+    "pkgconfig(glesv2)",
+    "pkgconfig(hwdata)",
+    "pkgconfig(libdisplay-info)",
+    "pkgconfig(libdrm)",
+    "pkgconfig(libinput)",
+    "pkgconfig(libliftoff)",
+    "pkgconfig(libseat)",
+    "pkgconfig(libudev)",
+    "pkgconfig(pango)",
+    "pkgconfig(pangocairo)",
+    "pkgconfig(pixman-1)",
+    "pkgconfig(wayland-client)",
+    "pkgconfig(wayland-protocols)",
+    "pkgconfig(wayland-scanner)",
+    "pkgconfig(wayland-server)",
+    "pkgconfig(xcb)",
+    "pkgconfig(xcb-composite)",
+    "pkgconfig(xcb-dri3)",
+    "pkgconfig(xcb-icccm)",
+    "pkgconfig(xcb-present)",
+    "pkgconfig(xcb-render)",
+    "pkgconfig(xcb-renderutil)",
+    "pkgconfig(xcb-res)",
+    "pkgconfig(xcb-shm)",
+    "pkgconfig(xcb-xfixes)",
+    "pkgconfig(xcb-xinput)",
+    "pkgconfig(xkbcommon)",
+    "pkgconfig(xwayland)"
+    }
+}
+
+%define printbdeps(r) %{lua:
+for _, dep in ipairs(hyprdeps) do
+    print((rpm.expand("%{-r}") ~= "" and "Requires: " or "BuildRequires: ")..dep.."\\n")
+end
+}
+
+%printbdeps
 
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
@@ -128,6 +139,7 @@ plugin system and more.
 %package        devel
 Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause AND MIT
+%printbdeps -r
 
 %description    devel
 %{summary}.
