@@ -45,7 +45,9 @@ esac
 
 git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i hyprland-git.spec && \
-bash ../hyprland-plugins/plugins_update.sh;
+pushd ../hyprland-plugins && \
+bash plugins_update.sh;
+popd && \
 git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" && \
 git push && \
 hyprlandGitBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland-git | sed -n 's/.*builds: \(.*\)/\1'/p) && \

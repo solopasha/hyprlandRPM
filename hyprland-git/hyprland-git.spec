@@ -139,6 +139,7 @@ plugin system and more.
 %package        devel
 Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause AND MIT
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 %printbdeps -r
 
 %description    devel
