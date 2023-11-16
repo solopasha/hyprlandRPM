@@ -13,11 +13,9 @@ if rpm.expand("%build_for") == "git" then
     rpm.define("pluginssuffix -git")
     rpm.define(rpm.expand("pluginsmetaname hyprland-plugins%pluginssuffix"))
     rpm.define(rpm.expand("hyprlandpkg hyprland%pluginssuffix"))
-    print(rpm.expand("BuildRequires: %{hyprlandpkg}-devel"))
 else
     rpm.define("pluginsmetaname hyprland-plugins")
     rpm.define("hyprlandpkg hyprland")
-    print(rpm.expand("BuildRequires: %{hyprlandpkg}-devel"))
 end
 }
 
@@ -34,6 +32,7 @@ Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
 
 BuildRequires:  gcc-c++
 BuildRequires:  meson
+BuildRequires:  %{hyprlandpkg}-devel
 
 Requires:       %{hyprlandpkg} = %_hyprland_version
 
