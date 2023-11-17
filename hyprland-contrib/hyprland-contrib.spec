@@ -94,10 +94,13 @@ Recommends:     /usr/bin/notify-send
 
 %files -n hdrop
 %{_bindir}/hdrop
+%{_mandir}/man1/hdrop.1.*
 
 
 %prep
 %autosetup -n contrib-%{commit0}
+sed -i "s/^[[:space:]]\+/$(printf "\t")/g" hdrop/hdrop.1.scd
+sed -i '/^install:/s/$/hdrop.1/' hdrop/Makefile
 
 
 %install
