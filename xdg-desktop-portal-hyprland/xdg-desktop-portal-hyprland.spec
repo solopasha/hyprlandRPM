@@ -6,7 +6,7 @@
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        1.2.4%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
+Version:        1.2.5%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
 Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
@@ -41,6 +41,7 @@ BuildRequires:  pkgconfig(wayland-scanner)
 Requires:       dbus
 # required for Screenshot portal implementation
 Requires:       grim
+Recommends:     hyprpicker
 Requires:       xdg-desktop-portal
 # required for hyprland-share-picker
 Requires:       slurp
