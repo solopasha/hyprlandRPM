@@ -4,7 +4,8 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global bumpver 1
 
-%global go_vendor_archive %{lua: print("vendor-"..(rpm.isdefined('bumpver') and rpm.expand('%shortcommit0') or rpm.expand('%version'))..".tar.gz")}
+%define go_vendor_archive %{lua: print("vendor-"..(macros.bumpver and macros.shortcommit0 or macros.version)..".tar.gz")}
+
 
 %bcond test 1
 %bcond doc 1
