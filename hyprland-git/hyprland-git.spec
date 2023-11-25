@@ -2,7 +2,7 @@
 
 %global hyprland_commit ad3f6886484e9adbab532de125e69a70c54fa13e
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 30
+%global bumpver 31
 
 %global wlroots_commit 2eb225236eb72f27beec921e9f37ddf58e874fba
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -39,14 +39,6 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
-%{lua:
-if string.match(rpm.expand('%{name}'), 'nvidia%-git$') then
-    print('Patch: https://raw.githubusercontent.com/hyprwm/Hyprland/main/nix/patches/wlroots-nvidia.patch#/wlroots-nvidia-git.patch')
-end
-if string.match(rpm.expand('%{name}'), 'nvidia$') then
-       print(rpm.expand('Patch: https://raw.githubusercontent.com/hyprwm/Hyprland/v%{version}/nix/patches/wlroots-nvidia.patch#/wlroots-nvidia-stable.patch'))
-end
-}
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -113,9 +105,14 @@ Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 if string.match(rpm.expand('%{name}'), '%-git$') then
     print(rpm.expand('Provides: hyprland-git = %{version}-%{release}')..'\n')
     print('Conflicts: hyprland'..'\n')
+    print('Obsoletes: hyprland-nvidia-git < 0.32.3^30.gitad3f688-2'..'\n')
+    print(rpm.expand('Provides: hyprland-nvidia-git = %{version}-%{release}')..'\n')
 elseif not string.match(rpm.expand('%{name}'), 'hyprland$') then
     print(rpm.expand('Provides: hyprland = %{version}-%{release}')..'\n')
     print('Conflicts: hyprland'..'\n')
+else
+    print('Obsoletes: hyprland-nvidia < 1:0.32.3-2'..'\n')
+    print(rpm.expand('Provides: hyprland-nvidia = %{version}-%{release}')..'\n')
 end
 end}
 
@@ -140,6 +137,15 @@ plugin system and more.
 Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause AND MIT
 Requires:       %{name}%{?_isa} = %{version}-%{release}
+%{lua:do
+if string.match(rpm.expand('%{name}'), 'hyprland%-git$') then
+    print('Obsoletes: hyprland-nvidia-git-devel < 0.32.3^30.gitad3f688-2'..'\n')
+    print(rpm.expand('Provides: hyprland-nvidia-git-devel = %{version}-%{release}')..'\n')
+elseif string.match(rpm.expand('%{name}'), 'hyprland$') then
+    print('Obsoletes: hyprland-nvidia-devel < 1:0.32.3-2'..'\n')
+    print(rpm.expand('Provides: hyprland-nvidia-devel = %{version}-%{release}')..'\n')
+end
+end}
 %printbdeps -r
 
 %description    devel

@@ -51,17 +51,16 @@ popd && \
 git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" && \
 git push && \
 hyprlandGitBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland-git | sed -n 's/.*builds: \(.*\)/\1'/p) && \
-copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins-git --after-build-id "$hyprlandGitBuildId" && \
-copr-cli build-package solopasha/hyprland --nowait --name hyprland-nvidia-git; }
+copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins-git --after-build-id "$hyprlandGitBuildId"; }
 
 if [[ $newRelease == "1" ]]; then
     parallel copr edit-package-scm --name {} --clone-url "https://github.com/solopasha/hyprlandRPM.git" --commit master \
-        --subdir hyprland-git --spec {}.spec --type git --method make_srpm --max-builds 5 solopasha/hyprland ::: hyprland{,-nvidia,-legacyrenderer}
+        --subdir hyprland-git --spec {}.spec --type git --method make_srpm --max-builds 5 solopasha/hyprland ::: hyprland{,-legacyrenderer}
     hyprlandBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
-    parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{-nvidia,-legacyrenderer}
+    parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{,-legacyrenderer}
     copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins --after-build-id "$hyprlandBuildId"
     git branch "$newTag"
     git push origin "$newTag"
     parallel copr edit-package-scm --name {} --clone-url "https://github.com/solopasha/hyprlandRPM.git" --commit "$newTag" \
-        --subdir hyprland-git --spec {}.spec --type git --method make_srpm --max-builds 5 solopasha/hyprland ::: hyprland{,-nvidia,-legacyrenderer}
+        --subdir hyprland-git --spec {}.spec --type git --method make_srpm --max-builds 5 solopasha/hyprland ::: hyprland{,-legacyrenderer}
 fi

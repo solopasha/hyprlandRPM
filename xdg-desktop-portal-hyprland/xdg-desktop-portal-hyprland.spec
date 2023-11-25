@@ -49,10 +49,8 @@ Requires:       qt6-qtwayland
 
 Enhances:       hyprland
 Supplements:    hyprland
-Supplements:    hyprland-nvidia
 Supplements:    hyprland-legacyrenderer
 Supplements:    hyprland-git
-Supplements:    hyprland-nvidia-git
 
 %if %{fedora} < 40
 Provides:       bundled(sdbus-cpp) = %{sdbus_version}
