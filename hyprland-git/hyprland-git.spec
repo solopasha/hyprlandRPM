@@ -1,5 +1,3 @@
-%global _default_patch_fuzz 2
-
 %global hyprland_commit 99ca26d4eb84e0071264713902e5b287fcab392e
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
 %global bumpver 33
@@ -92,7 +90,7 @@ end
 # Upstream insists on always building against very current snapshots of
 # wlroots, and doesn't provide a method for building against a system copy.
 # https://github.com/hyprwm/Hyprland/issues/302
-Provides:       bundled(wlroots) = 0.17.0~^1.%{wlroots_shortcommit}
+Provides:       bundled(wlroots) = 0.18.0~^1.%{wlroots_shortcommit}
 
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
@@ -103,7 +101,6 @@ Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
 %{lua:do
 if string.match(rpm.expand('%{name}'), '%-git$') then
-    print(rpm.expand('Provides: hyprland-git = %{version}-%{release}')..'\n')
     print('Conflicts: hyprland'..'\n')
     print('Obsoletes: hyprland-nvidia-git < 0.32.3^30.gitad3f688-2'..'\n')
     print(rpm.expand('Provides: hyprland-nvidia-git = %{version}-%{release}')..'\n')
@@ -153,7 +150,7 @@ end}
 
 
 %prep
-%autosetup -N -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -p1
+%autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -p1
 
 %if 0%{?bumpver}
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
@@ -162,8 +159,6 @@ tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
 sed -i 's|^HASH=.*|HASH=%{hyprland_commit}|' scripts/generateVersion.sh
 sed -i 's|DIRTY=.*|DIRTY=|' scripts/generateVersion.sh
 %endif
-
-%{?PATCH0:patch -d subprojects/wlroots -Np1 -i %{PATCH0}}
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
