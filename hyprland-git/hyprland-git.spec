@@ -1,6 +1,6 @@
 %global hyprland_commit 776f944619168e1812e7f8bee0258757fed987a4
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 38
+%global bumpver 39
 
 %global wlroots_commit d7ecdad4e082cb5817806348de198679a11b35df
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -96,6 +96,7 @@ Provides:       bundled(wlroots) = 0.18.0~^1.%{wlroots_shortcommit}
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
+Requires:       libdrm%{_isa} >= 2.4.118
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
