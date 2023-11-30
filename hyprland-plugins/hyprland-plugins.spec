@@ -4,7 +4,7 @@
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
-%global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars hyprwinwrap}
+%global plugins %{expand:borders-plus-plus csgo-vulkan-fix hyprbars hyprtrails hyprwinwrap}
 
 %global build_for release
 
