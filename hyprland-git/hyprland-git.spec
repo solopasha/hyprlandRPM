@@ -96,7 +96,7 @@ Provides:       bundled(wlroots) = 0.18.0~^1.%{wlroots_shortcommit}
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
-Requires:       libdrm%{_isa} >= 2.4.118
+Requires:       libdrm%{?_isa} >= 2.4.118
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
