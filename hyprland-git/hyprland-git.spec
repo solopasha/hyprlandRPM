@@ -15,7 +15,7 @@
 
 Name:           hyprland-git
 Version:        0.33.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
-Release:        %autorelease
+Release:        %autorelease.1
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -37,6 +37,8 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
+Patch:          https://github.com/hyprwm/Hyprland/commit/83248b6936c00ddef6a39fa31a37949ca1a34ffe.patch
+Patch:          https://github.com/hyprwm/Hyprland/commit/da863459c49c8b9a82e6a1180c2592a2b63feccd.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
