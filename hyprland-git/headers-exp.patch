@@ -1,0 +1,20 @@
+diff --git a/hyprpm/src/core/PluginManager.cpp b/hyprpm/src/core/PluginManager.cpp
+index 8efcdf98..f0f6f01d 100644
+--- a/hyprpm/src/core/PluginManager.cpp
++++ b/hyprpm/src/core/PluginManager.cpp
+@@ -253,7 +253,7 @@ eHeadersErrors CPluginManager::headersValid() {
+     const auto HLVER = getHyprlandVersion();
+ 
+     // find headers commit
+-    auto headers = execAndGet("pkg-config --cflags hyprland");
++    auto headers = execAndGet("pkg-config --cflags --keep-system-cflags hyprland");
+ 
+     if (!headers.contains("-I/"))
+         return HEADERS_MISSING;
+@@ -687,4 +687,4 @@ void CPluginManager::listAllPlugins() {
+ 
+ void CPluginManager::notify(const eNotifyIcons icon, uint32_t color, int durationMs, const std::string& message) {
+     execAndGet("hyprctl notify " + std::to_string((int)icon) + " " + std::to_string(durationMs) + " " + std::to_string(color) + " " + message);
+-}
+\ No newline at end of file
++}
