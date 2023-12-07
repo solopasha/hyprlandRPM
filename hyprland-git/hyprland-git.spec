@@ -1,6 +1,6 @@
 %global hyprland_commit a794eecd6a71e431b654cebb1b28dbff0d6da079
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 4
+%global bumpver 5
 
 %global wlroots_commit 5d639394f3e83b01596dcd166a44a9a1a2583350
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -158,8 +158,10 @@ end}
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
-sed -i 's|^HASH=.*|HASH=%{hyprland_commit}|' scripts/generateVersion.sh
-sed -i 's|DIRTY=.*|DIRTY=|' scripts/generateVersion.sh
+sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
+    -e 's|^DIRTY=.*|DIRTY=|' \
+    -e 's|^BRANCH=.*|BRANCH=main|' \
+    -i scripts/generateVersion.sh
 %endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
