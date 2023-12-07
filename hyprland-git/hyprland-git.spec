@@ -190,7 +190,7 @@ mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr
 mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 
 %files
-%license LICENSE LICENSE-udis86 LICENSE-wlroots
+%license LICENSE LICENSE-udis86 LICENSE-wlroots LICENSE-hyprland-protocols
 %{_bindir}/hyprctl
 %{_bindir}/Hyprland
 %{_bindir}/hyprpm
@@ -201,7 +201,6 @@ mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 %{_mandir}/man1/Hyprland.1*
 
 %files devel
-%license LICENSE-hyprland-protocols LICENSE-wlroots
 %{_datadir}/hyprland-protocols/
 %{_datadir}/pkgconfig/hyprland*.pc
 %{_includedir}/hyprland/
