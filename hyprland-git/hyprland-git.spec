@@ -59,11 +59,11 @@ hyprdeps = {
     "pkgconfig(pango)",
     "pkgconfig(pangocairo)",
     "pkgconfig(pixman-1)",
+    "pkgconfig(tomlplusplus)",
     "pkgconfig(wayland-client)",
     "pkgconfig(wayland-protocols)",
     "pkgconfig(wayland-scanner)",
     "pkgconfig(wayland-server)",
-    "pkgconfig(xcb)",
     "pkgconfig(xcb-composite)",
     "pkgconfig(xcb-dri3)",
     "pkgconfig(xcb-icccm)",
@@ -74,6 +74,7 @@ hyprdeps = {
     "pkgconfig(xcb-shm)",
     "pkgconfig(xcb-xfixes)",
     "pkgconfig(xcb-xinput)",
+    "pkgconfig(xcb)",
     "pkgconfig(xkbcommon)",
     "pkgconfig(xwayland)"
     }
@@ -190,20 +191,21 @@ mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-wlroots
-%{_bindir}/Hyprland
 %{_bindir}/hyprctl
-%{_mandir}/man1/Hyprland.1*
-%{_mandir}/man1/hyprctl.1*
+%{_bindir}/Hyprland
+%{_bindir}/hyprpm
 %{_datadir}/hyprland/
 %{_datadir}/wayland-sessions/hyprland.desktop
 %{_datadir}/xdg-desktop-portal/hyprland-portals.conf
+%{_mandir}/man1/hyprctl.1*
+%{_mandir}/man1/Hyprland.1*
 
 %files devel
 %license LICENSE-hyprland-protocols LICENSE-wlroots
-%{_rpmconfigdir}/macros.d/macros.hyprland
-%{_includedir}/hyprland/
-%{_datadir}/pkgconfig/hyprland*.pc
 %{_datadir}/hyprland-protocols/
+%{_datadir}/pkgconfig/hyprland*.pc
+%{_includedir}/hyprland/
+%{_rpmconfigdir}/macros.d/macros.hyprland
 
 
 %changelog
