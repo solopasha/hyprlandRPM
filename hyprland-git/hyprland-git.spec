@@ -1,6 +1,6 @@
-%global hyprland_commit d74607e414dcd16911089a6d4b6aeb661c880923
+%global hyprland_commit 62a8d0be5c1959ade8410f8f964e362288f22175
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 1
+%global bumpver 2
 
 %global wlroots_commit 5d639394f3e83b01596dcd166a44a9a1a2583350
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
