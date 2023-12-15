@@ -1,8 +1,9 @@
 %global commit0 8f3ee797d1e373953ed5a83aa60a0d014715cc8a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global bumpver 1
 
 Name:           hyprland-welcome
-Version:        0~1.git%{shortcommit0}
+Version:        0~%{bumpver}.git%{shortcommit0}
 Release:        %autorelease
 Summary:        Hyprland's welcome app
 
