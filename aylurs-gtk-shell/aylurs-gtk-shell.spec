@@ -1,4 +1,4 @@
-%global ver 1.5.4
+%global ver 1.5.5
 
 %global __provides_exclude_from ^(%{_libdir}/ags/.*\\.so)$
 
