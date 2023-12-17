@@ -24,7 +24,10 @@ hyprland%spec:
     endif
 
 kitty.spec: goprep
-	bash bundle_go_deps_for_rpm.sh kitty.spec
+	bash bundle_go_deps_for_rpm.sh $(specfile)
+
+cliphist.spec: goprep
+	bash bundle_go_deps_for_rpm.sh $(specfile)
 
 srpm: prepare $(specfile)
 	spectool -g ./$(specfile)
