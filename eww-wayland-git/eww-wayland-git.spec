@@ -1,6 +1,6 @@
-%global commit0 4f1f853b5f9ef17da0e01e23e82cfcb2f718373d
+%global commit0 65d622c81f2e753f462d23121fa1939b0a84a3e0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 9
+%global bumpver 10
 
 Name:           eww-wayland-git
 Version:        0.4.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
