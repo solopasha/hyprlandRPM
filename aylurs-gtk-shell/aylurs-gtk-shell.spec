@@ -1,4 +1,4 @@
-%global ver 1.5.5
+%global ver 1.6.3
 
 %global __provides_exclude_from ^(%{_libdir}/ags/.*\\.so)$
 
@@ -24,11 +24,12 @@ BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libpulse)
 
-Requires:       gjs
-Requires:       gtk-layer-shell
+Requires:       gjs%{?_isa}
+Requires:       gtk-layer-shell%{?_isa}
+Requires:       libsoup3%{?_isa}
 
-Recommends:     libdbusmenu-gtk3
-Recommends:     gnome-bluetooth-libs
+Recommends:     libdbusmenu-gtk3%{?_isa}
+Recommends:     gnome-bluetooth-libs%{?_isa}
 
 Provides:       bundled(libgnome-volume-control) = 0^1.git%{gvc_shortcommit}
 
