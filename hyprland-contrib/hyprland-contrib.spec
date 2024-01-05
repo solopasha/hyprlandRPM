@@ -1,6 +1,6 @@
 %global commit0 fe26a90afdf9690052955899355bdc564c184e14
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 28
+%global bumpver 29
 
 Name:           hyprland-contrib
 Version:        0.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
@@ -99,8 +99,6 @@ Recommends:     /usr/bin/notify-send
 
 %prep
 %autosetup -n contrib-%{commit0}
-sed -i "s/^[[:space:]]\+/$(printf "\t")/g" hdrop/hdrop.1.scd
-sed -i '/^install:/s/$/hdrop.1/' hdrop/Makefile
 
 
 %install
