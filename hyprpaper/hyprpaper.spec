@@ -1,5 +1,5 @@
 Name:           hyprpaper
-Version:        0.5.0
+Version:        0.6.0
 Release:        %autorelease
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
 
@@ -11,9 +11,11 @@ BuildRequires:  cmake
 BuildRequires:  gcc-c++
 
 BuildRequires:  pkgconfig(cairo)
-BuildRequires:  pkgconfig(libmagic)
 BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(hyprlang)
 BuildRequires:  pkgconfig(libjpeg)
+BuildRequires:  pkgconfig(libmagic)
+BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(pango)
 BuildRequires:  pkgconfig(pangocairo)
 BuildRequires:  pkgconfig(wayland-client)
