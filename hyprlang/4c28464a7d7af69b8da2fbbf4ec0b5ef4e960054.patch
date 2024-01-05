@@ -1,0 +1,43 @@
+From 4c28464a7d7af69b8da2fbbf4ec0b5ef4e960054 Mon Sep 17 00:00:00 2001
+From: Mihai Fufezan <fufexan@protonmail.com>
+Date: Thu, 4 Jan 2024 12:41:03 +0200
+Subject: [PATCH] CMake: fix install dirs
+
+---
+ CMakeLists.txt | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ed2efc9..c6582ca 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,17 +1,19 @@
+ cmake_minimum_required(VERSION 3.19)
+ 
+ set(HYPRLANG_VERSION "0.2.1")
+-set(PREFIX ${CMAKE_INSTALL_PREFIX})
+-set(INCLUDE ${CMAKE_INSTALL_INCLUDEDIR})
+ 
+ project(hyprlang
+     VERSION ${HYPRLANG_VERSION}
+     DESCRIPTION "A library to parse hypr config files"
+ )
+ 
+-configure_file(hyprlang.pc.in hyprlang.pc @ONLY)
+-
+ include(CTest)
++include(GNUInstallDirs)
++
++set(PREFIX ${CMAKE_INSTALL_PREFIX})
++set(INCLUDE ${CMAKE_INSTALL_FULL_INCLUDEDIR})
++
++configure_file(hyprlang.pc.in hyprlang.pc @ONLY)
+ 
+ set(CMAKE_CXX_STANDARD 23)
+ 
+@@ -43,4 +45,4 @@ add_dependencies(tests hyprlang_fuzz)
+ install(TARGETS hyprlang
+         PUBLIC_HEADER DESTINATION include
+         LIBRARY DESTINATION lib)
+-install(FILES ${CMAKE_BINARY_DIR}/hyprlang.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/share/pkgconfig)
++install(FILES ${CMAKE_BINARY_DIR}/hyprlang.pc DESTINATION ${PREFIX}/share/pkgconfig)
