@@ -1,6 +1,6 @@
 Name:           hyprlang
 Version:        0.2.1
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        The official implementation library for the hypr config language
 
 License:        GPL-3.0-or-later
@@ -17,6 +17,7 @@ BuildRequires:  gcc-c++
 
 %package        devel
 Summary:        Development files for %{name}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 %description    devel
 Development files for %{name}.
 
