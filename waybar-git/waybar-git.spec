@@ -82,7 +82,7 @@ cp %{SOURCE1} subprojects/packagecache
 %build
 %meson \
     -Dsndio=disabled \
-    -Dcava=disabled \
+    -Dcava=disabled
 %meson_build
 
 %install
