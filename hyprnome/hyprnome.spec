@@ -7,9 +7,16 @@ Name:           hyprnome
 Version:        0.2.0
 Release:        %autorelease
 Summary:        GNOME-like workspace switching in Hyprland
-
-# FIXME: paste output of %%cargo_license_summary here
-License:        GPL-3.0-or-later
+# 0BSD OR MIT OR Apache-2.0
+# Apache-2.0 OR BSL-1.0
+# Apache-2.0 OR MIT
+# Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+# GPL-3.0-or-later
+# MIT
+# MIT OR Apache-2.0
+# MIT OR Zlib OR Apache-2.0
+# Unlicense OR MIT
+License:        GPL-3.0-or-later AND (0BSD OR MIT OR Apache-2.0) AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND MIT AND (MIT OR Zlib OR Apache-2.0) AND (Unlicense OR MIT)
 # LICENSE.dependencies contains a full license breakdown
 
 URL:            https://github.com/donovanglover/hyprnome
