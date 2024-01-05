@@ -2,6 +2,8 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global bumpver 25
 
+%global catch2_version 3.5.1
+
 Name:           waybar-git
 Version:        0.9.24%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        1%{?dist}
@@ -20,14 +22,16 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source1:        https://github.com/catchorg/Catch2/archive/v%{catch2_version}/Catch2-%{catch2_version}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  meson >= 0.49.0
 BuildRequires:  scdoc
 BuildRequires:  systemd-rpm-macros
-
+%if %{fedora} >= 40
 BuildRequires:  pkgconfig(catch2)
+%endif
 BuildRequires:  pkgconfig(date)
 BuildRequires:  pkgconfig(dbusmenu-gtk3-0.4)
 BuildRequires:  pkgconfig(fmt) >= 8.1.1
@@ -58,6 +62,10 @@ BuildRequires:  pkgconfig(xkbregistry)
 Conflicts:      waybar
 Provides:       waybar
 
+%if %{fedora} < 40
+Provides:       bundled(catch2) = %{catch2_version}
+%endif
+
 Enhances:       hyprland
 Recommends:     (font(fontawesome6free) or font(fontawesome5free))
 
@@ -66,15 +74,19 @@ Recommends:     (font(fontawesome6free) or font(fontawesome5free))
 
 %prep
 %autosetup -p1 -n Waybar-%{commit0}
+%if %{fedora} < 40
+mkdir subprojects/packagecache
+cp %{SOURCE1} subprojects/packagecache
+%endif
 
 %build
 %meson \
     -Dsndio=disabled \
-    -Dcava=disabled
+    -Dcava=disabled \
 %meson_build
 
 %install
-%meson_install
+%meson_install --skip-subprojects catch2
 
 %check
 %meson_test
