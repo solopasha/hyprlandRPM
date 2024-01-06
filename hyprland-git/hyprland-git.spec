@@ -17,7 +17,7 @@
 
 Name:           hyprland-git
 Version:        0.34.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -188,7 +188,8 @@ sed -i \
        -Dlegacy_renderer=enabled \
 %endif
        -Dwlroots:examples=false \
-       -Dwlroots:xcb-errors=disabled
+       -Dwlroots:xcb-errors=disabled \
+       --force-fallback-for=libdrm
 %meson_build
 
 
