@@ -1,6 +1,6 @@
 %global hyprland_commit 7e033e48ace5406a9bc442f7d403f9ce3af193f3
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 12
+%global bumpver 13
 
 %global wlroots_commit f81c3d93cd6f61b20ae784297679283438def8df
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -188,7 +188,8 @@ sed -i \
        -Dlegacy_renderer=enabled \
 %endif
        -Dwlroots:examples=false \
-       -Dwlroots:xcb-errors=disabled
+       -Dwlroots:xcb-errors=disabled \
+       --force-fallback-for=libdrm
 %meson_build
 
 
