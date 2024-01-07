@@ -159,6 +159,7 @@ end}
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -p1
+sed -i 's/<libdrm\/drm_fourcc.h>/"drm_fourcc.h"/' src/includes.hpp
 
 %if 0%{?bumpver}
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
