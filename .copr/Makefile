@@ -8,10 +8,10 @@ goprep:
 	dnf install --nodocs -y golang git-core
 	go env -w GOPROXY=https://proxy.golang.org,direct
 	go env -w GOSUMDB=sum.golang.org
+	bash bundle_go_deps_for_rpm.sh $(specfile)
 
 hyprland-plugins-git.spec:
-	mv hyprland-plugins.spec hyprland-plugins-git.spec
-	sed -e '/%global build_for/s/release/git/' -i $(specfile)
+	sed -e '/%global build_for/s/release/git/' hyprland-plugins.spec > $(specfile)
 
 hyprland%spec:
 	sed -e "/Name:/s/hyprland-git/$(basename $(specfile))/" hyprland-git.spec > $(specfile)
@@ -24,10 +24,8 @@ hyprland%spec:
     endif
 
 kitty.spec: goprep
-	bash bundle_go_deps_for_rpm.sh $(specfile)
 
 cliphist.spec: goprep
-	bash bundle_go_deps_for_rpm.sh $(specfile)
 
 srpm: prepare $(specfile)
 	spectool -g ./$(specfile)
