@@ -1,6 +1,6 @@
-%global commit0 748fc809b51a6063e1b39bb17cc2c54e65d6291b
+%global commit0 f744d906becbf6d06a3d95fee37af5c32061d1aa
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 26
+%global bumpver 27
 
 %global catch2_version 3.5.1
 
