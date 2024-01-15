@@ -1,6 +1,6 @@
 %global commit0 07eabc5328dc5056f667a93f58549314d10f007b
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 28
+%global bumpver 29
 
 %global catch2_version 3.5.1
 
@@ -58,6 +58,7 @@ BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(wireplumber-0.4)
 BuildRequires:  pkgconfig(xkbregistry)
+BuildRequires:  python3dist(packaging)
 
 Conflicts:      waybar
 Provides:       waybar
