@@ -17,7 +17,7 @@
 
 Name:           hyprland-git
 Version:        0.34.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
-Release:        %autorelease -b3
+Release:        %autorelease -b4
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -54,7 +54,7 @@ hyprdeps = {
     "pkgconfig(glesv2)",
     "pkgconfig(hwdata)",
     "pkgconfig(libdisplay-info)",
---    "pkgconfig(libdrm)",
+    "pkgconfig(libdrm)",
     "pkgconfig(libinput)",
     "pkgconfig(libliftoff)",
     "pkgconfig(libseat)",
@@ -100,9 +100,11 @@ Provides:       bundled(wlroots) = 0.18.0~^1.%{wlroots_shortcommit}
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
+%if %{fedora} < 39
 Provides:       bundled(libdrm) = %{libdrm_version}
-
-#Requires:       libdrm%%{?_isa} >= 2.4.118
+%else
+Requires:       libdrm%{?_isa} >= 2.4.118
+%endif
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
@@ -170,8 +172,10 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -i scripts/generateVersion.sh
 %endif
 
+%if %{fedora} < 39
 mkdir subprojects/libdrm
 tar -xf %{SOURCE5} -C subprojects/libdrm --strip=1
+%endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
@@ -189,7 +193,10 @@ sed -i \
 %endif
        -Dwlroots:examples=false \
        -Dwlroots:xcb-errors=disabled \
+%if %{fedora} < 39
        --force-fallback-for=libdrm
+%endif
+       %{nil}
 %meson_build
 
 
