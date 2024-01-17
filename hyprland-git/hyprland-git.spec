@@ -1,6 +1,6 @@
 %global hyprland_commit 3c964a9fdc220250a85b1c498e5b6fad9390272f
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 27
+%global bumpver 28
 
 %global wlroots_commit f81c3d93cd6f61b20ae784297679283438def8df
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -54,7 +54,7 @@ hyprdeps = {
     "pkgconfig(glesv2)",
     "pkgconfig(hwdata)",
     "pkgconfig(libdisplay-info)",
---    "pkgconfig(libdrm)",
+    "pkgconfig(libdrm)",
     "pkgconfig(libinput)",
     "pkgconfig(libliftoff)",
     "pkgconfig(libseat)",
@@ -100,9 +100,11 @@ Provides:       bundled(wlroots) = 0.18.0~^1.%{wlroots_shortcommit}
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
+%if %{fedora} < 39
 Provides:       bundled(libdrm) = %{libdrm_version}
-
-#Requires:       libdrm%%{?_isa} >= 2.4.118
+%else
+Requires:       libdrm%{?_isa} >= 2.4.118
+%endif
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
@@ -171,8 +173,10 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -i scripts/generateVersion.sh
 %endif
 
+%if %{fedora} < 39
 mkdir subprojects/libdrm
 tar -xf %{SOURCE5} -C subprojects/libdrm --strip=1
+%endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
@@ -190,7 +194,10 @@ sed -i \
 %endif
        -Dwlroots:examples=false \
        -Dwlroots:xcb-errors=disabled \
+%if %{fedora} < 39
        --force-fallback-for=libdrm
+%endif
+       %{nil}
 %meson_build
 
 
