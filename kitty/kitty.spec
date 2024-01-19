@@ -6,9 +6,7 @@
 
 %define go_vendor_archive %{lua: print("vendor-"..(macros.bumpver and macros.shortcommit0 or macros.version)..".tar.gz")}
 
-
 %bcond test 1
-%bcond doc 1
 %bcond bundled 1
 
 %if %{with bundled}
@@ -18,7 +16,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.31.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.32.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -65,10 +63,6 @@ Source6:        %{go_vendor_archive}
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
 
-# Don't build kitten inside setup.py, use gobuild macro in the spec instead to build with fedora flags
-Patch0:         kitty-do-not-build-kitten.patch
-## upstream patches
-
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
 
@@ -104,10 +98,11 @@ BuildRequires:  pkgconfig(libxxhash)
 
 %if %{with test}
 # For tests:
-BuildRequires:  /usr/bin/ssh
-BuildRequires:  /usr/bin/getent
-BuildRequires:  /usr/bin/zsh
-BuildRequires:  /usr/bin/rg
+BuildRequires:  fish
+BuildRequires:  glibc-common
+BuildRequires:  openssh-clients
+BuildRequires:  ripgrep
+BuildRequires:  zsh
 BuildRequires:  python3dist(pillow)
 %endif
 
@@ -127,11 +122,11 @@ Requires:       %{name}-terminfo = %{version}-%{release}
 Requires:       %{name}-shell-integration = %{version}-%{release}
 Requires:       %{name}-kitten%{?_isa} = %{version}-%{release}
 
-# Very weak dependencies, these are required to enable all features of kitty's
-# "kittens" functions install separately
 # For the "Hyperlinked grep" feature
 Recommends:     ripgrep
 
+# Very weak dependencies, these are required to enable all features of kitty's
+# "kittens" functions install separately
 Suggests:       ImageMagick%{?_isa}
 
 %description
@@ -198,7 +193,6 @@ License:        GPL-3.0-only AND MIT AND BSD-3-Clause AND BSD-2-Clause AND Apach
 %{summary}.
 
 # doc package
-%if %{with doc}
 %package        doc
 Summary:        Documentation for %{name}
 License:        GPL-3.0-only AND MIT
@@ -209,7 +203,6 @@ BuildRequires:  python3dist(sphinx)
 BuildRequires:  python3dist(sphinx-copybutton)
 BuildRequires:  python3dist(sphinx-inline-tabs)
 BuildRequires:  python3dist(sphinxext-opengraph)
-%endif
 
 %description    doc
 This package contains the documentation for %{name}.
@@ -222,7 +215,7 @@ This package contains the documentation for %{name}.
 %endif
 %autosetup -p1 %{?bumpver:-n %{name}-%{commit0}}
 %if %{with bundled}
-%autosetup -NDT -a6
+%autosetup %{?bumpver:-n %{name}-%{commit0}} -NDT -a6
 %endif
 
 # Changing sphinx theme to classic
@@ -245,10 +238,11 @@ export GOPATH=$(pwd):%{gopath}
 
 %build
 %set_build_flags
+export OVERRIDE_CFLAGS="-std=c11 -fwrapv -fvisibility=hidden"
 %{python3} setup.py linux-package   \
     --libdir-name=%{_lib}           \
     --update-check-interval=0       \
-    --ignore-compiler-warnings      \
+    --skip-building-kitten          \
     --verbose
 
 %if %{without bundled}
@@ -268,11 +262,9 @@ install -m0755 -Dp _build/bin/kitten %{buildroot}%{_bindir}/kitten
 
 install -m0644 -Dp %{SOURCE1} %{buildroot}%{_metainfodir}/%{name}.appdata.xml
 
-%if %{with doc}
 # rpmlint fixes
 rm %{buildroot}%{_datadir}/doc/%{name}/html/.buildinfo \
    %{buildroot}%{_datadir}/doc/%{name}/html/.nojekyll
-%endif
 
 
 %check
@@ -313,9 +305,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/*/*.{png,svg}
 %{_libdir}/%{name}/
 %exclude %{_libdir}/%{name}/shell-integration
-%if %{with doc}
 %{_mandir}/man{1,5}/*.{1,5}*
-%endif
 %{_metainfodir}/*.xml
 
 %files kitten
@@ -334,13 +324,11 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 %license LICENSE
 %{_libdir}/%{name}/shell-integration/
 
-%if %{with doc}
 %files doc
 %license LICENSE
 %doc CONTRIBUTING.md CHANGELOG.rst INSTALL.md
 %{_docdir}/%{name}/html
 %dir %{_docdir}/%{name}
-%endif
 
 
 %changelog
