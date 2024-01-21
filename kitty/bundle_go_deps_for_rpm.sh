@@ -34,21 +34,24 @@ fi
 RPM_SPEC_FILE=$1
 
 # Extract the directory from the RPM SPEC file path
-SPEC_DIR=$(dirname $(realpath "$RPM_SPEC_FILE"))
+SPEC_DIR=$(dirname "$(realpath "$RPM_SPEC_FILE")")
 
 # Extract the URL, commit, tag, and version from the RPM SPEC file
-FORGEURL="https://github.com/kovidgoyal/kitty"
+FORGEURL=$(awk '/^%global forgeurl/ {print $NF}' "$RPM_SPEC_FILE")
 GOIPATH=$(awk '/^%global goipath/ {print $NF}' "$RPM_SPEC_FILE")
+PLAINURL=$(awk '/^URL:/ {print $NF}' "$RPM_SPEC_FILE")
 COMMIT=$(awk '/^%global commit0/ {print $NF}' "$RPM_SPEC_FILE")
 COMMIT_UNNEEDED=$(grep -q "%global bumpver" "$RPM_SPEC_FILE"; echo $?)
 TAG=$(awk '/^%global tag/ {print $NF}' "$RPM_SPEC_FILE")
-VERSION=$(rpmspec -q --qf "%{version}\n" "$RPM_SPEC_FILE" | head -1 | sed 's/\^.*//')
+VERSION=$(rpmspec -q --srpm --qf "%{version}\n" "$RPM_SPEC_FILE" | sed 's/\^.*//')
 
 # Decide which URL to use
 if [[ -n "$FORGEURL" ]]; then
     REPO_URL="$FORGEURL"
 elif [[ -n "$GOIPATH" ]]; then
     REPO_URL="https://$GOIPATH"
+elif [[ -n "$PLAINURL" ]]; then
+    REPO_URL="${PLAINURL}.git"
 else
     echo "No repository URL found in the RPM SPEC file."
     exit 2
@@ -109,8 +112,5 @@ mv "vendor-$CHECKOUT_IDENTIFIER.tar.gz" "$SPEC_DIR/"
 
 # Go back to the original directory
 popd > /dev/null
-
-# Clean up
-rm -rf "$TMP_DIR"
 
 echo "Created vendor-$CHECKOUT_IDENTIFIER.tar.gz successfully."

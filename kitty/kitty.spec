@@ -1,5 +1,6 @@
 %global optflags %{optflags} -Wno-array-bounds
 
+%global forgeurl https://github.com/kovidgoyal/kitty
 %global commit0 8dfe1fcca945192c03a0e8cbbf41560919892043
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global bumpver 1
@@ -49,7 +50,7 @@ Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 # golang.org/x/sys: BSD-3-Clause
 # howett.net/plist: BSD-2-Clause AND BSD-3-Clause
 License:        GPL-3.0-only AND LGPL-2.1-or-later AND Zlib AND BSD-1-Clause
-URL:            https://sw.kovidgoyal.net/kitty
+URL:            https://github.com/kovidgoyal/kitty
 %if 0%{?bumpver}
 Source0:        https://github.com/kovidgoyal/kitty/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 %else
