@@ -207,20 +207,17 @@ BuildRequires:  python3dist(sphinx)
 BuildRequires:  python3dist(sphinx-copybutton)
 BuildRequires:  python3dist(sphinx-inline-tabs)
 BuildRequires:  python3dist(sphinxext-opengraph)
+%endif
 
 %description    doc
 This package contains the documentation for %{name}.
-%endif
 
 
 %prep
 %if ! 0%{?bumpver}
 %{gpgverify} --keyring='%{SOURCE5}' --signature='%{SOURCE4}' --data='%{SOURCE0}'
 %endif
-%autosetup -p1 %{?bumpver:-n %{name}-%{commit0}}
-%if %{with bundled}
-%autosetup %{?bumpver:-n %{name}-%{commit0}} -NDT -a6
-%endif
+%autosetup -p1 %{?bumpver:-n %{name}-%{commit0}} %{?with_bundled:-a6}
 
 # Changing sphinx theme to classic
 sed "s/html_theme = 'furo'/html_theme = 'classic'/" -i docs/conf.py
