@@ -256,6 +256,12 @@ unset LDFLAGS
 mkdir -p _build/bin
 %gobuild -o _build/bin/kitten %{?with_bundled:./tools/cmd}%{!?with_bundled:./src/kitty/tools/cmd}
 
+%if 0%{?bumpver}
+ln -sr _build/bin/kitten kitty/launcher/
+make docs
+%endif
+
+
 %install
 # rpmlint fixes
 find linux-package -type f ! -executable -name "*.py" -exec sed -i '1{\@^#!%{python3}@d}' "{}" \;
@@ -265,6 +271,14 @@ cp -r linux-package %{buildroot}%{_prefix}
 install -m0755 -Dp _build/bin/kitten %{buildroot}%{_bindir}/kitten
 
 install -m0644 -Dp %{SOURCE1} %{buildroot}%{_metainfodir}/%{name}.appdata.xml
+
+%if 0%{?bumpver}
+install -m 0755 -vd %{buildroot}%{_mandir}/man{1,5}
+install -m 0644 -p docs/_build/man/*.1 %{buildroot}%{_mandir}/man1
+install -m 0644 -p docs/_build/man/*.5 %{buildroot}%{_mandir}/man5
+install -m 0755 -vd %{buildroot}%{_docdir}/%{name}
+cp -r docs/_build/html %{buildroot}%{_docdir}/%{name}
+%endif
 
 # rpmlint fixes
 rm %{buildroot}%{_datadir}/doc/%{name}/html/.buildinfo \
