@@ -26,7 +26,7 @@ jobs:
           mkdir -p ~/.config
           echo "$COPR_CONF" > ~/.config/copr
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Run updater
         run: |
