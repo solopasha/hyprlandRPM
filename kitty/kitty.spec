@@ -17,8 +17,8 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.32.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease -b2
+Version:        0.32.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
@@ -59,13 +59,14 @@ Source4:        https://github.com/kovidgoyal/kitty/releases/download/v%{version
 Source5:        https://calibre-ebook.com/signatures/kovid.gpg
 %endif
 # bash bundle_go_deps_for_rpm.sh kitty.spec
+%if ! 0%{?epel}
 Source6:        %{go_vendor_archive}
+%else
+Source6:        vendor-%{version}.tar.gz
+%endif
 # Add AppData manifest file
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
-
-# https://github.com/kovidgoyal/kitty/commit/828f4f312ab25e0edc68987231ea339b96e027c2
-Patch:          kitty-%{version}-fix-nvidia.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
