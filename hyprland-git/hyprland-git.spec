@@ -11,7 +11,7 @@
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
-%global libdrm_version 2.4.119
+%global libdrm_version 2.4.120
 
 %bcond legacyrenderer 0
 
