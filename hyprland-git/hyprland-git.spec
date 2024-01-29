@@ -103,7 +103,7 @@ Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 %if %{fedora} < 39
 Provides:       bundled(libdrm) = %{libdrm_version}
 %else
-Requires:       libdrm%{?_isa} >= 2.4.118
+Requires:       libdrm%{?_isa} >= 2.4.120
 %endif
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
