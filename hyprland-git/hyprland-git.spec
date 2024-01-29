@@ -11,13 +11,11 @@
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
-%global libdrm_version 2.4.119
-
 %bcond legacyrenderer 0
 
 Name:           hyprland-git
 Version:        0.34.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
-Release:        %autorelease -b4
+Release:        %{autorelease -b4}.1
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -39,7 +37,6 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
-Source5:        https://dri.freedesktop.org/libdrm/libdrm-%{libdrm_version}.tar.xz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -100,11 +97,7 @@ Provides:       bundled(wlroots) = 0.18.0~^1.%{wlroots_shortcommit}
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
-%if %{fedora} < 39
-Provides:       bundled(libdrm) = %{libdrm_version}
-%else
 Requires:       libdrm%{?_isa} >= 2.4.118
-%endif
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
@@ -172,11 +165,6 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -i scripts/generateVersion.sh
 %endif
 
-%if %{fedora} < 39
-mkdir subprojects/libdrm
-tar -xf %{SOURCE5} -C subprojects/libdrm --strip=1
-%endif
-
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
 cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
@@ -192,16 +180,12 @@ sed -i \
        -Dlegacy_renderer=enabled \
 %endif
        -Dwlroots:examples=false \
-       -Dwlroots:xcb-errors=disabled \
-%if %{fedora} < 39
-       --force-fallback-for=libdrm
-%endif
-       %{nil}
+       -Dwlroots:xcb-errors=disabled
 %meson_build
 
 
 %install
-%meson_install --skip-subprojects libdrm
+%meson_install
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
