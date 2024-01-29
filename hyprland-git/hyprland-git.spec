@@ -11,8 +11,6 @@
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
-%global libdrm_version 2.4.120
-
 %bcond legacyrenderer 0
 
 Name:           hyprland-git
@@ -39,7 +37,6 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
-Source5:        https://dri.freedesktop.org/libdrm/libdrm-%{libdrm_version}.tar.xz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -100,11 +97,7 @@ Provides:       bundled(wlroots) = 0.18.0~^1.%{wlroots_shortcommit}
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
-%if %{fedora} < 39
-Provides:       bundled(libdrm) = %{libdrm_version}
-%else
 Requires:       libdrm%{?_isa} >= 2.4.120
-%endif
 Requires:       libliftoff%{?_isa} >= 0.4.1
 Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
 
@@ -161,7 +154,6 @@ end}
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -p1
-sed -i 's/<libdrm\/drm_fourcc.h>/"drm_fourcc.h"/' src/includes.hpp
 
 %if 0%{?bumpver}
 tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
@@ -171,11 +163,6 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -e 's|^DIRTY=.*|DIRTY=|' \
     -e 's|^BRANCH=.*|BRANCH=main|' \
     -i scripts/generateVersion.sh
-%endif
-
-%if %{fedora} < 39
-mkdir subprojects/libdrm
-tar -xf %{SOURCE5} -C subprojects/libdrm --strip=1
 %endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
@@ -193,16 +180,12 @@ sed -i \
        -Dlegacy_renderer=enabled \
 %endif
        -Dwlroots:examples=false \
-       -Dwlroots:xcb-errors=disabled \
-%if %{fedora} < 39
-       --force-fallback-for=libdrm
-%endif
-       %{nil}
+       -Dwlroots:xcb-errors=disabled
 %meson_build
 
 
 %install
-%meson_install --skip-subprojects libdrm
+%meson_install
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
