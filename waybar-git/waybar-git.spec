@@ -61,6 +61,7 @@ BuildRequires:  pkgconfig(wayland-protocols)
 %if %{with wireplumber}
 BuildRequires:  pkgconfig(wireplumber-0.4)
 %endif
+BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(xkbregistry)
 BuildRequires:  python3dist(packaging)
 
