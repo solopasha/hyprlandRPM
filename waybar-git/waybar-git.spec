@@ -1,3 +1,5 @@
+%bcond wireplumber %[0%{?fedora} < 40]
+
 %global commit0 4c5ff80bbde40af78f5f829101ec71760caaa762
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global bumpver 40
@@ -56,7 +58,9 @@ BuildRequires:  pkgconfig(upower-glib)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-protocols)
+%if %{with wireplumber}
 BuildRequires:  pkgconfig(wireplumber-0.4)
+%endif
 BuildRequires:  pkgconfig(xkbregistry)
 BuildRequires:  python3dist(packaging)
 
@@ -83,11 +87,16 @@ cp %{SOURCE1} subprojects/packagecache
 %build
 %meson \
     -Dsndio=disabled \
-    -Dcava=disabled
+    -Dcava=disabled \
+    %{!?with_wireplumber:-Dwireplumber=disabled}
 %meson_build
 
 %install
 %meson_install --skip-subprojects catch2
+# remove man pages for disabled modules
+for module in cava sndio %{!?with_wireplumber:wireplumber} wlr-workspaces; do
+    rm -f %{buildroot}%{_mandir}/man5/%{name}-${module}.5
+done
 
 %check
 %meson_test
