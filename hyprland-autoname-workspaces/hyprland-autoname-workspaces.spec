@@ -1,5 +1,5 @@
 Name:           hyprland-autoname-workspaces
-Version:        1.1.12
+Version:        1.1.13
 Release:        %autorelease
 Summary:        Hyprland autoname workspaces
 
