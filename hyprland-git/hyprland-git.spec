@@ -137,6 +137,9 @@ Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause AND MIT
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Recommends:     git-core
+Requires:       meson
+Requires:       cmake
+Requires:       ninja-build
 %{lua:do
 if string.match(rpm.expand('%{name}'), 'hyprland%-git$') then
     print('Obsoletes: hyprland-nvidia-git-devel < 0.32.3^30.gitad3f688-2'..'\n')
