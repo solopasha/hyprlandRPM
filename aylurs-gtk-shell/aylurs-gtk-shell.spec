@@ -5,7 +5,7 @@
 
 Name:           aylurs-gtk-shell
 Version:        1.7.4
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        A customizable and extensible shell
 
 License:        GPL-3.0-or-later
@@ -43,7 +43,9 @@ the system so that these widgets can have functionality.
 tar -xf %{SOURCE2} -C subprojects/gvc --strip=1
 
 %build
-%meson --libdir=%{_libdir}/ags
+%meson \
+    -Dbuild_types=true \
+    --libdir=%{_libdir}/ags
 %meson_build
 
 %install
