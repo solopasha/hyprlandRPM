@@ -4,7 +4,7 @@
 # https://github.com/sentriz/cliphist
 %global goipath         go.senan.xyz/cliphist
 %global forgeurl        https://github.com/sentriz/cliphist
-Version:                0.4.0
+Version:                0.5.0
 
 %gometa -L -f
 
@@ -50,6 +50,7 @@ install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
 
 %files
 %license LICENSE
+%license vendor/modules.txt
 %doc CHANGELOG.md version.txt readme.md
 %{_bindir}/cliphist
 
