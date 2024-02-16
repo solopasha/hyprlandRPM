@@ -4,8 +4,8 @@
 %global gvc_shortcommit %(c=%{gvc_commit}; echo ${c:0:7})
 
 Name:           aylurs-gtk-shell
-Version:        1.7.4
-Release:        %autorelease -b2
+Version:        1.7.6
+Release:        %autorelease
 Summary:        A customizable and extensible shell
 
 License:        GPL-3.0-or-later
