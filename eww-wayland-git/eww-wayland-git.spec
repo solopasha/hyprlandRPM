@@ -1,9 +1,9 @@
-%global commit0 091b630072f64430d25f877ed6bd3c2139163b65
+%global commit0 387d344690903949121040f8a892f946e323c472
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 11
+%global bumpver 1
 
 Name:           eww-wayland-git
-Version:        0.4.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.5.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        ElKowars wacky widgets
 
