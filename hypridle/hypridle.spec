@@ -1,0 +1,57 @@
+%global sdbus_version 1.3.0
+
+Name:           hypridle
+Version:        0.1.0
+Release:        %autorelease
+Summary:        Hyprland's idle daemon
+License:        BSD-3-Clause
+URL:            https://github.com/hyprwm/hypridle
+Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1:        https://github.com/Kistler-Group/sdbus-cpp/archive/v%{sdbus_version}/sdbus-%{sdbus_version}.tar.gz
+
+BuildRequires:  cmake
+BuildRequires:  gcc-c++
+
+BuildRequires:  pkgconfig(hyprlang)
+BuildRequires:  pkgconfig(libsystemd)
+BuildRequires:  pkgconfig(systemd)
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(wayland-protocols)
+
+%description
+%{summary}.
+
+
+%prep
+%autosetup
+%if %{fedora} < 40
+%autosetup -NDT -a1
+%endif
+
+%build
+%if %{fedora} < 40
+pushd sdbus-cpp-%{sdbus_version}
+%cmake \
+    -DCMAKE_INSTALL_PREFIX=%{_builddir}/sdbus \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=OFF
+%cmake_build
+cmake --install %{__cmake_builddir}
+popd
+export PKG_CONFIG_PATH=%{_builddir}/sdbus/lib64/pkgconfig
+%endif
+%cmake
+%cmake_build
+
+
+%install
+%cmake_install
+
+%files
+%license LICENSE
+%doc README.md
+%{_bindir}/%{name}
+
+
+%changelog
+%autochangelog
