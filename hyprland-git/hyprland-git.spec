@@ -50,6 +50,7 @@ hyprdeps = {
     "pkgconfig(gbm)",
     "pkgconfig(glesv2)",
     "pkgconfig(hwdata)",
+    "pkgconfig(hyprlang)",
     "pkgconfig(libdisplay-info)",
     "pkgconfig(libdrm)",
     "pkgconfig(libinput)",
