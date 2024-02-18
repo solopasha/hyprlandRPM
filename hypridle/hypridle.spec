@@ -2,7 +2,7 @@
 
 Name:           hypridle
 Version:        0.1.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Hyprland's idle daemon
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hypridle
@@ -13,10 +13,14 @@ BuildRequires:  cmake
 BuildRequires:  gcc-c++
 
 BuildRequires:  pkgconfig(hyprlang)
-BuildRequires:  pkgconfig(libsystemd)
-BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
+%if %{fedora} >= 40
+BuildRequires:  pkgconfig(sdbus-c++)
+%else
+BuildRequires:  pkgconfig(libsystemd)
+BuildRequires:  pkgconfig(systemd)
+%endif
 
 %description
 %{summary}.
