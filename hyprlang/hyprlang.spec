@@ -1,14 +1,11 @@
-%global commit0 25da0804b00fffeee17463afd146711b4a05e77b
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:           hyprlang
-Version:        0.2.1^1.git%{shortcommit0}
+Version:        0.4.0
 Release:        %autorelease
 Summary:        The official implementation library for the hypr config language
 
 License:        GPL-3.0-or-later
 URL:            https://github.com/hyprwm/hyprlang
-Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -26,7 +23,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Development files for %{name}.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
 
 %build
 %cmake
@@ -41,7 +38,8 @@ Development files for %{name}.
 %files
 %license LICENSE
 %doc README.md
-%{_libdir}/libhyprlang.so.0{,.*}
+%{_libdir}/libhyprlang.so.1
+%{_libdir}/libhyprlang.so.%{version}
 
 %files devel
 %{_includedir}/hyprlang.hpp
