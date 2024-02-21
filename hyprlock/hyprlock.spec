@@ -1,6 +1,6 @@
-%global commit0 7b15d34f0af9b1c8ef49279827eee47e4dca9afa
+%global commit0 3d270606881fc5690074ca29aea7d00bbf762ab1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 7
+%global bumpver 8
 
 Name:           hyprlock
 Version:        0~%{bumpver}.git%{shortcommit0}
