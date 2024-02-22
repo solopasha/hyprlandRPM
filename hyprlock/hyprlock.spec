@@ -15,10 +15,12 @@ BuildRequires:  gcc-c++
 
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)
+BuildRequires:  pkgconfig(gbm)
 BuildRequires:  pkgconfig(hyprlang)
+BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(opengl)
 BuildRequires:  pkgconfig(pam)
-BuildRequires:  pkgconfig(pango)
+BuildRequires:  pkgconfig(pangocairo)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-egl)
 BuildRequires:  pkgconfig(wayland-protocols)
