@@ -3,7 +3,7 @@
 %global bumpver 1
 
 Name:           hyprlock
-Version:        0.1.0~%{bumpver}.git%{shortcommit0}
+Version:        0.1.0^%{bumpver}.git%{shortcommit0}
 Release:        %autorelease
 Summary:        Hyprland's GPU-accelerated screen locking utility
 License:        BSD-3-Clause
