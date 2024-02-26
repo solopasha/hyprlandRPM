@@ -113,7 +113,7 @@ done
 %license LICENSE
 %doc README.md
 %dir %{_sysconfdir}/xdg/waybar
-%config(noreplace) %{_sysconfdir}/xdg/waybar/config
+%config(noreplace) %{_sysconfdir}/xdg/waybar/config.jsonc
 %config(noreplace) %{_sysconfdir}/xdg/waybar/style.css
 %{_bindir}/waybar
 %{_mandir}/man5/waybar*
