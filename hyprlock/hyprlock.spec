@@ -43,6 +43,7 @@ BuildRequires:  pkgconfig(xkbcommon)
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
+%config(noreplace) %{_sysconfdir}/pam.d/%{name}
 
 %changelog
 %autochangelog
