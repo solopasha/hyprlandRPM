@@ -38,6 +38,8 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 
+Patch:          https://github.com/hyprwm/Hyprland/commit/2a08f2ba84ead47bd13aae5797d0d71b2e11b612.patch
+
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  jq
