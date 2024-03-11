@@ -1,9 +1,9 @@
 Name:           hyprlang
-Version:        0.4.1
+Version:        0.5.0
 Release:        %autorelease
 Summary:        The official implementation library for the hypr config language
 
-License:        GPL-3.0-or-later
+License:        LGPL-3.0-only
 URL:            https://github.com/hyprwm/hyprlang
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
@@ -38,7 +38,7 @@ Development files for %{name}.
 %files
 %license LICENSE
 %doc README.md
-%{_libdir}/libhyprlang.so.1
+%{_libdir}/libhyprlang.so.2
 %{_libdir}/libhyprlang.so.%{version}
 
 %files devel
