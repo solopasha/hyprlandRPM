@@ -4,7 +4,7 @@
 %global gvc_shortcommit %(c=%{gvc_commit}; echo ${c:0:7})
 
 Name:           aylurs-gtk-shell
-Version:        1.7.7
+Version:        1.8.0
 Release:        %autorelease
 Summary:        A customizable and extensible shell
 
@@ -13,6 +13,7 @@ URL:            https://github.com/Aylur/ags
 Source0:        %{url}/archive/v%{version_no_tilde}/%{name}-%{version_no_tilde}.tar.gz
 Source1:        %{url}/releases/download/v%{version_no_tilde}/node_modules-v%{version_no_tilde}.tar.gz
 Source2:        https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive/%{gvc_commit}/gvc-%{gvc_shortcommit}.tar.gz
+Patch:          https://patch-diff.githubusercontent.com/raw/Aylur/ags/pull/332.patch
 
 BuildRequires:  gcc
 BuildRequires:  meson
@@ -39,7 +40,7 @@ in a declarative way in JavaScript. It also provides services to interact with
 the system so that these widgets can have functionality.
 
 %prep
-%autosetup -n ags-%{version_no_tilde} -a1
+%autosetup -n ags-%{version_no_tilde} -a1 -p1
 tar -xf %{SOURCE2} -C subprojects/gvc --strip=1
 
 %build
