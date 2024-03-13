@@ -1,14 +1,10 @@
-%global commit0 f3a41161eca06074de40c60991f569f1db77182a
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 27
-
 Name:           hyprlock
-Version:        0.1.0^%{bumpver}.git%{shortcommit0}
+Version:        0.2.0
 Release:        %autorelease
 Summary:        Hyprland's GPU-accelerated screen locking utility
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprlock
-Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -30,7 +26,7 @@ BuildRequires:  pkgconfig(xkbcommon)
 %{summary}.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
 
 %build
 %cmake
