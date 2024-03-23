@@ -1,4 +1,4 @@
-%bcond wireplumber %[0%{?fedora} < 40]
+%bcond wireplumber %[0%{?fedora} > 39]
 
 %global commit0 cc084f5f86776b3b5b9708a99bed49b991eb48af
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -59,7 +59,7 @@ BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-protocols)
 %if %{with wireplumber}
-BuildRequires:  pkgconfig(wireplumber-0.4)
+BuildRequires:  pkgconfig(wireplumber-0.5)
 %endif
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(xkbregistry)
