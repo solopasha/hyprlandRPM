@@ -6,24 +6,29 @@ Version:        0.9.1
 Release:        %autorelease
 Summary:        Efficient animated wallpaper daemon for wayland, controlled at runtime
 # 0BSD OR MIT OR Apache-2.0
+# Apache-2.0
 # Apache-2.0 OR MIT
+# Apache-2.0 WITH LLVM-exception
 # Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+# BSD-2-Clause
 # BSD-3-Clause
+# CC0-1.0 OR Apache-2.0
 # ISC
 # MIT
 # MIT OR Apache-2.0
+# MIT OR Apache-2.0 OR NCSA
 # MIT OR Apache-2.0 OR Zlib
 # MIT OR Zlib OR Apache-2.0
 # Unlicense OR MIT
-# Zlib
 # Zlib OR Apache-2.0 OR MIT
-License:        GPL-3.0-only AND (0BSD OR MIT OR Apache-2.0) AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND BSD-3-Clause AND MIT AND (MIT OR Apache-2.0) AND (MIT OR Apache-2.0 OR Zlib) AND (Unlicense OR MIT) AND Zlib
+License:        GPL-3.0-only AND (0BSD OR MIT OR Apache-2.0) AND Apache-2.0 AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND BSD-2-Clause AND BSD-3-Clause AND MIT AND (MIT OR Apache-2.0) AND (MIT OR Apache-2.0 OR NCSA) AND (CC0-1.0 OR Apache-2.0) AND (MIT OR Apache-2.0 OR Zlib) AND (Unlicense OR MIT) AND Zlib
 
 URL:            https://github.com/LGFae/swww
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cargo-rpm-macros >= 24
 BuildRequires:  scdoc
+BuildRequires:  pkgconfig(liblz4)
 
 %global _description %{expand:
 %{summary}.}
