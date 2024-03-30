@@ -3,7 +3,7 @@ set -euxo pipefail
 
 ec=0
 
-SPEC=eww-wayland-git.spec
+SPEC=eww-git.spec
 
 oldTag="$(rpmspec -q --qf "%{version}\n" $SPEC | head -1 | sed 's/\^.*//')"
 newTag="$(curl "https://api.github.com/repos/elkowar/eww/tags" | jq -r '.[0].name' | sed 's/^v//')"
@@ -25,6 +25,6 @@ esac
 
 git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i $SPEC && \
-git commit -am "up rev eww-wayland-git-${newTag}+${newCommit:0:7}" && \
+git commit -am "up rev eww-git-${newTag}+${newCommit:0:7}" && \
 git push && \
-copr-cli build-package solopasha/hyprland --name eww-wayland-git --nowait --enable-net on; }
+copr-cli build-package solopasha/hyprland --name eww-git --nowait --enable-net on; }
