@@ -139,8 +139,9 @@ Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause AND MIT
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Recommends:     git-core
-Requires:       meson
 Requires:       cmake
+Requires:       cpio
+Requires:       meson
 Requires:       ninja-build
 %{lua:do
 if string.match(rpm.expand('%{name}'), 'hyprland%-git$') then
@@ -190,12 +191,11 @@ sed -i \
 
 
 %install
-%meson_install
+%meson_install --skip-subprojects wlroots
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
-rm %{buildroot}%{_libdir}/libwlroots.a
-rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
-mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr
-mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
+mkdir -p %{buildroot}%{bash_completions_dir} %{buildroot}%{fish_completions_dir}
+mv %{buildroot}%{_datadir}/bash-completions/hyprctl %{buildroot}%{bash_completions_dir}/hyprctl
+mv %{buildroot}%{_datadir}/fish/completions/hyprctl.fish %{buildroot}%{fish_completions_dir}/hyprctl.fish
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-wlroots LICENSE-hyprland-protocols
