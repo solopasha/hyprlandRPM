@@ -207,6 +207,9 @@ mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 %{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 %{_mandir}/man1/hyprctl.1*
 %{_mandir}/man1/Hyprland.1*
+%{bash_completions_dir}/hyprctl
+%{fish_completions_dir}/hyprctl.fish
+%{zsh_completions_dir}/_hyprctl
 
 %files devel
 %{_datadir}/hyprland-protocols/
