@@ -1,6 +1,6 @@
 %global hyprland_commit 81766647f2dc34013a62066edd191426b8f16a42
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 10
+%global bumpver 11
 
 %global wlroots_commit 50eae512d9cecbf0b3b1898bb1f0b40fa05fe19b
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -191,9 +191,14 @@ sed -i \
 
 
 %install
-%meson_install --skip-subprojects wlroots
+%meson_install
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
-mkdir -p %{buildroot}%{bash_completions_dir} %{buildroot}%{fish_completions_dir}
+rm %{buildroot}%{_libdir}/libwlroots.a
+rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
+mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr \
+         %{buildroot}%{bash_completions_dir} \
+         %{buildroot}%{fish_completions_dir}
+mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 mv %{buildroot}%{_datadir}/bash-completions/hyprctl %{buildroot}%{bash_completions_dir}/hyprctl
 mv %{buildroot}%{_datadir}/fish/completions/hyprctl.fish %{buildroot}%{fish_completions_dir}/hyprctl.fish
 
