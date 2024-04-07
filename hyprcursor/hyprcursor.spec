@@ -1,5 +1,5 @@
 Name:           hyprcursor
-Version:        0.1.5
+Version:        0.1.6
 Release:        %autorelease
 Summary:        The hyprland cursor format, library and utilities
 
@@ -17,6 +17,7 @@ BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(hyprlang)
 BuildRequires:  pkgconfig(librsvg-2.0)
 BuildRequires:  pkgconfig(libzip)
+BuildRequires:  pkgconfig(tomlplusplus)
 
 %description
 %{summary}.
