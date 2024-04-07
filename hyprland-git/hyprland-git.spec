@@ -195,12 +195,9 @@ sed -i \
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
-mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr \
-         %{buildroot}%{bash_completions_dir} \
-         %{buildroot}%{fish_completions_dir}
+mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr
 mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
-mv %{buildroot}%{_datadir}/bash-completions/hyprctl %{buildroot}%{bash_completions_dir}/hyprctl
-mv %{buildroot}%{_datadir}/fish/completions/hyprctl.fish %{buildroot}%{fish_completions_dir}/hyprctl.fish
+
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-wlroots LICENSE-hyprland-protocols
@@ -212,9 +209,6 @@ mv %{buildroot}%{_datadir}/fish/completions/hyprctl.fish %{buildroot}%{fish_comp
 %{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 %{_mandir}/man1/hyprctl.1*
 %{_mandir}/man1/Hyprland.1*
-%{bash_completions_dir}/hyprctl
-%{fish_completions_dir}/hyprctl.fish
-%{zsh_completions_dir}/_hyprctl
 
 %files devel
 %{_datadir}/hyprland-protocols/
