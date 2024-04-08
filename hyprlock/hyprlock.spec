@@ -1,10 +1,11 @@
 Name:           hyprlock
-Version:        0.2.0
+Version:        0.3.0
 Release:        %autorelease
 Summary:        Hyprland's GPU-accelerated screen locking utility
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprlock
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch:          cmake.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
