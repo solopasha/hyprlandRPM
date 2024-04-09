@@ -1,8 +1,8 @@
 %global __provides_exclude_from ^(%{_libdir}/ags/.*\\.so)$
 
-%global ags_commit d589077199ec8a055ef936bf8a1f051b7a0c7e34
+%global ags_commit 75251984746a82ec21a61f14cedd2e83ca55d357
 %global ags_shortcommit %(c=%{ags_commit}; echo ${c:0:7})
-%global bumpver 8
+%global bumpver 9
 
 %global gvc_commit 8e7a5a4c3e51007ce6579292642517e3d3eb9c50
 %global gvc_shortcommit %(c=%{gvc_commit}; echo ${c:0:7})
