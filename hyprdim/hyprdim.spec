@@ -4,7 +4,7 @@
 %global crate hyprdim
 
 Name:           hyprdim
-Version:        2.2.3
+Version:        2.2.4
 Release:        %autorelease
 Summary:        Automatically dim windows in Hyprland when switching between them
 # 0BSD OR MIT OR Apache-2.0
@@ -35,10 +35,10 @@ cargo vendor
 %cargo_prep -v vendor
 
 %build
-%cargo_build
-%{cargo_license_summary}
-%{cargo_license} > LICENSE.dependencies
-%{cargo_vendor_manifest}
+cargo build --locked --profile rpm
+#%%{cargo_license_summary}
+#%%{cargo_license} > LICENSE.dependencies
+#%%{cargo_vendor_manifest}
 
 %install
 install -Dpm755 target/release/hyprdim %{buildroot}%{_bindir}/hyprdim
@@ -54,8 +54,8 @@ install -Dpm644 target/man/hyprdim.1 -t %{buildroot}%{_mandir}/man1
 
 %files
 %license LICENSE
-%license LICENSE.dependencies
-%license cargo-vendor.txt
+#%%license LICENSE.dependencies
+#%%license cargo-vendor.txt
 %doc README.md
 %{_bindir}/hyprdim
 %{_mandir}/man1/%{name}.1.*
