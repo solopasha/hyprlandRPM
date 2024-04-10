@@ -1,6 +1,8 @@
 %global hyprland_commit 303b9956b2ae15508b09dffae602550ca17e6539
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
 %global bumpver 12
+%global commits_count 1
+%global commit_date Apr 1
 
 %global wlroots_commit 50eae512d9cecbf0b3b1898bb1f0b40fa05fe19b
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
@@ -168,6 +170,8 @@ tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
 sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -e 's|^DIRTY=.*|DIRTY=|' \
     -e 's|^BRANCH=.*|BRANCH=main|' \
+    -e 's|^DATE=.*|DATE="%{commit_date}"|' \
+    -e 's|^COMMITS=.*|COMMITS=%{commits_count}|' \
     -i scripts/generateVersion.sh
 %endif
 
