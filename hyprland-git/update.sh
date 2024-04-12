@@ -23,7 +23,7 @@ oldWlrootsCommit="$(sed -n 's/.*wlroots_commit \(.*\)/\1/p' hyprland-git.spec)"
 newWlrootsCommit="$(curl -L \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/hyprwm/Hyprland/contents/subprojects/wlroots?ref=$newHyprlandCommit" | jq -r '.sha')"
+            "https://api.github.com/repos/hyprwm/Hyprland/contents/subprojects/wlroots-hyprland?ref=$newHyprlandCommit" | jq -r '.sha')"
 
 oldProtocolsCommit="$(sed -n 's/.*protocols_commit \(.*\)/\1/p' hyprland-git.spec)"
 newProtocolsCommit="$(curl -L \

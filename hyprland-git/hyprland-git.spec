@@ -32,7 +32,7 @@ License:        BSD-3-Clause AND MIT AND BSD-2-Clause AND HPND-sell-variant AND 
 URL:            https://github.com/hyprwm/Hyprland
 %if 0%{?bumpver}
 Source0:        %{url}/archive/%{hyprland_commit}/%{name}-%{hyprland_shortcommit}.tar.gz
-Source1:        https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/%{wlroots_commit}/wlroots-%{wlroots_shortcommit}.tar.gz
+Source1:        https://github.com/hyprwm/wlroots-hyprland/archive/%{wlroots_commit}/wlroots-%{wlroots_shortcommit}.tar.gz
 Source2:        https://github.com/hyprwm/hyprland-protocols/archive/%{protocols_commit}/protocols-%{protocols_shortcommit}.tar.gz
 Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_commit}/udis86-%{udis86_shortcommit}.tar.gz
 %else
@@ -164,7 +164,7 @@ end}
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -p1
 
 %if 0%{?bumpver}
-tar -xf %{SOURCE1} -C subprojects/wlroots --strip=1
+tar -xf %{SOURCE1} -C subprojects/wlroots-hyprland --strip=1
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
 sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
@@ -177,7 +177,7 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
 cp -p subprojects/udis86/LICENSE LICENSE-udis86
-cp -p subprojects/wlroots/LICENSE LICENSE-wlroots
+cp -p subprojects/wlroots-hyprland/LICENSE LICENSE-wlroots
 
 sed -i \
   -e "s|@@HYPRLAND_VERSION@@|%{version}|g" \
@@ -189,8 +189,8 @@ sed -i \
 %if %{with legacyrenderer}
        -Dlegacy_renderer=enabled \
 %endif
-       -Dwlroots:examples=false \
-       -Dwlroots:xcb-errors=disabled
+       -Dwlroots-hyprland:examples=false \
+       -Dwlroots-hyprland:xcb-errors=disabled
 %meson_build
 
 
@@ -201,7 +201,7 @@ rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr \
          %{buildroot}%{bash_completions_dir}
-mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
+mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots-hyprland
 mv %{buildroot}%{_datadir}/bash-completions/hyprctl %{buildroot}%{bash_completions_dir}/hyprctl
 mv %{buildroot}%{_datadir}/bash-completions/hyprpm %{buildroot}%{bash_completions_dir}/hyprpm
 
