@@ -1,6 +1,6 @@
 %global hyprland_commit 0634aaeac6cca12e4f72174c431c2db9da9c0072
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 21
+%global bumpver 22
 %global commits_count 4442
 %global commit_date Sat Apr 13 11:16:26 2024
 
@@ -201,7 +201,7 @@ rm %{buildroot}%{_libdir}/libwlroots.a
 rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr \
          %{buildroot}%{bash_completions_dir}
-mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots-hyprland
+mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
 mv %{buildroot}%{_datadir}/bash-completions/hyprctl %{buildroot}%{bash_completions_dir}/hyprctl
 mv %{buildroot}%{_datadir}/bash-completions/hyprpm %{buildroot}%{bash_completions_dir}/hyprpm
 
