@@ -41,11 +41,11 @@ cargo vendor
 %cargo_prep -v vendor
 
 %build
-%cargo_build
+cargo build --locked --profile rpm
 ./doc/gen.sh
-%{cargo_license_summary}
-%{cargo_license} > LICENSE.dependencies
-%{cargo_vendor_manifest}
+#%%{cargo_license_summary}
+#%%{cargo_license} > LICENSE.dependencies
+#%%{cargo_vendor_manifest}
 
 %install
 install -Dpm755 target/release/swww %{buildroot}%{_bindir}/swww
@@ -62,8 +62,8 @@ install -Dpm644 ./doc/generated/*.1 -t %{buildroot}%{_mandir}/man1
 
 %files
 %license LICENSE
-%license LICENSE.dependencies
-%license cargo-vendor.txt
+#%%license LICENSE.dependencies
+#%%license cargo-vendor.txt
 %doc CHANGELOG.md
 %doc README.md
 %{_bindir}/swww
