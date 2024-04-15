@@ -202,8 +202,8 @@ rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
 mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr \
          %{buildroot}%{bash_completions_dir}
 mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
-mv %{buildroot}%{_datadir}/bash-completions/hyprctl %{buildroot}%{bash_completions_dir}/hyprctl
-mv %{buildroot}%{_datadir}/bash-completions/hyprpm %{buildroot}%{bash_completions_dir}/hyprpm
+mv %{buildroot}%{_datadir}/bash-completion/hyprctl %{buildroot}%{bash_completions_dir}/hyprctl
+mv %{buildroot}%{_datadir}/bash-completion/hyprpm %{buildroot}%{bash_completions_dir}/hyprpm
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-wlroots LICENSE-hyprland-protocols
