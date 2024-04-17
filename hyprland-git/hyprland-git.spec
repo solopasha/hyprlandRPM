@@ -1,6 +1,6 @@
 %global hyprland_commit e8e02e81e84bb04efa0c926361ec80c60744f665
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 2
+%global bumpver 3
 %global commits_count 4461
 %global commit_date Tue Apr 16 07:36:21 2024
 
@@ -70,12 +70,14 @@ hyprdeps = {
     "pkgconfig(wayland-server)",
     "pkgconfig(xcb-composite)",
     "pkgconfig(xcb-dri3)",
+    "pkgconfig(xcb-ewmh)",
     "pkgconfig(xcb-icccm)",
     "pkgconfig(xcb-present)",
     "pkgconfig(xcb-render)",
     "pkgconfig(xcb-renderutil)",
     "pkgconfig(xcb-res)",
     "pkgconfig(xcb-shm)",
+    "pkgconfig(xcb-util)",
     "pkgconfig(xcb-xfixes)",
     "pkgconfig(xcb-xinput)",
     "pkgconfig(xcb)",
