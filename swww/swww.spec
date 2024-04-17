@@ -2,7 +2,7 @@
 %bcond_with check
 
 Name:           swww
-Version:        0.9.3
+Version:        0.9.4
 Release:        %autorelease
 Summary:        Efficient animated wallpaper daemon for wayland, controlled at runtime
 # 0BSD OR MIT OR Apache-2.0
