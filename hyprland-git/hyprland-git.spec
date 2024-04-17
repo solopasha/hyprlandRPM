@@ -17,7 +17,7 @@
 
 Name:           hyprland-git
 Version:        0.39.1%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -70,12 +70,14 @@ hyprdeps = {
     "pkgconfig(wayland-server)",
     "pkgconfig(xcb-composite)",
     "pkgconfig(xcb-dri3)",
+    "pkgconfig(xcb-ewmh)",
     "pkgconfig(xcb-icccm)",
     "pkgconfig(xcb-present)",
     "pkgconfig(xcb-render)",
     "pkgconfig(xcb-renderutil)",
     "pkgconfig(xcb-res)",
     "pkgconfig(xcb-shm)",
+    "pkgconfig(xcb-util)",
     "pkgconfig(xcb-xfixes)",
     "pkgconfig(xcb-xinput)",
     "pkgconfig(xcb)",
