@@ -1,9 +1,9 @@
-%global commit0 1e37f53e99016aa2cd725d7050788bb5d4fcc76a
+%global commit0 d87c2fdbfdc012e76d229e4e9ea3325bc0f23e89
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 9
+%global bumpver 1
 
 Name:           eww-git
-Version:        0.5.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.6.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        ElKowars wacky widgets
 
