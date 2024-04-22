@@ -7,6 +7,9 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprwayland-scanner
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
+# https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
+ExcludeArch:    %{ix86}
+
 BuildRequires:  cmake
 BuildRequires:  cmake(pugixml)
 BuildRequires:  gcc-c++
