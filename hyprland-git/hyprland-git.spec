@@ -1,6 +1,6 @@
 %global hyprland_commit a4f38a07d7578f0b06c09de7d04682e0aaddb12a
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 14
+%global bumpver 15
 %global commits_count 4501
 %global commit_date Sun Apr 21 09:38:28 2024
 
@@ -42,6 +42,7 @@ Source4:        macros.hyprland
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
+BuildRequires:  git-core
 BuildRequires:  jq
 BuildRequires:  meson
 
@@ -54,6 +55,7 @@ hyprdeps = {
     "pkgconfig(hwdata)",
     "pkgconfig(hyprcursor)",
     "pkgconfig(hyprlang)",
+    "pkgconfig(hyprwayland-scanner)",
     "pkgconfig(libdisplay-info)",
     "pkgconfig(libdrm)",
     "pkgconfig(libinput)",
@@ -193,6 +195,7 @@ sed -i \
 %endif
        -Dwlroots-hyprland:examples=false \
        -Dwlroots-hyprland:xcb-errors=disabled
+cat ./src/version.h
 %meson_build
 
 
