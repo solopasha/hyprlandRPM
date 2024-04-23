@@ -66,6 +66,7 @@ hyprdeps = {
     "pkgconfig(pangocairo)",
     "pkgconfig(pixman-1)",
     "pkgconfig(tomlplusplus)",
+    "pkgconfig(uuid)",
     "pkgconfig(wayland-client)",
     "pkgconfig(wayland-protocols)",
     "pkgconfig(wayland-scanner)",
