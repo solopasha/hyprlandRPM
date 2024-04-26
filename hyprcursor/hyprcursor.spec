@@ -30,6 +30,7 @@ Development files for %{name}.
 
 %prep
 %autosetup -p1
+sed 's/0\.1\.7/0.1.8/' -i CMakeLists.txt
 
 %build
 %cmake
