@@ -1,5 +1,5 @@
 Name:           hyprwayland-scanner
-Version:        0.3.2
+Version:        0.3.3
 Release:        %autorelease
 Summary:        A Hyprland implementation of wayland-scanner, in and for C++
 
@@ -39,6 +39,7 @@ developing applications that use %{name}.
 %doc README.md
 %{_bindir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/cmake/hyprwayland-scanner/
 
 %changelog
 %autochangelog
