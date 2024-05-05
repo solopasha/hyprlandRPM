@@ -1,0 +1,31 @@
+Submodule subprojects/wlroots-hyprland 5c1d51c5..2aa5900e:
+diff --git a/subprojects/wlroots-hyprland/patches/apply.sh b/subprojects/wlroots-hyprland/patches/apply.sh
+index d5492b1b..dd0cd02f 100755
+--- a/subprojects/wlroots-hyprland/patches/apply.sh
++++ b/subprojects/wlroots-hyprland/patches/apply.sh
+@@ -4,15 +4,7 @@
+ PATCHES=$(find patches/ -type f -name '*.patch')
+ 
+ apply () {
+-	git apply $PATCH
+-}
+-
+-check_applied () {
+-	git apply --check --reverse -q $PATCH
+-}
+-
+-fail () {
+-	echo =======\> \'$PATCH\' was not applied && exit 1
++	patch -Np1 -i $PATCH
+ }
+ 
+ if [ -n "$PATCHES" ];
+@@ -21,7 +13,7 @@ then
+ 	echo 'Patches found. Applying...';
+ 	for PATCH in $PATCHES;
+ 	do
+-		apply || check_applied || fail;
++		apply
+ 	done
+ else
+ 	echo 'No patches found.'

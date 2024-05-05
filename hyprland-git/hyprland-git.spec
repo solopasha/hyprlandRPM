@@ -39,6 +39,7 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
+Patch:          no-git.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -166,7 +167,7 @@ end}
 
 
 %prep
-%autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -p1
+%autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
 
 %if 0%{?bumpver}
 tar -xf %{SOURCE1} -C subprojects/wlroots-hyprland --strip=1
@@ -178,6 +179,8 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -e 's|^DATE=.*|DATE="%{commit_date}"|' \
     -e 's|^COMMITS=.*|COMMITS=%{commits_count}|' \
     -i scripts/generateVersion.sh
+%else
+%autopatch -p1
 %endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
