@@ -1,6 +1,6 @@
 Name:           hyprpaper
-Version:        0.6.0
-Release:        %autorelease -b4
+Version:        0.7.0
+Release:        %autorelease
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
 
 License:        BSD-3-Clause
@@ -20,6 +20,7 @@ BuildRequires:  pkgconfig(pango)
 BuildRequires:  pkgconfig(pangocairo)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
+BuildRequires:  pkgconfig(wayland-scanner)
 
 %description
 Hyprpaper is a blazing fast wallpaper utility for Hyprland with the ability
@@ -37,7 +38,7 @@ make protocols
 
 
 %install
-install -m0755 -Dp %{__cmake_builddir}/%{name} %{buildroot}%{_bindir}/%{name}
+%cmake_install
 
 
 %files
