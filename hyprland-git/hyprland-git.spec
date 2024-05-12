@@ -1,6 +1,6 @@
 %global hyprland_commit fd35b35000fa11ce540d944966ff17c71c31fd27
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 25
+%global bumpver 26
 %global commits_count 4678
 %global commit_date Sun May 12 03:00:55 2024
 
@@ -39,7 +39,6 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
-Patch:          no-git.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -207,9 +206,7 @@ cat ./src/version.h
 %meson_install
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 rm %{buildroot}%{_libdir}/libwlroots.a
-rm %{buildroot}%{_libdir}/pkgconfig/wlroots.pc
-mkdir -p %{buildroot}%{_includedir}/hyprland/wlroots/wlr
-mv %{buildroot}%{_includedir}/wlr %{buildroot}%{_includedir}/hyprland/wlroots
+rm %{buildroot}%{_datadir}/pkgconfig/wlroots.pc
 
 
 %files
