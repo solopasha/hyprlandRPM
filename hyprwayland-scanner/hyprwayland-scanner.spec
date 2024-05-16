@@ -1,5 +1,5 @@
 Name:           hyprwayland-scanner
-Version:        0.3.7
+Version:        0.3.8
 Release:        %autorelease
 Summary:        A Hyprland implementation of wayland-scanner, in and for C++
 
