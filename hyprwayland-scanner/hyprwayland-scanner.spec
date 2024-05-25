@@ -18,11 +18,10 @@ BuildRequires:  gcc-c++
 %{summary}.
 
 %package        devel
-Summary:        Development files for %{name}
+Summary:        A Hyprland implementation of wayland-scanner, in and for C++
 
 %description    devel
-The %{name}-devel package contains libraries and header files for
-developing applications that use %{name}.
+%{summary}.
 
 %prep
 %autosetup -p1
@@ -39,7 +38,7 @@ developing applications that use %{name}.
 %doc README.md
 %{_bindir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
-%{_libdir}/cmake/hyprwayland-scanner/
+%{_libdir}/cmake/%{name}/
 
 %changelog
 %autochangelog
