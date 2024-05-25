@@ -15,7 +15,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.34.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.35.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -72,7 +72,7 @@ Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
 
-BuildRequires:  golang >= 1.21.0
+BuildRequires:  golang >= 1.22.0
 BuildRequires:  go-rpm-macros
 BuildRequires:  git-core
 
