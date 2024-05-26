@@ -73,6 +73,7 @@ hyprdeps = {
     "pkgconfig(wayland-server)",
     "pkgconfig(xcb-composite)",
     "pkgconfig(xcb-dri3)",
+    "pkgconfig(xcb-errors)",
     "pkgconfig(xcb-ewmh)",
     "pkgconfig(xcb-icccm)",
     "pkgconfig(xcb-present)",
@@ -196,8 +197,7 @@ sed -i \
 %if %{with legacyrenderer}
        -Dlegacy_renderer=enabled \
 %endif
-       -Dwlroots-hyprland:examples=false \
-       -Dwlroots-hyprland:xcb-errors=disabled
+       -Dwlroots-hyprland:examples=false
 cat ./src/version.h
 %meson_build
 
