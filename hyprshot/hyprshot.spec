@@ -1,5 +1,5 @@
 Name:           hyprshot
-Version:        1.2.3
+Version:        1.3.0
 Release:        %autorelease
 Summary:        Utility to easily take screenshots in Hyprland using your mouse
 BuildArch:      noarch
@@ -9,6 +9,7 @@ URL:            https://github.com/Gustash/Hyprshot
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 Requires:       jq grim slurp wl-clipboard /usr/bin/notify-send
+Recommends:     hyprpicker
 
 %description
 Hyprshot is an utility to easily take screenshot in Hyprland using your mouse.
