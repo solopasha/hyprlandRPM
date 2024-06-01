@@ -107,10 +107,13 @@ BuildRequires:  pkgconfig(libxxhash)
 # For tests:
 BuildRequires:  fish
 BuildRequires:  glibc-common
+%if 0%{?epel}
+BuildRequires:  glibc-langpack-en
+%endif
 BuildRequires:  openssh-clients
+BuildRequires:  python3dist(pillow)
 BuildRequires:  ripgrep
 BuildRequires:  zsh
-BuildRequires:  python3dist(pillow)
 %endif
 
 Requires:       python3%{?_isa}
@@ -305,6 +308,8 @@ for test in "TestRgArgParsing" \
 ; do
 awk -i inplace '/^func.*'"$test"'\(/ { print; print "\tt.Skip(\"disabled failing test\")"; next}1' $(grep -rl $test)
 done
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 %endif
 %ifarch ppc64le
 for test in test_transfer_receive test_transfer_send; do
