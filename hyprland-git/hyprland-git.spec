@@ -181,6 +181,7 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -i scripts/generateVersion.sh
 %else
 %autopatch -p1
+echo ':' > scripts/generateVersion.sh
 %endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
