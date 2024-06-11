@@ -55,6 +55,7 @@ hyprdeps = {
     "pkgconfig(hwdata)",
     "pkgconfig(hyprcursor)",
     "pkgconfig(hyprlang)",
+    "pkgconfig(hyprutils)",
     "pkgconfig(hyprwayland-scanner)",
     "pkgconfig(libdisplay-info)",
     "pkgconfig(libdrm)",
