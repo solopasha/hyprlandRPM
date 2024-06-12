@@ -1,5 +1,5 @@
 Name:           pyprland
-Version:        2.3.7
+Version:        2.3.8
 Release:        %autorelease
 Summary:        Hyprland extensions made easy
 
