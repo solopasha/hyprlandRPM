@@ -6,8 +6,8 @@
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        1.3.1%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
-Release:        %autorelease -b4
+Version:        1.3.2%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
+Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        BSD-3-Clause
@@ -80,12 +80,12 @@ cmake --install %{__cmake_builddir}
 popd
 export PKG_CONFIG_PATH=%{_builddir}/sdbus/lib64/pkgconfig
 %endif
-%meson
-%meson_build
+%cmake
+%cmake_build
 
 
 %install
-%meson_install
+%cmake_install
 
 
 %post
