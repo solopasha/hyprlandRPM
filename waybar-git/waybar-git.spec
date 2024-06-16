@@ -1,8 +1,8 @@
 %bcond wireplumber %[0%{?fedora} > 39]
 
-%global commit0 9ba5825009aefc4e85d0d0c5f7f70b3063723d1a
+%global commit0 1c1089bade49f4b7745f8226886608005d1ed29c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 23
+%global bumpver 24
 
 %global catch2_version 3.5.1
 
