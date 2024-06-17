@@ -16,7 +16,7 @@
 
 Name:           kitty
 Version:        0.35.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
