@@ -1,11 +1,10 @@
 Name:           hyprlock
-Version:        0.3.0
+Version:        0.4.0
 Release:        %autorelease
 Summary:        Hyprland's GPU-accelerated screen locking utility
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprlock
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch:          cmake.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -17,7 +16,11 @@ BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(gbm)
 BuildRequires:  pkgconfig(hyprlang)
+BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(libdrm)
+BuildRequires:  pkgconfig(libjpeg)
+BuildRequires:  pkgconfig(libmagic)
+BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(opengl)
 BuildRequires:  pkgconfig(pam)
 BuildRequires:  pkgconfig(pangocairo)
