@@ -1,5 +1,5 @@
 Name:           nwg-clipman
-Version:        0.2.0
+Version:        0.2.2
 Release:        %autorelease
 Summary:        GTK3-based GUI for cliphist
 
@@ -32,7 +32,7 @@ Requires:       python3-gobject
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
-%{python3_sitelib}/nwg_clipman
+%{python3_sitelib}/nwg_clipman/
 %{python3_sitelib}/nwg_clipman-*.egg-info/
 
 %changelog
