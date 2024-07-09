@@ -16,7 +16,7 @@
 
 Name:           kitty
 Version:        0.35.2%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
@@ -68,6 +68,8 @@ Source6:        vendor-%{version}.tar.gz
 # Add AppData manifest file
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
+
+Patch:          https://github.com/kovidgoyal/kitty/commit/ee7afeea5aad373a9deba22bc7068278619151d3.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
