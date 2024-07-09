@@ -69,7 +69,7 @@ Source6:        vendor-%{version}.tar.gz
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
 
-Patch:          https://github.com/kovidgoyal/kitty/commit/ee7afeea5aad373a9deba22bc7068278619151d3.patch
+Patch:          remove-workaround-for-kwin.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
