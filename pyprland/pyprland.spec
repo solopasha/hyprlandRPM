@@ -1,11 +1,12 @@
 Name:           pyprland
-Version:        2.3.8
+Version:        2.4.0
 Release:        %autorelease
 Summary:        Hyprland extensions made easy
 
 License:        MIT
 URL:            https://github.com/hyprland-community/pyprland
-Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Source:         %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Patch:          ver.patch
 
 BuildArch:      noarch
 

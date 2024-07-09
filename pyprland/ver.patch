@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index e0c4bac..b6487dd 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -17,7 +17,7 @@ pypr = "pyprland.command:main"
+ 
+ [tool.poetry.dependencies]
+ python = "^3.11"
+-aiofiles = "^23.2.1"
++aiofiles = ">= 23.2.1, < 25"
+ 
+ [tool.poetry.group.dev.dependencies]
+ black = "^24.1.1"
