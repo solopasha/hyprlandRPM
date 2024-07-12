@@ -1,6 +1,6 @@
-%global commit0 59fc21940db44b347ccf1bcc22b2eb08ba2b9109
+%global commit0 05219d5287dfa5e2475b47cccc1cb00def3e6c30
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 2
+%global bumpver 3
 
 Name:           aquamarine
 Version:        0.1.0~%{bumpver}.git%{shortcommit0}
