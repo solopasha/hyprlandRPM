@@ -1,11 +1,15 @@
+%global commit0 6174a2a25f4e216c0f1d0c4278adc23c476b1d09
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global bumpver 1
+
 Name:           hyprutils
-Version:        0.1.5
+Version:        0.1.5%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Hyprland utilities library used across the ecosystem
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprutils
-Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -24,7 +28,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Development files for %{name}.
 
 %prep
-%autosetup -p1
+%autosetup -n %{name}-%{commit0} -p1
 
 %build
 %cmake
@@ -39,7 +43,7 @@ Development files for %{name}.
 %files
 %license LICENSE
 %doc README.md
-%{_libdir}/lib%{name}.so.%{version}
+%{_libdir}/lib%{name}.so.%{lua: print((macros.version:gsub('[%^~].*', '')))}
 %{_libdir}/lib%{name}.so.0
 
 %files devel
