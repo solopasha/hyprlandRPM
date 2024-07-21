@@ -3,7 +3,7 @@
 %global bumpver 16
 
 Name:           aquamarine
-Version:        0.1.0~%{bumpver}.git%{shortcommit0}
+Version:        0.1.0^%{bumpver}.git%{shortcommit0}
 Release:        %autorelease
 Summary:        A very light linux rendering backend library
 License:        BSD-3-Clause
