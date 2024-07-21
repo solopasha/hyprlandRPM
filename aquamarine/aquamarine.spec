@@ -1,9 +1,9 @@
 %global commit0 7a84686b4a6dbf7df0bfb4856e6299f995c50d15
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 16
+%global bumpver 1
 
 Name:           aquamarine
-Version:        0.1.0^%{bumpver}.git%{shortcommit0}
+Version:        0.1.1^%{bumpver}.git%{shortcommit0}
 Release:        %autorelease
 Summary:        A very light linux rendering backend library
 License:        BSD-3-Clause
