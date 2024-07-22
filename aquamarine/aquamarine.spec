@@ -1,14 +1,12 @@
-%global commit0 601f6cf95cbe4fef02dc7faf34bba58566c914e9
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 2
-
 Name:           aquamarine
-Version:        0.1.1^%{bumpver}.git%{shortcommit0}
+Version:        0.1.1
 Release:        %autorelease
 Summary:        A very light linux rendering backend library
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/aquamarine
-Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch:          https://github.com/hyprwm/aquamarine/commit/7a84686b4a6dbf7df0bfb4856e6299f995c50d15.patch
+Patch:          https://github.com/hyprwm/aquamarine/commit/601f6cf95cbe4fef02dc7faf34bba58566c914e9.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -40,7 +38,8 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Development files for %{name}.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
+sed -i 's/0\.1\.0/0.1.1/' VERSION
 
 %build
 %cmake
@@ -52,7 +51,7 @@ Development files for %{name}.
 %files
 %license LICENSE
 %doc README.md
-%{_libdir}/lib%{name}.so.%{lua: print((macros.version:gsub('[%^~].*', '')))}
+%{_libdir}/lib%{name}.so.%{version}
 %{_libdir}/lib%{name}.so.0
 
 %files devel
