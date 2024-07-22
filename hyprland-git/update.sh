@@ -19,12 +19,6 @@ oldCommitDate="$(sed -n 's/.*commit_date \(.*\)/\1/p' hyprland-git.spec)"
 newCommitDate="$(env TZ=Etc/GMT+12 date -d "$(curl -s "https://api.github.com/repos/hyprwm/Hyprland/commits?per_page=1&ref=$newHyprlandCommit" | \
                 jq -r '.[].commit.author.date')" +"%a %b %d %T %Y")"
 
-oldWlrootsCommit="$(sed -n 's/.*wlroots_commit \(.*\)/\1/p' hyprland-git.spec)"
-newWlrootsCommit="$(curl -L \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/hyprwm/Hyprland/contents/subprojects/wlroots-hyprland?ref=$newHyprlandCommit" | jq -r '.sha')"
-
 oldProtocolsCommit="$(sed -n 's/.*protocols_commit \(.*\)/\1/p' hyprland-git.spec)"
 newProtocolsCommit="$(curl -L \
             -H "Accept: application/vnd.github+json" \
@@ -40,7 +34,6 @@ newUdis86Commit="$(curl -L \
 sed -e "s/$oldHyprlandCommit/$newHyprlandCommit/" \
     -e "/%global commits_count/s/$oldCommitsCount/$newCommitsCount/" \
     -e "s/$oldCommitDate/$newCommitDate/" \
-    -e "s/$oldWlrootsCommit/$newWlrootsCommit/" \
     -e "s/$oldProtocolsCommit/$newProtocolsCommit/" \
     -e "s/$oldUdis86Commit/$newUdis86Commit/" \
     -i hyprland-git.spec
