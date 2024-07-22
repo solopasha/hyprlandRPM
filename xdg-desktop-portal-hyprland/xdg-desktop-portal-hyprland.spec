@@ -18,6 +18,7 @@ Source:         %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 %endif
 Source:         https://github.com/Kistler-Group/sdbus-cpp/archive/v%{sdbus_version}/sdbus-%{sdbus_version}.tar.gz
+Patch:          revert-c5b309.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -62,7 +63,10 @@ Provides:       bundled(sdbus-cpp) = %{sdbus_version}
 
 
 %prep
-%autosetup %{?bumpver:-n %{name}-%{portal_commit}}
+%autosetup %{?bumpver:-n %{name}-%{portal_commit}} -N
+%if %{fedora} < 41
+%autopatch -p1
+%endif
 %if %{fedora} < 40
 tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
 %endif
