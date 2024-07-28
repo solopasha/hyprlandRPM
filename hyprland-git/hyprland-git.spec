@@ -35,14 +35,14 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 
-BuildRequires:  cmake
-BuildRequires:  gcc-c++
 BuildRequires:  git-core
 BuildRequires:  jq
 BuildRequires:  meson
 
 %{lua:
 hyprdeps = {
+    "cmake",
+    "gcc-c++",
     "pkgconfig(aquamarine)",
     "pkgconfig(cairo)",
     "pkgconfig(egl)",
@@ -101,8 +101,7 @@ end
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
 Requires:       libdrm%{?_isa} >= 2.4.120
-Requires:       libliftoff%{?_isa} >= 0.4.1
-Requires:       xorg-x11-server-Xwayland%{?_isa} >= 23.1.2
+Requires:       xorg-x11-server-Xwayland%{?_isa}
 
 %{lua:do
 if string.match(rpm.expand('%{name}'), '%-git$') then
@@ -138,13 +137,10 @@ plugin system and more.
 
 %package        devel
 Summary:        Header and protocol files for %{name}
-License:        BSD-3-Clause AND MIT
+License:        BSD-3-Clause
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Recommends:     git-core
-Requires:       cmake
 Requires:       cpio
-Requires:       meson
-Requires:       ninja-build
 %{lua:do
 if string.match(rpm.expand('%{name}'), 'hyprland%-git$') then
     print('Obsoletes: hyprland-nvidia-git-devel < 0.32.3^30.gitad3f688-2'..'\n')
