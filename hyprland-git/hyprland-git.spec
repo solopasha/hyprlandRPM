@@ -1,6 +1,6 @@
 %global hyprland_commit 5dd2c27b631f16e49a2c6e6cbbefba9fa50bf543
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 68
+%global bumpver 69
 %global commits_count 5050
 %global commit_date Sun Aug 04 00:19:37 2024
 
@@ -201,7 +201,7 @@ install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 %{_bindir}/hyprctl
 %{_bindir}/Hyprland
 %{_bindir}/hyprpm
-%{_datadir}/hyprland/
+%{_datadir}/hypr/
 %{_datadir}/wayland-sessions/hyprland.desktop
 %{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 %{_mandir}/man1/hyprctl.1*
