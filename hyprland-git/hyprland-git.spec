@@ -102,6 +102,8 @@ Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
 Requires:       libdrm%{?_isa} >= 2.4.120
 Requires:       xorg-x11-server-Xwayland%{?_isa}
+Requires:       hyprcursor%{?_isa} >= 0.1.7
+Requires:       hyprutils%{?_isa} >= 0.2.1
 
 %{lua:do
 if string.match(rpm.expand('%{name}'), '%-git$') then
