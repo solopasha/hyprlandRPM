@@ -1,5 +1,5 @@
 Name:           waypaper
-Version:        2.1.2
+Version:        2.2
 Release:        %autorelease
 Summary:        GUI wallpaper setter for Wayland
 
