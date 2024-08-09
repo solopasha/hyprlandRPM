@@ -47,6 +47,7 @@ hyprdeps = {
     "pkgconfig(cairo)",
     "pkgconfig(egl)",
     "pkgconfig(gbm)",
+    "pkgconfig(gio-2.0)",
     "pkgconfig(glesv2)",
     "pkgconfig(hwdata)",
     "pkgconfig(hyprcursor)",
