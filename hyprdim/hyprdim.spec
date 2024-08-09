@@ -4,19 +4,20 @@
 %global crate hyprdim
 
 Name:           hyprdim
-Version:        2.2.5
+Version:        2.2.6
 Release:        %autorelease
 Summary:        Automatically dim windows in Hyprland when switching between them
 # 0BSD OR MIT OR Apache-2.0
 # Apache-2.0 OR BSL-1.0
 # Apache-2.0 OR MIT
 # Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+# BSD-2-Clause OR Apache-2.0 OR MIT
 # GPL-3.0-or-later
 # MIT
 # MIT OR Apache-2.0
 # MIT OR Zlib OR Apache-2.0
 # Unlicense OR MIT
-License:        GPL-3.0-or-later AND (0BSD OR MIT OR Apache-2.0) AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND MIT AND (MIT OR Zlib OR Apache-2.0) AND (Unlicense OR MIT)
+License:        GPL-3.0-or-later AND (0BSD OR MIT OR Apache-2.0) AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND (BSD-2-Clause OR Apache-2.0 OR MIT) AND MIT AND (MIT OR Zlib OR Apache-2.0) AND (Unlicense OR MIT)
 # LICENSE.dependencies contains a full license breakdown
 
 URL:            https://github.com/donovanglover/hyprdim
@@ -30,22 +31,22 @@ Automatically dim windows in Hyprland when switching between them.}
 %description %{_description}
 
 %prep
-%autosetup -n %{crate}-%{version} -p1
+%autosetup -p1
 cargo vendor
 %cargo_prep -v vendor
 
 %build
-cargo build --locked --profile rpm
-#%%{cargo_license_summary}
-#%%{cargo_license} > LICENSE.dependencies
-#%%{cargo_vendor_manifest}
+%cargo_build
+%{cargo_license_summary}
+%{cargo_license} > LICENSE.dependencies
+%{cargo_vendor_manifest}
 
 %install
-install -Dpm755 target/release/hyprdim %{buildroot}%{_bindir}/hyprdim
-install -Dpm644 target/completions/_hyprdim %{buildroot}%{zsh_completions_dir}/_%{name}
-install -Dpm644 target/completions/hyprdim.bash %{buildroot}%{bash_completions_dir}/%{name}
-install -Dpm644 target/completions/hyprdim.fish %{buildroot}%{fish_completions_dir}/%{name}.fish
-install -Dpm644 target/man/hyprdim.1 -t %{buildroot}%{_mandir}/man1
+install -Dpm755 target/release/%{name} %{buildroot}%{_bindir}/%{name}
+install -Dpm644 target/completions/_%{name} %{buildroot}%{zsh_completions_dir}/_%{name}
+install -Dpm644 target/completions/%{name}.bash %{buildroot}%{bash_completions_dir}/%{name}
+install -Dpm644 target/completions/%{name}.fish %{buildroot}%{fish_completions_dir}/%{name}.fish
+install -Dpm644 target/man/%{name}.1 -t %{buildroot}%{_mandir}/man1
 
 %if %{with check}
 %check
@@ -54,10 +55,10 @@ install -Dpm644 target/man/hyprdim.1 -t %{buildroot}%{_mandir}/man1
 
 %files
 %license LICENSE
-#%%license LICENSE.dependencies
-#%%license cargo-vendor.txt
+%license LICENSE.dependencies
+%license cargo-vendor.txt
 %doc README.md
-%{_bindir}/hyprdim
+%{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1.*
 %{bash_completions_dir}/%{name}
 %{fish_completions_dir}/%{name}.fish
