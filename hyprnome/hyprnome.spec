@@ -4,7 +4,7 @@
 %global crate hyprnome
 
 Name:           hyprnome
-Version:        0.3.0
+Version:        0.3.1
 Release:        %autorelease
 Summary:        GNOME-like workspace switching in Hyprland
 # 0BSD OR MIT OR Apache-2.0
