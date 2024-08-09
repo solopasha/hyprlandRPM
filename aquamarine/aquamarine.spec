@@ -1,5 +1,5 @@
 Name:           aquamarine
-Version:        0.3.0
+Version:        0.3.1
 Release:        %autorelease
 Summary:        A very light linux rendering backend library
 License:        BSD-3-Clause
