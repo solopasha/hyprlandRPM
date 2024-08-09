@@ -4,7 +4,7 @@
 %global crate hyprnome
 
 Name:           hyprnome
-Version:        0.2.0
+Version:        0.3.0
 Release:        %autorelease
 Summary:        GNOME-like workspace switching in Hyprland
 # 0BSD OR MIT OR Apache-2.0
@@ -31,7 +31,7 @@ GNOME-like workspace switching in Hyprland.}
 %description %{_description}
 
 %prep
-%autosetup -n %{crate}-%{version} -p1
+%autosetup -p1
 cargo vendor
 %cargo_prep -v vendor
 
@@ -42,11 +42,11 @@ cargo vendor
 %{cargo_vendor_manifest}
 
 %install
-install -Dpm755 target/release/hyprnome %{buildroot}%{_bindir}/hyprnome
-install -Dpm644 target/completions/_hyprnome %{buildroot}%{zsh_completions_dir}/_%{name}
-install -Dpm644 target/completions/hyprnome.bash %{buildroot}%{bash_completions_dir}/%{name}
-install -Dpm644 target/completions/hyprnome.fish %{buildroot}%{fish_completions_dir}/%{name}.fish
-install -Dpm644 target/man/hyprnome.1 -t %{buildroot}%{_mandir}/man1
+install -Dpm755 target/release/%{name} %{buildroot}%{_bindir}/%{name}
+install -Dpm644 target/completions/_%{name} %{buildroot}%{zsh_completions_dir}/_%{name}
+install -Dpm644 target/completions/%{name}.bash %{buildroot}%{bash_completions_dir}/%{name}
+install -Dpm644 target/completions/%{name}.fish %{buildroot}%{fish_completions_dir}/%{name}.fish
+install -Dpm644 target/man/%{name}.1 -t %{buildroot}%{_mandir}/man1
 
 %if %{with check}
 %check
@@ -59,8 +59,8 @@ install -Dpm644 target/man/hyprnome.1 -t %{buildroot}%{_mandir}/man1
 %license cargo-vendor.txt
 %doc CHANGELOG.md
 %doc README.md
-%{_bindir}/hyprnome
-%{_mandir}/man1/hyprnome.1.*
+%{_bindir}/%{name}
+%{_mandir}/man1/%{name}.1.*
 %{bash_completions_dir}/%{name}
 %{fish_completions_dir}/%{name}.fish
 %{zsh_completions_dir}/_%{name}
