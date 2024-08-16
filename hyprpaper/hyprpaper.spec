@@ -2,8 +2,9 @@ Name:           hyprpaper
 Version:        0.7.1
 Release:        %autorelease
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
-
-License:        BSD-3-Clause
+# LICENSE: BSD-3-Clause
+# protocols/wlr-layer-shell-unstable-v1.xml: HPND-sell-variant
+License:        BSD-3-Clause AND HPND-sell-variant
 URL:            https://github.com/hyprwm/hyprpaper
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
@@ -34,21 +35,17 @@ wlroots-based compositors, though.
 %prep
 %autosetup -p1
 
-
 %build
 %cmake
 %cmake_build
 
-
 %install
 %cmake_install
-
 
 %files
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
-
 
 %changelog
 %autochangelog
