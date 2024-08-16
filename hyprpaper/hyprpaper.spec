@@ -5,7 +5,10 @@ Summary:        Blazing fast wayland wallpaper utility with IPC controls
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprpaper
-Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+
+# https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
+ExcludeArch:    %{ix86}
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -29,11 +32,10 @@ to dynamically change wallpapers through sockets. It will work on all
 wlroots-based compositors, though.
 
 %prep
-%autosetup
+%autosetup -p1
 
 
 %build
-make protocols
 %cmake
 %cmake_build
 
