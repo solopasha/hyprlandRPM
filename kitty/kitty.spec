@@ -15,18 +15,18 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.35.2%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.36.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
 # Zlib: glfw
 # LGPL-2.1-or-later: kitty/iqsort.h
-# BSD-1-Clause: kitty/uthash.h
 # MIT: docs/_static/custom.css, shell-integration/ssh/bootstrap-utils.sh
 # MIT AND CC0-1.0: simde
 # CC0-1.0: c-ringbuf
 # BSD-2-Clause: base64simd
+# MIT: NerdFontsSymbolsOnly
 # Go dependencies:
 # github.com/alecthomas/chroma: MIT
 # github.com/ALTree/bigfloat: MIT
@@ -50,7 +50,7 @@ Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 # golang.org/x/image: BSD-3-Clause
 # golang.org/x/sys: BSD-3-Clause
 # howett.net/plist: BSD-2-Clause AND BSD-3-Clause
-License:        GPL-3.0-only AND LGPL-2.1-or-later AND Zlib AND BSD-1-Clause AND (MIT AND CC0-1.0) AND BSD-2-Clause AND CC0-1.0
+License:        GPL-3.0-only AND LGPL-2.1-or-later AND Zlib AND (MIT AND CC0-1.0) AND BSD-2-Clause AND CC0-1.0
 URL:            https://github.com/kovidgoyal/kitty
 %if 0%{?bumpver}
 Source0:        https://github.com/kovidgoyal/kitty/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
@@ -68,6 +68,8 @@ Source6:        vendor-%{version}.tar.gz
 # Add AppData manifest file
 # * https://github.com/kovidgoyal/kitty/pull/2088
 Source1:        https://raw.githubusercontent.com/kovidgoyal/kitty/46c0951751444e4f4994008f0d2dcb41e49389f4/kitty/data/%{name}.appdata.xml
+
+Source2:        https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -139,7 +141,9 @@ Recommends:     ripgrep
 # "kittens" functions install separately
 Suggests:       ImageMagick%{?_isa}
 
-Provides:       bundled(uthash) = 2.3.0^1.gitca98384
+Provides:       bundled(font(SymbolsNFM))
+
+Provides:       bundled(Verstable) = 2.1.1
 # modified version of https://github.com/dhess/c-ringbuf
 Provides:       bundled(c-ringbuf)
 # heavily modified
@@ -232,6 +236,8 @@ This package contains the documentation for %{name}.
 %{gpgverify} --keyring='%{SOURCE5}' --signature='%{SOURCE4}' --data='%{SOURCE0}'
 %endif
 %autosetup -p1 %{?bumpver:-n %{name}-%{commit0}} %{?with_bundled:-a6}
+mkdir fonts
+tar -xf %{SOURCE2} -C fonts
 
 # Changing sphinx theme to classic
 sed "s/html_theme = 'furo'/html_theme = 'classic'/" -i docs/conf.py
