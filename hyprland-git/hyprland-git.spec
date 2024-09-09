@@ -121,9 +121,11 @@ else
 end
 end}
 
-# Both are used in the default configuration
+# Used in the default configuration
 Recommends:     kitty
 Recommends:     wofi
+Recommends:     playerctl
+Recommends:     brightnessctl
 # Lack of graphical drivers may hurt the common use case
 Recommends:     mesa-dri-drivers
 # Logind needs polkit to create a graphical session
