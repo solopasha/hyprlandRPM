@@ -4,8 +4,6 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global bumpver 12
 
-%global catch2_version 3.5.1
-
 Name:           waybar-git
 Version:        0.10.4%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        1%{?dist}
@@ -24,7 +22,6 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
-Source1:        https://github.com/catchorg/Catch2/archive/v%{catch2_version}/Catch2-%{catch2_version}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
@@ -68,10 +65,6 @@ BuildRequires:  python3dist(packaging)
 Conflicts:      waybar
 Provides:       waybar
 
-%if %{fedora} < 40
-Provides:       bundled(catch2) = %{catch2_version}
-%endif
-
 Enhances:       hyprland
 Recommends:     (font(fontawesome6free) or font(fontawesome5free))
 
@@ -87,13 +80,16 @@ cp %{SOURCE1} subprojects/packagecache
 
 %build
 %meson \
+%if %{fedora} < 40
+    -Dtests=disabled \
+%endif
     -Dsndio=disabled \
     -Dcava=disabled \
     %{!?with_wireplumber:-Dwireplumber=disabled}
 %meson_build
 
 %install
-%meson_install --skip-subprojects catch2
+%meson_install
 # remove man pages for disabled modules
 for module in cava sndio %{!?with_wireplumber:wireplumber} wlr-workspaces; do
     rm -f %{buildroot}%{_mandir}/man5/%{name}-${module}.5
