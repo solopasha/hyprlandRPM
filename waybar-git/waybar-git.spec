@@ -73,10 +73,6 @@ Recommends:     (font(fontawesome6free) or font(fontawesome5free))
 
 %prep
 %autosetup -p1 -n Waybar-%{commit0}
-%if %{fedora} < 40
-mkdir subprojects/packagecache
-cp %{SOURCE1} subprojects/packagecache
-%endif
 
 %build
 %meson \
