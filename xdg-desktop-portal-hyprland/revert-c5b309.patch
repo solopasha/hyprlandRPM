@@ -1,5 +1,5 @@
 diff --git a/src/shared/ScreencopyShared.hpp b/src/shared/ScreencopyShared.hpp
-index a71fd23..41d3bc1 100644
+index a314ac5..25315d4 100644
 --- a/src/shared/ScreencopyShared.hpp
 +++ b/src/shared/ScreencopyShared.hpp
 @@ -5,12 +5,16 @@
@@ -17,5 +17,5 @@ index a71fd23..41d3bc1 100644
 +#undef SPA_VERSION_POD_BUILDER_CALLBACKS
 +#define SPA_VERSION_POD_BUILDER_CALLBACKS 0
  }
- #include <wayland-client.h>
- 
+ #include "wayland.hpp"
+ #include "wlr-foreign-toplevel-management-unstable-v1.hpp"
