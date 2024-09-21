@@ -1,6 +1,6 @@
 %global hyprland_commit 9232bc2c00a57b99ac876b43fdfedfa25c2de774
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 26
+%global bumpver 27
 %global commits_count 5245
 %global commit_date Fri Sep 20 11:33:48 2024
 
@@ -104,7 +104,7 @@ Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 Requires:       libdrm%{?_isa} >= 2.4.120
 Requires:       xorg-x11-server-Xwayland%{?_isa}
 Requires:       hyprcursor%{?_isa} >= 0.1.9
-Requires:       hyprutils%{?_isa} >= 0.2.1
+Requires:       hyprutils%{?_isa} >= 0.2.2
 
 %{lua:do
 if string.match(rpm.expand('%{name}'), '%-git$') then
