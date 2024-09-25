@@ -1,5 +1,5 @@
 Name:           hyprutils
-Version:        0.2.2
+Version:        0.2.3
 Release:        %autorelease
 Summary:        Hyprland utilities library used across the ecosystem
 
