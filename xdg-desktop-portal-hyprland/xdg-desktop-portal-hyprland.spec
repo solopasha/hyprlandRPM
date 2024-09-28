@@ -6,7 +6,7 @@
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        1.3.5%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
+Version:        1.3.6%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
 Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
