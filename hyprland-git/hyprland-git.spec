@@ -176,7 +176,7 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -i scripts/generateVersion.sh
 %else
 %autopatch -p1
-sed -i '/version_h/d' meson.build
+sed -i '/scripts\/generateVersion.sh/d' meson.build
 %endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
