@@ -35,14 +35,12 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 
-BuildRequires:  git-core
-BuildRequires:  jq
-BuildRequires:  meson
-
 %{lua:
 hyprdeps = {
     "cmake",
     "gcc-c++",
+    "git-core",
+    "meson",
     "pkgconfig(aquamarine)",
     "pkgconfig(cairo)",
     "pkgconfig(egl)",
@@ -144,7 +142,6 @@ plugin system and more.
 Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-Recommends:     git-core
 Requires:       cpio
 %{lua:do
 if string.match(rpm.expand('%{name}'), 'hyprland%-git$') then
