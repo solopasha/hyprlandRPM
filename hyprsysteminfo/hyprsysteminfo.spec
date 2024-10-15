@@ -1,6 +1,6 @@
-%global commit0 9b50bb2c297ac65d280ddc49803de71c93932e31
+%global commit0 00beba904fa73f8e0f582c9a9e9679e7bda77e23
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1
+%global bumpver 2
 
 Name:           hyprsysteminfo
 Version:        0~%{bumpver}.git%{shortcommit0}
@@ -22,6 +22,9 @@ BuildRequires:  cmake(Qt6QuickControls2)
 BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  pkgconfig(hyprutils)
 
+Requires:       /usr/bin/lscpu
+Requires:       /usr/bin/lspci
+Requires:       /usr/bin/free
 Requires:       kf6-qqc2-desktop-style%{?_isa}
 
 %description
