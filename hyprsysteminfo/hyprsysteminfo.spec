@@ -1,14 +1,10 @@
-%global commit0 00beba904fa73f8e0f582c9a9e9679e7bda77e23
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 2
-
 Name:           hyprsysteminfo
-Version:        0~%{bumpver}.git%{shortcommit0}
+Version:        0.1.0
 Release:        %autorelease
 Summary:        An application to display information about the running system
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprsysteminfo
-Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -32,7 +28,7 @@ A tiny qt6/qml application to display information about the running system,
 or copy diagnostics data, without the terminal.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
 
 %build
 %cmake
