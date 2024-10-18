@@ -4,7 +4,7 @@
 %global crate hyprdim
 
 Name:           hyprdim
-Version:        2.2.6
+Version:        3.0.0
 Release:        %autorelease
 Summary:        Automatically dim windows in Hyprland when switching between them
 # 0BSD OR MIT OR Apache-2.0
