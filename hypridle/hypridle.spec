@@ -1,7 +1,7 @@
 %global sdbus_version 1.5.0
 
 Name:           hypridle
-Version:        0.1.2
+Version:        0.1.3
 Release:        %autorelease
 Summary:        Hyprland's idle daemon
 License:        BSD-3-Clause
@@ -17,6 +17,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  systemd-rpm-macros
 
 BuildRequires:  pkgconfig(hyprlang)
+BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
 %if %{fedora} >= 40
@@ -54,10 +55,11 @@ export PKG_CONFIG_PATH=%{_builddir}/sdbus/lib64/pkgconfig
 
 %install
 %cmake_install
+rm %{buildroot}%{_datadir}/hypr/hypridle.conf
 
 %files
 %license LICENSE
-%doc README.md
+%doc README.md assets/example.conf
 %{_bindir}/%{name}
 %{_userunitdir}/%{name}.service
 
