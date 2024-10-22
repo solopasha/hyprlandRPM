@@ -1,22 +1,14 @@
-%global portal_commit ca077cc05c370879a6df90eac43a3c2ee6768306
-%global portal_shortcommit %(c=%{portal_commit}; echo ${c:0:7})
-#global bumpver 1
-
-%global sdbus_version 1.5.0
+%global sdbus_version 2.0.0
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        1.3.6%{?bumpver:^%{bumpver}.git%{portal_shortcommit}}
+Version:        1.3.7
 Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        BSD-3-Clause
-URL:            https://github.com/hyprwm/%{name}
-%if 0%{?bumpver}
-Source:         %{url}/archive/%{portal_commit}/%{name}-%{version}.tar.gz
-%else
+URL:            https://github.com/hyprwm/xdg-desktop-portal-hyprland
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-%endif
 Source:         https://github.com/Kistler-Group/sdbus-cpp/archive/v%{sdbus_version}/sdbus-%{sdbus_version}.tar.gz
 Patch:          revert-c5b309.patch
 
@@ -26,20 +18,17 @@ BuildRequires:  systemd-rpm-macros
 
 BuildRequires:  pkgconfig(gbm)
 BuildRequires:  pkgconfig(hyprland-protocols)
+BuildRequires:  pkgconfig(hyprlang)
+BuildRequires:  pkgconfig(hyprutils)
+BuildRequires:  pkgconfig(hyprwayland-scanner)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(Qt6Widgets)
-%if %{fedora} >= 41
-BuildRequires:  pkgconfig(sdbus-c++)
-%endif
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(wayland-scanner)
-BuildRequires:  pkgconfig(hyprlang)
-BuildRequires:  pkgconfig(hyprwayland-scanner)
-BuildRequires:  pkgconfig(hyprutils)
 
 Requires:       dbus
 # required for Screenshot portal implementation
@@ -55,23 +44,19 @@ Supplements:    hyprland
 Supplements:    hyprland-legacyrenderer
 Supplements:    hyprland-git
 
-%if %{fedora} < 41
 Provides:       bundled(sdbus-cpp) = %{sdbus_version}
-%endif
 
 %description
 %{summary}.
 
 
 %prep
-%autosetup %{?bumpver:-n %{name}-%{portal_commit}} -N
+%autosetup -N
 %if %{fedora} < 41
 %patch -P 0 -p1
 sed -i '/libpipewire/s/>=1.1.82//' CMakeLists.txt
 %endif
-%if %{fedora} < 41
 tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
-%endif
 
 
 %build
@@ -92,11 +77,11 @@ tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
 
 %files
 %license LICENSE
-%doc README.md contrib/config.sample
+%doc README.md
 %{_bindir}/hyprland-share-picker
-%{_libexecdir}/%{name}
+%{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.hyprland.service
 %{_datadir}/xdg-desktop-portal/portals/hyprland.portal
-%{_datadir}/dbus-1/services/*.service
+%{_libexecdir}/%{name}
 %{_userunitdir}/%{name}.service
 
 
