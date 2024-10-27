@@ -2,7 +2,7 @@
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        1.3.7
+Version:        1.3.8
 Release:        %autorelease
 Summary:        xdg-desktop-portal backend for hyprland
 
