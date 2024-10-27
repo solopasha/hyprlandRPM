@@ -195,6 +195,8 @@ sed -i \
 
 %install
 %meson_install
+rm %{buildroot}%{_libdir}/systemd/user/hyprland-session.service \
+   %{buildroot}%{_datadir}/wayland-sessions/hyprland-systemd.desktop
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 
 
