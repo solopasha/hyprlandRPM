@@ -15,7 +15,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.36.4%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.37.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -250,6 +250,10 @@ find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python3|%{python3}|g'    
 
 mkdir src
 ln -s ../ src/kitty
+
+%if 0%{?epel}
+sed '1i \#define XKB_KEY_XF86Fn 0x100811d0' -i kitty/keys.c
+%endif
 
 %if %{without bundled}
 %generate_buildrequires
