@@ -1,5 +1,5 @@
 Name:           nwg-clipman
-Version:        0.2.3
+Version:        0.2.4
 Release:        %autorelease
 Summary:        GTK3-based GUI for cliphist
 
