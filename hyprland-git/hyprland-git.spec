@@ -35,6 +35,9 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 
+BuildRequires: pkgconfig(systemd)
+BuildRequires: systemd-rpm-macros
+
 %{lua:
 hyprdeps = {
     "cmake",
@@ -195,9 +198,14 @@ sed -i \
 
 %install
 %meson_install
-rm %{buildroot}%{_libdir}/systemd/user/hyprland-session.service \
-   %{buildroot}%{_datadir}/wayland-sessions/hyprland-systemd.desktop
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
+
+
+%post
+%systemd_user_post hyprland-session.service
+
+%preun
+%systemd_user_preun hyprland-session.service
 
 
 %files
@@ -206,10 +214,11 @@ install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 %{_bindir}/Hyprland
 %{_bindir}/hyprpm
 %{_datadir}/hypr/
-%{_datadir}/wayland-sessions/hyprland.desktop
+%{_datadir}/wayland-sessions/hyprland{,-systemd}.desktop
 %{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 %{_mandir}/man1/hyprctl.1*
 %{_mandir}/man1/Hyprland.1*
+%{_userunitdir}/hyprland-session.service
 %{bash_completions_dir}/hypr*
 %{fish_completions_dir}/hypr*.fish
 %{zsh_completions_dir}/_hypr*
