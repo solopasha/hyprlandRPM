@@ -1,14 +1,10 @@
-%global commit0 64515a97dc9e69d5cf4e7e0d4d4d297df4aea2cb
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1
-
 Name:           hyprsunset
-Version:        0~%{bumpver}.git%{shortcommit0}
+Version:        0.1.0
 Release:        %autorelease
 Summary:        An application to enable a blue-light filter on Hyprland
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprsunset
-Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -26,7 +22,7 @@ BuildRequires:  pkgconfig(wayland-protocols)
 %{summary}.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
 
 %build
 %cmake
