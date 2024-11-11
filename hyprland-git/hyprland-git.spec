@@ -189,8 +189,9 @@ sed -i \
 
 %build
 %meson \
+    -Duwsm=disabled \
 %if %{with legacyrenderer}
-       -Dlegacy_renderer=enabled \
+    -Dlegacy_renderer=enabled \
 %endif
 %{nil}
 %meson_build
@@ -201,24 +202,16 @@ sed -i \
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 
 
-%post
-%systemd_user_post hyprland-session.service
-
-%preun
-%systemd_user_preun hyprland-session.service
-
-
 %files
 %license LICENSE LICENSE-udis86 LICENSE-hyprland-protocols
 %{_bindir}/hyprctl
 %{_bindir}/Hyprland
 %{_bindir}/hyprpm
 %{_datadir}/hypr/
-%{_datadir}/wayland-sessions/hyprland{,-systemd}.desktop
+%{_datadir}/wayland-sessions/hyprland.desktop
 %{_datadir}/xdg-desktop-portal/hyprland-portals.conf
 %{_mandir}/man1/hyprctl.1*
 %{_mandir}/man1/Hyprland.1*
-%{_userunitdir}/hyprland-session.service
 %{bash_completions_dir}/hypr*
 %{fish_completions_dir}/hypr*.fish
 %{zsh_completions_dir}/_hypr*
