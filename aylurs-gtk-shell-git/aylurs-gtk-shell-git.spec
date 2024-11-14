@@ -1,14 +1,14 @@
 %global __provides_exclude_from ^(%{_libdir}/ags/.*\\.so)$
 
-%global ags_commit 60180a184cfb32b61a1d871c058b31a3b9b0743d
+%global ags_commit fb47b50834333359eaf9717896065e7f54f2f4fb
 %global ags_shortcommit %(c=%{ags_commit}; echo ${c:0:7})
-%global bumpver 10
+%global bumpver 1
 
-%global gvc_commit 8e7a5a4c3e51007ce6579292642517e3d3eb9c50
+%global gvc_commit null
 %global gvc_shortcommit %(c=%{gvc_commit}; echo ${c:0:7})
 
 Name:           aylurs-gtk-shell-git
-Version:        1.8.2^%{bumpver}.git%{ags_shortcommit}
+Version:        2.0.0^%{bumpver}.git%{ags_shortcommit}
 Release:        %autorelease
 Summary:        A customizable and extensible shell
 
