@@ -189,7 +189,6 @@ sed -i \
 
 %build
 %meson \
-    -Duwsm=disabled \
 %if %{with legacyrenderer}
     -Dlegacy_renderer=enabled \
 %endif
