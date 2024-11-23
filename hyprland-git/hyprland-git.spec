@@ -189,6 +189,7 @@ sed -i \
 
 %build
 %meson \
+    -Db_ndebug=true \
     -Duwsm=disabled \
 %if %{with legacyrenderer}
     -Dlegacy_renderer=enabled \
