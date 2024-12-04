@@ -52,6 +52,7 @@ hyprdeps = {
     "pkgconfig(glesv2)",
     "pkgconfig(hwdata)",
     "pkgconfig(hyprcursor)",
+    "pkgconfig(hyprgraphics)",
     "pkgconfig(hyprlang)",
     "pkgconfig(hyprutils)",
     "pkgconfig(hyprwayland-scanner)",
