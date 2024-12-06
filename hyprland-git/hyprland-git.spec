@@ -128,6 +128,7 @@ Recommends:     kitty
 Recommends:     wofi
 Recommends:     playerctl
 Recommends:     brightnessctl
+Recommends:     hyprland-qtutils
 # Lack of graphical drivers may hurt the common use case
 Recommends:     mesa-dri-drivers
 # Logind needs polkit to create a graphical session
