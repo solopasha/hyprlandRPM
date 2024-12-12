@@ -1,5 +1,5 @@
 Name:           hyprland-qtutils
-Version:        0.1.0
+Version:        0.1.1
 Release:        %autorelease
 Summary:        Hyprland Qt/qml utility apps
 License:        BSD-3-Clause
