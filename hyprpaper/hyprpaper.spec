@@ -1,5 +1,5 @@
 Name:           hyprpaper
-Version:        0.7.1
+Version:        0.7.2
 Release:        %autorelease
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
 # LICENSE: BSD-3-Clause
@@ -13,13 +13,18 @@ ExcludeArch:    %{ix86}
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
+BuildRequires:  systemd-rpm-macros
 
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(hyprgraphics)
 BuildRequires:  pkgconfig(hyprlang)
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(hyprwayland-scanner)
 BuildRequires:  pkgconfig(libjpeg)
+BuildRequires:  pkgconfig(libjxl_cms)
+BuildRequires:  pkgconfig(libjxl_threads)
+BuildRequires:  pkgconfig(libjxl)
 BuildRequires:  pkgconfig(libmagic)
 BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(pango)
@@ -34,6 +39,7 @@ wlroots-based compositors, though.
 
 %prep
 %autosetup -p1
+sed '/hyprpaper.service/s/${CMAKE_INSTALL_LIBDIR}/lib/' -i CMakeLists.txt
 
 %build
 %cmake
@@ -42,10 +48,17 @@ wlroots-based compositors, though.
 %install
 %cmake_install
 
+%post
+%systemd_user_post %{name}.service
+
+%preun
+%systemd_user_preun %{name}.service
+
 %files
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
+%{_userunitdir}/%{name}.service
 
 %changelog
 %autochangelog
