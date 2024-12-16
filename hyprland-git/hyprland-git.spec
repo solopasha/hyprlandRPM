@@ -65,6 +65,7 @@ hyprdeps = {
     "pkgconfig(pango)",
     "pkgconfig(pangocairo)",
     "pkgconfig(pixman-1)",
+    "pkgconfig(re2)",
     "pkgconfig(tomlplusplus)",
     "pkgconfig(uuid)",
     "pkgconfig(wayland-client)",
@@ -87,7 +88,7 @@ hyprdeps = {
     "pkgconfig(xcb)",
     "pkgconfig(xcursor)",
     "pkgconfig(xkbcommon)",
-    "pkgconfig(xwayland)"
+    "pkgconfig(xwayland)",
     }
 }
 
@@ -190,25 +191,26 @@ sed -i \
 
 
 %build
-%meson \
-    -Db_ndebug=true \
-    -Duwsm=disabled \
+%cmake \
+    -GNinja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DNO_UWSM:BOOL=ON \
 %if %{with legacyrenderer}
-    -Dlegacy_renderer=enabled \
+    -DLEGACY_RENDERER:BOOL=ON \
 %endif
 %{nil}
-%meson_build
+%cmake_build
 
 
 %install
-%meson_install
+%cmake_install
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 
 
 %files
 %license LICENSE LICENSE-udis86 LICENSE-hyprland-protocols
+%{_bindir}/[Hh]yprland
 %{_bindir}/hyprctl
-%{_bindir}/Hyprland
 %{_bindir}/hyprpm
 %{_datadir}/hypr/
 %{_datadir}/wayland-sessions/hyprland.desktop
@@ -220,8 +222,7 @@ install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 %{zsh_completions_dir}/_hypr*
 
 %files devel
-%{_datadir}/hyprland-protocols/
-%{_datadir}/pkgconfig/hyprland*.pc
+%{_datadir}/pkgconfig/hyprland.pc
 %{_includedir}/hyprland/
 %{_rpmconfigdir}/macros.d/macros.hyprland
 
