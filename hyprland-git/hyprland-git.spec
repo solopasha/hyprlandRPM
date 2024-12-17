@@ -1,8 +1,8 @@
-%global hyprland_commit c7d97199103fd1ca43c2a9810c085df5500169ac
+%global hyprland_commit e2c78c00e50a0835c3830c8a0cd82049dc5700b8
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 2
-%global commits_count 5558
-%global commit_date Mon Dec 16 20:19:55 2024
+%global bumpver 1
+%global commits_count 5560
+%global commit_date Tue Dec 17 04:31:27 2024
 
 %global protocols_commit c7c3f4cd0faed21fc90ba6bd06fe4f3e0e057ea8
 %global protocols_shortcommit %(c=%{protocols_commit}; echo ${c:0:7})
@@ -13,7 +13,7 @@
 %bcond legacyrenderer 0
 
 Name:           hyprland-git
-Version:        0.46.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
+Version:        0.46.1%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
