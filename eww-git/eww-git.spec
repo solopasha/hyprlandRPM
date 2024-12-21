@@ -1,6 +1,6 @@
-%global commit0 a8dd2f251fdb05f20a4275f2ef53057e13177ac8
+%global commit0 f2b687043e555da681f465c54f0802d34f3488a5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 21
+%global bumpver 22
 
 Name:           eww-git
 Version:        0.6.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
