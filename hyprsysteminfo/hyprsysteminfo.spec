@@ -1,6 +1,6 @@
 Name:           hyprsysteminfo
 Version:        0.1.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        An application to display information about the running system
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprsysteminfo

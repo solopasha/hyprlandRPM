@@ -1,6 +1,6 @@
 %global hyprland_commit 5f7ad767dbf0bac9ddd6bf6c825fb9ed7921308a
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 6
+%global bumpver 7
 %global commits_count 5582
 %global commit_date Sun Dec 22 10:39:17 2024
 
