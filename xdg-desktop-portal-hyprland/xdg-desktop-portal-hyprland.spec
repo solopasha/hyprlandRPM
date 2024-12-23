@@ -2,8 +2,8 @@
 
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
-Version:        1.3.9 -b2
-Release:        %autorelease
+Version:        1.3.9
+Release:        %autorelease -b2
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        BSD-3-Clause
