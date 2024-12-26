@@ -35,9 +35,6 @@ Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
 
-BuildRequires: pkgconfig(systemd)
-BuildRequires: systemd-rpm-macros
-
 %{lua:
 hyprdeps = {
     "cmake",
@@ -66,6 +63,7 @@ hyprdeps = {
     "pkgconfig(pangocairo)",
     "pkgconfig(pixman-1)",
     "pkgconfig(re2)",
+    "pkgconfig(systemd)",
     "pkgconfig(tomlplusplus)",
     "pkgconfig(uuid)",
     "pkgconfig(wayland-client)",
@@ -104,10 +102,8 @@ end
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
-Requires:       libdrm%{?_isa} >= 2.4.120
 Requires:       xorg-x11-server-Xwayland%{?_isa}
 Requires:       hyprcursor%{?_isa} >= 0.1.9
-Requires:       hyprutils%{?_isa} >= 0.2.4
 
 %{lua:do
 if string.match(rpm.expand('%{name}'), '%-git$') then
