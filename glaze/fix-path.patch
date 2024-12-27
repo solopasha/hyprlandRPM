@@ -1,0 +1,13 @@
+diff --git a/cmake/install-rules.cmake b/cmake/install-rules.cmake
+index 1db5b74e..224af736 100644
+--- a/cmake/install-rules.cmake
++++ b/cmake/install-rules.cmake
+@@ -27,7 +27,7 @@ write_basic_package_version_file(
+ 
+ # Allow package maintainers to freely override the path for the configs
+ set(
+-    glaze_INSTALL_CMAKEDIR "${CMAKE_INSTALL_DATADIR}/${package}"
++    glaze_INSTALL_CMAKEDIR "${CMAKE_INSTALL_DATADIR}/cmake/${package}"
+     CACHE PATH "CMake package config location relative to the install prefix"
+ )
+ mark_as_advanced(glaze_INSTALL_CMAKEDIR)
