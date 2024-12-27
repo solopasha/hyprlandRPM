@@ -41,6 +41,7 @@ hyprdeps = {
     "gcc-c++",
     "git-core",
     "meson",
+    "glaze-static",
     "pkgconfig(aquamarine)",
     "pkgconfig(cairo)",
     "pkgconfig(egl)",
