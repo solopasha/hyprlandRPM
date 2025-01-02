@@ -25,6 +25,7 @@ Development files for %{name}.
 
 %prep
 %autosetup -p1
+echo %{version} > VERSION
 
 %build
 %cmake
