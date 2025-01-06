@@ -6,6 +6,7 @@ Summary:        Hyprland graphics / resource utilities
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprgraphics
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch:          optional-jxl.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -16,9 +17,11 @@ BuildRequires:  gcc-c++
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(libjpeg)
+%if 0%{?fedora} >= 41
 BuildRequires:  pkgconfig(libjxl_cms)
 BuildRequires:  pkgconfig(libjxl_threads)
 BuildRequires:  pkgconfig(libjxl)
+%endif
 BuildRequires:  pkgconfig(libmagic)
 BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(pixman-1)
