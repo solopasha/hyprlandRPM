@@ -1,5 +1,5 @@
 Name:           hyprutils
-Version:        0.3.2
+Version:        0.3.3
 Release:        %autorelease
 Summary:        Hyprland utilities library used across the ecosystem
 
@@ -25,7 +25,6 @@ Development files for %{name}.
 
 %prep
 %autosetup -p1
-echo %{version} > VERSION
 
 %build
 %cmake
