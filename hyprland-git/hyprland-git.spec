@@ -12,8 +12,6 @@
 
 %bcond legacyrenderer 0
 
-%global optflags %optflags -Wp,-U_GLIBCXX_ASSERTIONS
-
 Name:           hyprland-git
 Version:        0.46.2%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
