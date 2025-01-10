@@ -1,5 +1,5 @@
 Name:           hyprsysteminfo
-Version:        0.1.2
+Version:        0.1.3
 Release:        %autorelease
 Summary:        An application to display information about the running system
 License:        BSD-3-Clause
@@ -24,7 +24,7 @@ BuildRequires:  pkgconfig(hyprutils)
 Requires:       /usr/bin/lscpu
 Requires:       /usr/bin/lspci
 Requires:       /usr/bin/free
-Requires:       kf6-qqc2-desktop-style%{?_isa}
+Requires:       hyprland-qt-support%{?_isa}
 
 %description
 A tiny qt6/qml application to display information about the running system,
