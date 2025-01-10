@@ -1,5 +1,5 @@
 Name:           hyprland-qtutils
-Version:        0.1.2
+Version:        0.1.3
 Release:        %autorelease
 Summary:        Hyprland Qt/qml utility apps
 License:        BSD-3-Clause
@@ -21,7 +21,7 @@ BuildRequires:  qt6-qtbase-private-devel
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  wayland-devel
 
-Requires:       kf6-qqc2-desktop-style%{?_isa}
+Requires:       hyprland-qt-support%{?_isa}
 
 %description
 %{summary}.
@@ -40,6 +40,7 @@ Requires:       kf6-qqc2-desktop-style%{?_isa}
 %license LICENSE
 %doc README.md
 %{_bindir}/hyprland-dialog
+%{_bindir}/hyprland-donate-screen
 %{_bindir}/hyprland-update-screen
 
 %changelog
