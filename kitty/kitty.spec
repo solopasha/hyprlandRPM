@@ -251,7 +251,7 @@ find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python3|%{python3}|g'    
 mkdir src
 ln -s ../ src/kitty
 
-%if 0%{?epel}
+%if 0%{?epel} < 10
 sed '1i \#define XKB_KEY_XF86Fn 0x100811d0' -i kitty/keys.c
 %endif
 
