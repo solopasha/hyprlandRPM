@@ -11,7 +11,6 @@ Summary:        A customizable and extensible shell
 License:        GPL-3.0-or-later
 URL:            https://github.com/Aylur/ags
 Source0:        %{url}/archive/v%{version_no_tilde}/%{name}-%{version_no_tilde}.tar.gz
-Source1:        %{url}/releases/download/v%{version_no_tilde}/node_modules-v%{version_no_tilde}.tar.gz
 Source2:        https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive/%{gvc_commit}/gvc-%{gvc_shortcommit}.tar.gz
 
 BuildRequires:  gcc
