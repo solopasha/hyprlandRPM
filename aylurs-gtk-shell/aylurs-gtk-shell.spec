@@ -4,7 +4,7 @@
 %global gvc_shortcommit %(c=%{gvc_commit}; echo ${c:0:7})
 
 Name:           aylurs-gtk-shell
-Version:        1.8.2
+Version:        1.9.0
 Release:        %autorelease
 Summary:        A customizable and extensible shell
 
@@ -16,6 +16,7 @@ Source2:        https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive
 
 BuildRequires:  gcc
 BuildRequires:  meson
+BuildRequires:  nodejs-npm
 BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(gjs-1.0)
 BuildRequires:  pkgconfig(gobject-introspection-1.0)
@@ -23,6 +24,8 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libpulse)
 BuildRequires:  pkgconfig(pam)
 BuildRequires:  typescript
+
+Obsoletes:      aylurs-gtk-shell-git < 1.9.0
 
 Requires:       gjs%{?_isa}
 Requires:       gtk-layer-shell%{?_isa}
@@ -39,10 +42,11 @@ in a declarative way in JavaScript. It also provides services to interact with
 the system so that these widgets can have functionality.
 
 %prep
-%autosetup -n ags-%{version_no_tilde} -a1 -p1
+%autosetup -n ags-%{version_no_tilde} -p1
 tar -xf %{SOURCE2} -C subprojects/gvc --strip=1
 
 %build
+npm install
 %meson \
     -Dbuild_types=true \
     --libdir=%{_libdir}/ags
