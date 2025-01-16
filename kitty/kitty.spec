@@ -15,7 +15,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.38.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.39.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -236,6 +236,9 @@ This package contains the documentation for %{name}.
 %{gpgverify} --keyring='%{SOURCE5}' --signature='%{SOURCE4}' --data='%{SOURCE0}'
 %endif
 %autosetup -p1 %{?bumpver:-n %{name}-%{commit0}} %{?with_bundled:-a6}
+
+sed 's/go 1\.23/go 1.22/' -i go.mod
+
 mkdir fonts
 tar -xf %{SOURCE2} -C fonts
 
