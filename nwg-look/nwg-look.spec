@@ -6,13 +6,9 @@
 %global debug_package %{nil}
 %endif
 
-%if %{with bootstrap}
-%global __requires_exclude %{?__requires_exclude:%{__requires_exclude}|}^golang\\(.*\\)$
-%endif
-
 # https://github.com/nwg-piotr/nwg-look
 %global goipath         github.com/nwg-piotr/nwg-look
-Version:                0.2.7
+Version:                1.0.0
 
 %gometa -L -f
 
@@ -29,8 +25,18 @@ Summary:        GTK3 settings editor adapted to work in the wlroots environment
 License:        MIT
 URL:            %{gourl}
 Source:         %{gosource}
+Source:         vendor-%{version}.tar.gz
+Source:         bundle_go_deps_for_rpm.sh
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  pkgconfig(cairo-gobject)
+BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(gdk-3.0)
+BuildRequires:  pkgconfig(gio-2.0)
+BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(gobject-2.0)
+BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(pango)
 
 Requires:       /usr/bin/gsettings
 Requires:       xcur2png
@@ -40,12 +46,8 @@ Requires:       xcur2png
 
 %prep
 %goprep -A
+%setup -q -T -D -a 1
 %autopatch -p1
-
-%if %{without bootstrap}
-%generate_buildrequires
-%go_generate_buildrequires
-%endif
 
 %if %{without bootstrap}
 %build
@@ -72,6 +74,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %if %{without bootstrap}
 %files
+%license vendor/modules.txt
 %license LICENSE
 %doc README.md
 %{_bindir}/nwg-look

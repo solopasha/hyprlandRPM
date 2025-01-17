@@ -30,6 +30,8 @@ kitty.spec: goprep
 
 cliphist.spec: goprep
 
+nwg-look.spec: goprep
+
 srpm: prepare $(specfile)
 	spectool -g ./$(specfile)
 	rpmbuild -bs --define "_sourcedir ${PWD}" --define "_specdir ${PWD}" \
