@@ -16,7 +16,7 @@
 
 Name:           kitty
 Version:        0.39.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
 # GPL-3.0-only: kitty
@@ -82,7 +82,11 @@ BuildRequires:  gnupg2
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc
 BuildRequires:  go-rpm-macros
+%if 0%{?epel} && 0%{?epel} < 10
+BuildRequires:  python3.12-devel
+%else
 BuildRequires:  python3-devel
+%endif
 BuildRequires:  lcms2-devel
 BuildRequires:  libappstream-glib
 BuildRequires:  ncurses
@@ -118,7 +122,6 @@ BuildRequires:  ripgrep
 BuildRequires:  zsh
 %endif
 
-Requires:       python3%{?_isa}
 Requires:       hicolor-icon-theme
 
 Obsoletes:      %{name}-bash-integration < 0.28.1-3
@@ -254,7 +257,7 @@ find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python3|%{python3}|g'    
 mkdir src
 ln -s ../ src/kitty
 
-%if 0%{?epel} < 10
+%if 0%{?epel} && 0%{?epel} < 10
 sed '1i \#define XKB_KEY_XF86Fn 0x100811d0' -i kitty/keys.c
 %endif
 
