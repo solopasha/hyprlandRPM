@@ -1,5 +1,5 @@
 Name:           hyprutils
-Version:        0.3.3
+Version:        0.4.0
 Release:        %autorelease
 Summary:        Hyprland utilities library used across the ecosystem
 
@@ -40,7 +40,7 @@ Development files for %{name}.
 %license LICENSE
 %doc README.md
 %{_libdir}/lib%{name}.so.%{version}
-%{_libdir}/lib%{name}.so.2
+%{_libdir}/lib%{name}.so.3
 
 %files devel
 %{_includedir}/%{name}/
