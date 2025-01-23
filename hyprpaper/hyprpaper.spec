@@ -1,13 +1,12 @@
 Name:           hyprpaper
-Version:        0.7.3
-Release:        %autorelease -b3
+Version:        0.7.4
+Release:        %autorelease
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
 # LICENSE: BSD-3-Clause
 # protocols/wlr-layer-shell-unstable-v1.xml: HPND-sell-variant
 License:        BSD-3-Clause AND HPND-sell-variant
 URL:            https://github.com/hyprwm/hyprpaper
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch:          https://github.com/hyprwm/hyprpaper/commit/505e447b6c48e6b49f3aecf5da276f3cc5780054.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -22,9 +21,7 @@ BuildRequires:  pkgconfig(hyprgraphics)
 BuildRequires:  pkgconfig(hyprlang)
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(hyprwayland-scanner)
-BuildRequires:  pkgconfig(libjpeg)
 BuildRequires:  pkgconfig(libmagic)
-BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(pango)
 BuildRequires:  pkgconfig(pangocairo)
 BuildRequires:  pkgconfig(wayland-client)
@@ -38,7 +35,6 @@ wlroots-based compositors, though.
 %prep
 %autosetup -p1
 sed '/hyprpaper.service/s/${CMAKE_INSTALL_LIBDIR}/lib/' -i CMakeLists.txt
-sed '/libjxl/d' -i CMakeLists.txt
 
 %build
 %cmake
