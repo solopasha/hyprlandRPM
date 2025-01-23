@@ -1,5 +1,5 @@
 Name:           hyprland-protocols
-Version:        0.6.0
+Version:        0.6.1
 Release:        %autorelease
 Summary:        Wayland protocol extensions for Hyprland
 BuildArch:      noarch
