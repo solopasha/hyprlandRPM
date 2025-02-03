@@ -34,6 +34,7 @@ newUdis86Commit="$(curl -L \
 sed -e "s/$oldHyprlandCommit/$newHyprlandCommit/" \
     -e "/%global commits_count/s/$oldCommitsCount/$newCommitsCount/" \
     -e "s/$oldCommitDate/$newCommitDate/" \
+    -e "s/$oldProtocolsCommit/$newProtocolsCommit/" \
     -e "s/$oldUdis86Commit/$newUdis86Commit/" \
     -i hyprland-git.spec
 
