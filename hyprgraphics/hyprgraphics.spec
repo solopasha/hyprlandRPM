@@ -1,12 +1,11 @@
 Name:           hyprgraphics
-Version:        0.1.1
-Release:        %autorelease -b4
+Version:        0.1.2
+Release:        %autorelease
 Summary:        Hyprland graphics / resource utilities
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprgraphics
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch:          optional-jxl.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -25,6 +24,7 @@ BuildRequires:  pkgconfig(libjxl)
 BuildRequires:  pkgconfig(libmagic)
 BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(pixman-1)
+BuildRequires:  pkgconfig(spng)
 
 %description
 %{summary}.
