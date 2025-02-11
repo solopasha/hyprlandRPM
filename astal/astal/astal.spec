@@ -4,7 +4,7 @@
 
 %global _vpath_srcdir lib/astal/gtk3
 
-%bcond bootstrap 1
+%bcond bootstrap 0
 
 Name:           astal
 Version:        0~%{bumpver}.git%{astal_shortcommit}
