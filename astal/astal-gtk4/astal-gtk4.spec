@@ -2,6 +2,8 @@
 %global astal_shortcommit %(c=%{astal_commit}; echo ${c:0:7})
 %global bumpver 3
 
+%bcond bootstrap 1
+
 %global _vpath_srcdir lib/astal/gtk4
 
 Name:           astal-gtk4
@@ -23,7 +25,9 @@ BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(gtk4-layer-shell-0)
 
+%if %{without bootstrap}
 Requires:       astal-libs%{?_isa}
+%endif
 
 %package        devel
 Summary:        Development files for %{name}
