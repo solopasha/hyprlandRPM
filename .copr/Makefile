@@ -33,7 +33,7 @@ cliphist.spec: goprep
 nwg-look.spec: goprep
 
 aylurs-gtk-shell2.spec:
-	dnf install --nodocs -y golang git-core
+	dnf install --nodocs -y golang git-core go-vendor-tools
 	spectool -g ./$(specfile)
 	go_vendor_archive create --config ./go-vendor-tools.toml ./aylurs-gtk-shell2.spec
 
