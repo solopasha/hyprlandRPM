@@ -6,7 +6,7 @@
 
 Name:           hyprpanel
 Version:        0~%{bumpver}.git%{shortcommit0}
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        A panel built for Hyprland with Astal
 
 License:        MIT
@@ -24,7 +24,6 @@ Requires:       /usr/bin/wl-copy
 Requires:       /usr/bin/wl-paste
 Requires:       aylurs-gtk-shell2
 Requires:       bluez
-Requires:       cascadia-mono-nf-fonts
 Requires:       gnome-bluetooth
 Requires:       gvfs
 Requires:       libgtop2
@@ -59,12 +58,15 @@ Provides:       HyprPanel
 
 %install
 %meson_install
+mkdir -p %{buildroot}%{_fontbasedir}
+mv %{buildroot}%{_datadir}/%{name}/assets/fonts %{buildroot}%{_fontbasedir}/nf-hyprpanel
 
 %files
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
 %{_datadir}/%{name}/
+%{_fontbasedir}/nf-hyprpanel/
 
 %changelog
 %autochangelog
