@@ -13,8 +13,9 @@ License:        MIT
 URL:            https://github.com/Jas-SinghFSU/HyprPanel
 Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 
-BuildRequires:  meson
+BuildRequires:  /usr/bin/sass
 BuildRequires:  aylurs-gtk-shell2
+BuildRequires:  meson
 
 Requires:       /usr/bin/bluetoothctl
 Requires:       /usr/bin/sass
