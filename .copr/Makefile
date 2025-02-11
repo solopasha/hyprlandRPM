@@ -1,4 +1,4 @@
-.PHONY: prepare goprep srpm
+.PHONY: prepare goprep srpm aylurs-gtk-shell2.spec
 specfile = $(notdir $(spec))
 
 prepare:
@@ -31,6 +31,11 @@ kitty.spec: goprep
 cliphist.spec: goprep
 
 nwg-look.spec: goprep
+
+aylurs-gtk-shell2.spec:
+	dnf install --nodocs -y golang git-core
+	spectool -g ./$(specfile)
+	go_vendor_archive create --config ./go-vendor-tools.toml ./aylurs-gtk-shell2.spec
 
 srpm: prepare $(specfile)
 	spectool -g ./$(specfile)

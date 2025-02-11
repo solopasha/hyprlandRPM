@@ -1,0 +1,8 @@
+[archive]
+
+[licensing]
+detector = "askalono"
+[[licensing.licenses]]
+path = "vendor/github.com/titanous/json5/LICENSE"
+sha256sum = "598015380703f97d5729581fde8f78e4c75af5ab0fd0aa18b6e6b75813302a4f"
+expression = "BSD-3-Clause AND MIT"
