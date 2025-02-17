@@ -70,7 +70,7 @@ pushd $lib
 %meson_install
 popd
 done
-sed -i 's/ cava,//' %{_libdir}/pkgconfig/ astal-cava-0.1.pc
+sed -i 's/ cava,//' %{buildroot}%{_libdir}/pkgconfig/astal-cava-0.1.pc
 rm -rf %{buildroot}%{_includedir}/cava
 rm -rf %{buildroot}%{_datadir}/consolefonts/cava.psf
 rm -rf %{buildroot}%{_libdir}/pkgconfig/cava.pc
