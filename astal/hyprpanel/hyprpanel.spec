@@ -1,12 +1,12 @@
-%global commit0 0d5f80ff5cd525b8f27adfb84cef67d90e3d7f10
+%global commit0 9b342341fe17e4fb2c4cad9e3379a814a6a73097
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1
+%global bumpver 2
 
 %global debug_package %{nil}
 
 Name:           hyprpanel
 Version:        0~%{bumpver}.git%{shortcommit0}
-Release:        %autorelease -b2
+Release:        %autorelease
 Summary:        A panel built for Hyprland with Astal
 
 License:        MIT

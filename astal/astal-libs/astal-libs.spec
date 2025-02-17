@@ -1,6 +1,6 @@
-%global astal_commit ee91402cabc994bb4fb7c3f5405a218ad0b57fd3
+%global astal_commit 956b74fd9ff8c607b6683b404860c4e6b30ffe2b
 %global astal_shortcommit %(c=%{astal_commit}; echo ${c:0:7})
-%global bumpver 6
+%global bumpver 7
 
 %global _lto_cflags %{nil}
 
@@ -70,6 +70,7 @@ pushd $lib
 %meson_install
 popd
 done
+sed -i 's/ cava,//' %{_libdir}/pkgconfig/ astal-cava-0.1.pc
 rm -rf %{buildroot}%{_includedir}/cava
 rm -rf %{buildroot}%{_datadir}/consolefonts/cava.psf
 rm -rf %{buildroot}%{_libdir}/pkgconfig/cava.pc
