@@ -131,6 +131,8 @@ Recommends:     hyprland-qtutils
 Recommends:     mesa-dri-drivers
 # Logind needs polkit to create a graphical session
 Recommends:     polkit
+# https://wiki.hyprland.org/Useful-Utilities/Systemd-start
+Recommends:     %{name}-uwsm
 
 Recommends:     (qt5-qtwayland if qt5-qtbase-gui)
 Recommends:     (qt6-qtwayland if qt6-qtbase-gui)
@@ -140,6 +142,12 @@ Hyprland is a dynamic tiling Wayland compositor that doesn't sacrifice
 on its looks. It supports multiple layouts, fancy effects, has a
 very flexible IPC model allowing for a lot of customization, a powerful
 plugin system and more.
+
+%package        uwsm
+Summary:        Files for a uwsm-managed session
+Requires:       uwsm
+%description    uwsm
+Files for a uwsm-managed session.
 
 %package        devel
 Summary:        Header and protocol files for %{name}
@@ -191,7 +199,6 @@ sed -i \
 %cmake \
     -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
-    -DNO_UWSM:BOOL=ON \
 %if %{with legacyrenderer}
     -DLEGACY_RENDERER:BOOL=ON \
 %endif
@@ -217,6 +224,9 @@ install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 %{bash_completions_dir}/hypr*
 %{fish_completions_dir}/hypr*.fish
 %{zsh_completions_dir}/_hypr*
+
+%files uwsm
+%{_datadir}/wayland-sessions/hyprland-uwsm.desktop
 
 %files devel
 %{_datadir}/pkgconfig/hyprland.pc
