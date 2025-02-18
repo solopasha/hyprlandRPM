@@ -182,9 +182,6 @@ sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
     -e 's|^DATE=.*|DATE="%{commit_date}"|' \
     -e 's|^COMMITS=.*|COMMITS=%{commits_count}|' \
     -i scripts/generateVersion.sh
-%else
-%autopatch -p1
-sed '/\.\/scripts\/generateVersion.sh/,/WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/d' -i CMakeLists.txt
 %endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
