@@ -75,6 +75,7 @@ cargo vendor
 install -Dpm755 target/release/%{name} %{buildroot}%{_bindir}/%{name}
 
 install -Dpm644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -Dpm644 assets/%{name}.svg %{buildroot}%{_datadir}/hicolor/scalable/apps/%{name}.svg
 
 install -Dpm644 completions/%{name}.bash %{buildroot}%{bash_completions_dir}/%{name}
 install -Dpm644 completions/%{name}.fish %{buildroot}%{fish_completions_dir}/%{name}.fish
@@ -93,6 +94,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %doc README.md
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/hicolor/scalable/apps/%{name}.svg
 %{bash_completions_dir}/%{name}
 %{fish_completions_dir}/%{name}.fish
 %{zsh_completions_dir}/_%{name}
