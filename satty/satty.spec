@@ -6,7 +6,7 @@
 
 Name:           satty
 Version:        0.16.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Modern Screenshot Annotation
 
 # 0BSD OR MIT OR Apache-2.0
@@ -53,6 +53,8 @@ BuildRequires:  pkgconfig(epoxy)
 BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(libadwaita-1)
+
+Recommends:     gdk-pixbuf2-modules-extra
 
 %global _description %{expand:
 Modern Screenshot Annotation. A Screenshot Annotation Tool inspired by
