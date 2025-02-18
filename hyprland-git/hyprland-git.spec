@@ -14,7 +14,7 @@
 
 Name:           hyprland-git
 Version:        0.47.2%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
 
 # hyprland: BSD-3-Clause
@@ -141,6 +141,12 @@ on its looks. It supports multiple layouts, fancy effects, has a
 very flexible IPC model allowing for a lot of customization, a powerful
 plugin system and more.
 
+%package        uwsm
+Summary:        Files for a uwsm-managed session
+Requires:       uwsm
+%description    uwsm
+Files for a uwsm-managed session.
+
 %package        devel
 Summary:        Header and protocol files for %{name}
 License:        BSD-3-Clause
@@ -191,7 +197,6 @@ sed -i \
 %cmake \
     -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
-    -DNO_UWSM:BOOL=ON \
 %if %{with legacyrenderer}
     -DLEGACY_RENDERER:BOOL=ON \
 %endif
@@ -217,6 +222,9 @@ install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 %{bash_completions_dir}/hypr*
 %{fish_completions_dir}/hypr*.fish
 %{zsh_completions_dir}/_hypr*
+
+%files uwsm
+%{_datadir}/wayland-sessions/hyprland-uwsm.desktop
 
 %files devel
 %{_datadir}/pkgconfig/hyprland.pc
