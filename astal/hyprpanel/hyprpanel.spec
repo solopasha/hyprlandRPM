@@ -1,6 +1,6 @@
-%global commit0 efdcb7d53bd53b18b707e13363a48646e4be6d61
+%global commit0 2be9f1ef6c2df2ecf0eebe5a039e8029d8d151cd
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 3
+%global bumpver 4
 
 %global debug_package %{nil}
 
@@ -43,6 +43,7 @@ Recommends:     hypridle
 Recommends:     hyprpicker
 Recommends:     hyprsunset
 Recommends:     swww
+Recommends:     wf-recorder
 
 Provides:       HyprPanel
 

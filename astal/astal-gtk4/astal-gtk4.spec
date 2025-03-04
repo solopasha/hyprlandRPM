@@ -1,6 +1,6 @@
-%global astal_commit ee91402cabc994bb4fb7c3f5405a218ad0b57fd3
+%global astal_commit 4b283b0045c0752c36c6e8306fc137f2c9f244a4
 %global astal_shortcommit %(c=%{astal_commit}; echo ${c:0:7})
-%global bumpver 3
+%global bumpver 4
 
 %bcond bootstrap 0
 
