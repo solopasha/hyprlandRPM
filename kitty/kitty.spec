@@ -15,7 +15,7 @@
 %global goipath kitty
 
 Name:           kitty
-Version:        0.39.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
+Version:        0.40.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        Cross-platform, fast, feature full, GPU based terminal emulator
 
@@ -93,12 +93,15 @@ BuildRequires:  ncurses
 BuildRequires:  wayland-devel
 BuildRequires:  simde-static
 
+BuildRequires:  pkgconfig(cairo-fc)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(libcanberra)
+BuildRequires:  pkgconfig(libcrypto)
 BuildRequires:  pkgconfig(libpng)
+BuildRequires:  pkgconfig(libxxhash)
 BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(xcursor)
 BuildRequires:  pkgconfig(xi)
@@ -106,8 +109,6 @@ BuildRequires:  pkgconfig(xinerama)
 BuildRequires:  pkgconfig(xkbcommon-x11)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(zlib)
-BuildRequires:  pkgconfig(libcrypto)
-BuildRequires:  pkgconfig(libxxhash)
 
 %if %{with test}
 # For tests:
