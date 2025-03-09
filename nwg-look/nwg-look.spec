@@ -8,7 +8,7 @@
 
 # https://github.com/nwg-piotr/nwg-look
 %global goipath         github.com/nwg-piotr/nwg-look
-Version:                1.0.2
+Version:                1.0.3
 
 %gometa -L -f
 
