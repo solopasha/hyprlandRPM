@@ -1,5 +1,5 @@
 Name:           hyprcursor
-Version:        0.1.11
+Version:        0.1.12
 Release:        %autorelease
 Summary:        The hyprland cursor format, library and utilities
 
@@ -32,7 +32,7 @@ Development files for %{name}.
 %autosetup -p1
 
 %build
-%cmake
+%cmake -DCMAKE_BUILD_TYPE=Release
 %cmake_build
 
 %install
