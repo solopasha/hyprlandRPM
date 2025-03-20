@@ -1,6 +1,6 @@
-%global commit0 2be9f1ef6c2df2ecf0eebe5a039e8029d8d151cd
+%global commit0 3a5ad2a1db420f0238895f2cb1ff64acd0d2cc54
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 4
+%global bumpver 5
 
 %global debug_package %{nil}
 
@@ -42,6 +42,7 @@ Recommends:     grimblast
 Recommends:     hypridle
 Recommends:     hyprpicker
 Recommends:     hyprsunset
+Recommends:     jq
 Recommends:     swww
 Recommends:     wf-recorder
 
