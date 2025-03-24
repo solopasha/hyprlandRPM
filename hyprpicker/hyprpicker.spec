@@ -1,6 +1,6 @@
 Name:           hyprpicker
-Version:        0.4.2
-Release:        %autorelease -b3
+Version:        0.4.3
+Release:        %autorelease
 Summary:        A wlroots-compatible Wayland color picker
 # LICENSE: BSD-3-Clause
 # protocols/wlr-layer-shell-unstable-v1.xml: HPND-sell-variant
@@ -28,11 +28,13 @@ Recommends:     wl-clipboard
 
 
 %prep
-%autosetup
+%autosetup -p1
 
 
 %build
-%cmake -DCMAKE_INSTALL_MANDIR=%{_mandir}
+%cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_MANDIR=%{_mandir}
 %cmake_build
 
 
