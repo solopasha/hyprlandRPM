@@ -10,6 +10,7 @@ BuildArch:      noarch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  meson
+BuildRequires:  python-rpm-macros
 BuildRequires:  python3
 BuildRequires:  python3-dbus
 BuildRequires:  python3-pyxdg
@@ -41,6 +42,7 @@ session/XDG autostart management in Systemd-managed environments.
 
 %install
 %meson_install
+%py_byte_compile %{python3} %{buildroot}%{_datadir}/%{name}/modules
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
