@@ -1,14 +1,13 @@
 %global debug_package %{nil}
 
 Name:           glaze
-Version:        4.3.1
+Version:        5.0.1
 Release:        %autorelease
 Summary:        Extremely fast, in memory, JSON and interface library
 
 License:        MIT
 URL:            https://github.com/stephenberry/glaze
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch:          fix-path.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -28,7 +27,8 @@ Development files for %{name}.
 
 %build
 %cmake \
-    -Dglaze_ENABLE_AVX2:BOOL=OFF \
+    -Dglaze_INSTALL_CMAKEDIR=%{_datadir}/cmake/%{name} \
+    -Dglaze_DISABLE_SIMD_WHEN_SUPPORTED:BOOL=ON \
     -Dglaze_DEVELOPER_MODE:BOOL=OFF \
     -Dglaze_ENABLE_FUZZING:BOOL=OFF
 %cmake_build
