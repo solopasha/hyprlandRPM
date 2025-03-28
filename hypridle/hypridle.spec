@@ -1,8 +1,8 @@
-%global sdbus_version 1.5.0
+%global sdbus_version 2.1.0
 
 Name:           hypridle
-Version:        0.1.3
-Release:        %autorelease -b4
+Version:        0.1.6
+Release:        %autorelease
 Summary:        Hyprland's idle daemon
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hypridle
@@ -16,29 +16,22 @@ BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  systemd-rpm-macros
 
+BuildRequires:  cmake(hyprwayland-scanner)
+BuildRequires:  pkgconfig(hyprland-protocols)
 BuildRequires:  pkgconfig(hyprlang)
 BuildRequires:  pkgconfig(hyprutils)
-BuildRequires:  pkgconfig(wayland-client)
-BuildRequires:  pkgconfig(wayland-protocols)
-%if %{fedora} >= 40
-BuildRequires:  pkgconfig(sdbus-c++)
-%else
 BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(systemd)
-%endif
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(wayland-protocols)
 
 %description
 %{summary}.
 
-
 %prep
-%autosetup
-%if %{fedora} < 40
-%autosetup -NDT -a1
-%endif
+%autosetup -p1 -a1
 
 %build
-%if %{fedora} < 40
 pushd sdbus-cpp-%{sdbus_version}
 %cmake \
     -DCMAKE_INSTALL_PREFIX=%{_builddir}/sdbus \
@@ -48,10 +41,9 @@ pushd sdbus-cpp-%{sdbus_version}
 cmake --install %{__cmake_builddir}
 popd
 export PKG_CONFIG_PATH=%{_builddir}/sdbus/lib64/pkgconfig
-%endif
+
 %cmake
 %cmake_build
-
 
 %install
 %cmake_install
@@ -71,7 +63,6 @@ rm %{buildroot}%{_datadir}/hypr/hypridle.conf
 
 %postun
 %systemd_user_postun %{name}.service
-
 
 %changelog
 %autochangelog
