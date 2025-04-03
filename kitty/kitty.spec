@@ -83,6 +83,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  gcc
 BuildRequires:  go-rpm-macros
 %if 0%{?epel} && 0%{?epel} < 10
+%global python3_pkgversion 3.12
 BuildRequires:  python3.12-devel
 %else
 BuildRequires:  python3-devel
