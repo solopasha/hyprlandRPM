@@ -10,7 +10,6 @@ License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/xdg-desktop-portal-hyprland
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source:         https://github.com/Kistler-Group/sdbus-cpp/archive/v%{sdbus_version}/sdbus-%{sdbus_version}.tar.gz
-Patch:          revert-c5b309.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -53,7 +52,6 @@ Provides:       bundled(sdbus-cpp) = %{sdbus_version}
 %prep
 %autosetup -N
 %if %{fedora} < 41
-%patch -P 0 -p1
 sed -i '/libpipewire/s/>=1.1.82//' CMakeLists.txt
 %endif
 tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
