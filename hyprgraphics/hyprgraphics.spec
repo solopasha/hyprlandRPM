@@ -1,5 +1,5 @@
 Name:           hyprgraphics
-Version:        0.1.2
+Version:        0.1.3
 Release:        %autorelease
 Summary:        Hyprland graphics / resource utilities
 
