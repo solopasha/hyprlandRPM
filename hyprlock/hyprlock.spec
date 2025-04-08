@@ -1,8 +1,8 @@
 %global sdbus_version 2.1.0
 
 Name:           hyprlock
-Version:        0.7.0
-Release:        %autorelease -b2
+Version:        0.8.0
+Release:        %autorelease
 Summary:        Hyprland's GPU-accelerated screen locking utility
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprlock
@@ -58,7 +58,7 @@ cmake --install %{_vpath_builddir}
 popd
 export PKG_CONFIG_PATH=%{_builddir}/sdbus/%{_lib}/pkgconfig
 
-%cmake
+%cmake -DCMAKE_BUILD_TYPE=Release
 %cmake_build
 
 %install
