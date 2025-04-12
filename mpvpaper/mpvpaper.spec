@@ -6,6 +6,7 @@ Summary:        A video wallpaper program
 License:        GPL-3.0-or-later
 URL:            https://github.com/GhostNaN/mpvpaper
 Source:         %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Patch:          https://github.com/GhostNaN/mpvpaper/commit/2f9cc00e1e514b2e6a64f2671753d6c163d04c95.patch
 
 BuildRequires:  gcc
 BuildRequires:  meson
@@ -21,7 +22,7 @@ mpvpaper is a wallpaper program for wlroots based wayland compositors,
 such as sway. That allows you to play videos with mpv as your wallpaper.
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 %meson
