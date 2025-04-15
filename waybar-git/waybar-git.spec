@@ -1,8 +1,8 @@
 %bcond wireplumber %[0%{?fedora} > 39]
 
-%global commit0 67272cc47f430dcb82f533e29ae26495f7876154
+%global commit0 c8484ebb1d1c85f9faa27019be7deed1c1b27e10
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 8
+%global bumpver 9
 
 Name:           waybar-git
 Version:        0.12.0%{?bumpver:^%{bumpver}.git%{shortcommit0}}
