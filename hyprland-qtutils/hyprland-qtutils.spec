@@ -1,6 +1,6 @@
 Name:           hyprland-qtutils
-Version:        0.1.3
-Release:        %autorelease -b5
+Version:        0.1.4
+Release:        %autorelease
 Summary:        Hyprland Qt/qml utility apps
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprland-qtutils
