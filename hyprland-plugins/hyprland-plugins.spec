@@ -31,7 +31,7 @@ end
 
 Name:           %{pluginsmetaname}
 Version:        0.1^%{bumpver}.git%{shortcommit0}
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        Official plugins for Hyprland
 
 License:        BSD-3-Clause
