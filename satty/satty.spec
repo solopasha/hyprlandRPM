@@ -5,8 +5,8 @@
 %global cargo_install_lib 0
 
 Name:           satty
-Version:        0.16.0
-Release:        %autorelease -b2
+Version:        0.17.0
+Release:        %autorelease
 Summary:        Modern Screenshot Annotation
 
 # 0BSD OR MIT OR Apache-2.0
