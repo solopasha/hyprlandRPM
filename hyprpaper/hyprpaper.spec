@@ -1,6 +1,6 @@
 Name:           hyprpaper
-Version:        0.7.4
-Release:        %autorelease -b4
+Version:        0.7.5
+Release:        %autorelease
 Summary:        Blazing fast wayland wallpaper utility with IPC controls
 # LICENSE: BSD-3-Clause
 # protocols/wlr-layer-shell-unstable-v1.xml: HPND-sell-variant
@@ -34,7 +34,6 @@ wlroots-based compositors, though.
 
 %prep
 %autosetup -p1
-sed '/hyprpaper.service/s/${CMAKE_INSTALL_LIBDIR}/lib/' -i CMakeLists.txt
 
 %build
 %cmake
