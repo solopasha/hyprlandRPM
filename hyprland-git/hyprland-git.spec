@@ -103,6 +103,7 @@ Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
 
 Requires:       xorg-x11-server-Xwayland%{?_isa}
 Requires:       hyprcursor%{?_isa} >= 0.1.9
+Requires:       hyprgraphics%{?_isa} >= 0.1.4
 
 %{lua:do
 if string.match(rpm.expand('%{name}'), '%-git$') then
