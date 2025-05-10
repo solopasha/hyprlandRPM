@@ -38,7 +38,6 @@ Summary:        Official plugins for Hyprland
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprland-plugins
 Source:         %{url}/archive/%{commit0}/%{name}-%{commit0}.tar.gz
-Patch:          hyprtrails.diff
 
 BuildRequires:  gcc-c++
 BuildRequires:  meson
