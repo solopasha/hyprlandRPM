@@ -5,7 +5,7 @@
 %global cargo_install_lib 0
 
 Name:           satty
-Version:        0.18.0
+Version:        0.18.1
 Release:        %autorelease
 Summary:        Modern Screenshot Annotation
 
