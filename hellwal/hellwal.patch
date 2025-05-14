@@ -1,0 +1,30 @@
+diff --git a/Makefile b/Makefile
+index 3b59d05..4197cc6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,9 +1,9 @@
+ VERSION := $(shell cat VERSION)
+ 
+-CFLAGS = -Wall -Wextra -O3
+-LDFLAGS = -lm
++CFLAGS += -Wall -Wextra -O3
++LDFLAGS += -lm
+ 
+-DESTDIR = /usr/local/bin
++DESTDIR ?= /usr/local/bin
+ 
+ hellwal: hellwal.c
+ 	$(CC) $(CFLAGS) hellwal.c -o hellwal $(LDFLAGS) -DVERSION=\"$(VERSION)\"
+@@ -14,10 +14,8 @@ debug: hellwal.c
+ clean:
+ 	rm hellwal
+ 
+-install: hellwal
+-	mkdir -p $(DESTDIR)
+-	cp -f hellwal $(DESTDIR)
+-	chmod 755 $(DESTDIR)/hellwal # chmod u=rwx,g=rx,o=rx
++install:
++	install -Dpm0755 hellwal -t $(DESTDIR)/usr/bin
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)/hellwal
