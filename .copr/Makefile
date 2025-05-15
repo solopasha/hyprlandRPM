@@ -22,10 +22,6 @@ hyprland%spec:
 		sed 's/%global bumpver/#%&/' -i $(specfile)
     endif
 
-    ifeq ($(specfile),hyprland-legacyrenderer.spec)
-		sed -e '/legacyrenderer/s/0/1/' -i $(specfile)
-    endif
-
 kitty.spec: goprep
 
 cliphist.spec: goprep

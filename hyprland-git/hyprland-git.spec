@@ -10,8 +10,6 @@
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
 
-%bcond legacyrenderer 0
-
 Name:           hyprland-git
 Version:        0.49.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
 Release:        %autorelease
@@ -119,6 +117,7 @@ elseif not string.match(rpm.expand('%{name}'), 'hyprland$') then
 else
     print('Obsoletes: hyprland-nvidia < 1:0.32.3-2'..'\n')
     print(rpm.expand('Provides: hyprland-nvidia = %{version}-%{release}')..'\n')
+    print('Obsoletes: hyprland-legacyrenderer < 0.49.0'..'\n')
 end
 end}
 
@@ -196,11 +195,7 @@ sed -i \
 %build
 %cmake \
     -GNinja \
-    -DCMAKE_BUILD_TYPE=Release \
-%if %{with legacyrenderer}
-    -DLEGACY_RENDERER:BOOL=ON \
-%endif
-%{nil}
+    -DCMAKE_BUILD_TYPE=Release
 %cmake_build
 
 
