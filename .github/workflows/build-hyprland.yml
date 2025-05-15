@@ -12,9 +12,7 @@ jobs:
   main:
     if: |
       github.event_name == 'workflow_dispatch' ||
-      contains(github.event.head_commit.message, '[build-all-released]') ||
       contains(github.event.head_commit.message, '[build-hyprland]') ||
-      contains(github.event.head_commit.message, '[build-legacyrenderer]') ||
       contains(github.event.head_commit.message, '[build-git-hyprland]')
     runs-on: ubuntu-latest
     container:
@@ -33,20 +31,10 @@ jobs:
           mkdir -p ~/.config
           echo "$COPR_CONF" > ~/.config/copr
 
-      - name: Build all released
-        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build-all-released]')
-        run: |
-          parallel copr-cli build-package solopasha/hyprland --nowait --name ::: hyprland{,-legacyrenderer}
-
       - name: Build hyprland
-        if: contains(github.event.head_commit.message, '[build-hyprland]')
+        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build-hyprland]')
         run: |
           copr-cli build-package solopasha/hyprland --nowait --name hyprland
-
-      - name: Build hyprland-legacyrenderer
-        if: contains(github.event.head_commit.message, '[build-legacyrenderer]')
-        run: |
-          copr-cli build-package solopasha/hyprland --nowait --name hyprland-legacyrenderer
 
       - name: Build hyprland-git
         if: contains(github.event.head_commit.message, '[build-git-hyprland]')
