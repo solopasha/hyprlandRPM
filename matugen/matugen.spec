@@ -22,10 +22,10 @@ cargo vendor
 %cargo_prep -v vendor
 
 %build
-cargo build --locked --profile rpm
-#%%{cargo_license_summary}
-#%%{cargo_license} > LICENSE.dependencies
-#%%{cargo_vendor_manifest}
+%cargo_build
+%{cargo_license_summary}
+%{cargo_license} > LICENSE.dependencies
+%{cargo_vendor_manifest}
 
 %install
 install -Dpm755 target/release/matugen %{buildroot}%{_bindir}/matugen
@@ -37,8 +37,8 @@ install -Dpm755 target/release/matugen %{buildroot}%{_bindir}/matugen
 
 %files
 %license LICENSE
-#%%license LICENSE.dependencies
-#%%license cargo-vendor.txt
+%license LICENSE.dependencies
+%license cargo-vendor.txt
 %doc CHANGELOG.md
 %doc README.md
 %{_bindir}/matugen
