@@ -1,10 +1,10 @@
-%global commit0 218bb4aaf1a1d9fcd89a71a14c8bf99cfd94ba1e
+%global commit0 f05d28d805a22a7564895aa178772361c44b6b7a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global _vpath_srcdir subprojects/appmenu-glib-translator
 
 Name:           appmenu-glib-translator
-Version:        24.05^1.git%{shortcommit0}
+Version:        25.04^1.git%{shortcommit0}
 Release:        %autorelease
 Summary:        appmenu-glib-translator
 
@@ -41,12 +41,12 @@ Development files for %{name}.
 
 %files
 %license LICENSE
-%{_libdir}/girepository-1.0/AppmenuGLibTranslator-24.02.typelib
+%{_libdir}/girepository-1.0/AppmenuGLibTranslator-25.04.typelib
 %{_libdir}/libappmenu-glib-translator.so.0
-%{_libdir}/libappmenu-glib-translator.so.24.02
+%{_libdir}/libappmenu-glib-translator.so.25.04
 
 %files devel
-%{_datadir}/gir-1.0/AppmenuGLibTranslator-24.02.gir
+%{_datadir}/gir-1.0/AppmenuGLibTranslator-25.04.gir
 %{_datadir}/vala/vapi/appmenu-glib-translator.deps
 %{_datadir}/vala/vapi/appmenu-glib-translator.vapi
 %{_includedir}/appmenu-glib-translator/

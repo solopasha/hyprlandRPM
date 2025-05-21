@@ -1,6 +1,6 @@
-%global astal_commit 3ac89cab8a2a9f5ef86dc9fdc3a3dce2188ca8f7
+%global astal_commit 4820a3e37cc8eb81db6ed991528fb23472a8e4de
 %global astal_shortcommit %(c=%{astal_commit}; echo ${c:0:7})
-%global bumpver 11
+%global bumpver 12
 
 %global _lto_cflags %{nil}
 
