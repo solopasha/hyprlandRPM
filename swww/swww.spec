@@ -2,7 +2,7 @@
 %bcond_with check
 
 Name:           swww
-Version:        0.9.5
+Version:        0.10.0
 Release:        %autorelease
 Summary:        Efficient animated wallpaper daemon for wayland, controlled at runtime
 # 0BSD OR MIT OR Apache-2.0
@@ -27,8 +27,10 @@ URL:            https://github.com/LGFae/swww
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cargo-rpm-macros >= 24
-BuildRequires:  scdoc
 BuildRequires:  pkgconfig(liblz4)
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(wayland-protocols)
+BuildRequires:  scdoc
 
 %global _description %{expand:
 %{summary}.}
@@ -41,11 +43,11 @@ cargo vendor
 %cargo_prep -v vendor
 
 %build
-cargo build --locked --profile rpm
+%cargo_build
 ./doc/gen.sh
-#%%{cargo_license_summary}
-#%%{cargo_license} > LICENSE.dependencies
-#%%{cargo_vendor_manifest}
+%{cargo_license_summary}
+%{cargo_license} > LICENSE.dependencies
+%{cargo_vendor_manifest}
 
 %install
 install -Dpm755 target/release/swww %{buildroot}%{_bindir}/swww
@@ -62,8 +64,8 @@ install -Dpm644 ./doc/generated/*.1 -t %{buildroot}%{_mandir}/man1
 
 %files
 %license LICENSE
-#%%license LICENSE.dependencies
-#%%license cargo-vendor.txt
+%license LICENSE.dependencies
+%license cargo-vendor.txt
 %doc CHANGELOG.md
 %doc README.md
 %{_bindir}/swww
