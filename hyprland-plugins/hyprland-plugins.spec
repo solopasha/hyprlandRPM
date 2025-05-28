@@ -1,6 +1,6 @@
-%global commit0 d81d96e9d68c182a202e0bbf14384d60929b4454
+%global commit0 367f4fc6e9a903314c1f1eb227af35dccbe0b64c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1125
+%global bumpver 1126
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
