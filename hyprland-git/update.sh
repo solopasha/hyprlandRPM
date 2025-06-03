@@ -60,7 +60,7 @@ copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins-git -
 
 if [[ $newRelease == "1" ]]; then
     copr edit-package-scm --name hyprland --clone-url "https://github.com/solopasha/hyprlandRPM.git" --commit master \
-        --subdir hyprland-git --spec hyprland.spec --type git --method make_srpm solopasha/hyprland ::: hyprland
+        --subdir hyprland-git --spec hyprland.spec --type git --method make_srpm solopasha/hyprland
     hyprlandBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
     copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins --after-build-id "$hyprlandBuildId"
     git branch "$newTag"
