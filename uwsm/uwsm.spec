@@ -70,6 +70,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/applications/uuctl.desktop
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/man1/fumon.1.*
+%{_mandir}/man1/uuctl.1.*
+%{_mandir}/man1/uwsm-app.1.*
 %{_mandir}/man3/%{name}-plugins.3.*
 %{_userunitdir}/fumon.service
 
