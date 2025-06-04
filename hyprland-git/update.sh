@@ -3,6 +3,7 @@ set -euxo pipefail
 
 ec=0
 newRelease=0
+curl_opts=(--connect-timeout 10 --retry 7 --retry-connrefused -Ss -X POST)
 
 oldTag="$(rpmspec -q --qf "%{version}\n" hyprland-git.spec | head -1 | sed 's/\^.*//')"
 newTag="$(curl "https://api.github.com/repos/hyprwm/Hyprland/tags" | jq -r '.[0].name' | sed 's/^v//')"
@@ -55,16 +56,14 @@ bash plugins_update.sh;
 popd && \
 git commit -am "up rev hyprland-git-${newTag}+${newHyprlandCommit:0:7}" && \
 git push && \
-hyprlandGitBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland-git | sed -n 's/.*builds: \(.*\)/\1'/p) && \
-copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins-git --after-build-id "$hyprlandGitBuildId"; }
+hyprlandGitBuildId=$(curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/77569/${COPR_WEBHOOK}/hyprland-git") && \
+copr watch-build "${hyprlandGitBuildId}" && \
+curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/77569/${COPR_WEBHOOK}/hyprland-plugins-git"; }
 
 if [[ $newRelease == "1" ]]; then
-    copr edit-package-scm --name hyprland --clone-url "https://github.com/solopasha/hyprlandRPM.git" --commit master \
-        --subdir hyprland-git --spec hyprland.spec --type git --method make_srpm solopasha/hyprland
-    hyprlandBuildId=$(copr-cli build-package solopasha/hyprland --nowait --name hyprland | sed -n 's/.*builds: \(.*\)/\1'/p)
-    copr-cli build-package solopasha/hyprland --nowait --name hyprland-plugins --after-build-id "$hyprlandBuildId"
+    hyprlandBuildId=$(curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/77569/${COPR_WEBHOOK}/hyprland")
+    copr watch-build "${hyprlandBuildId}"
+    curl "${curl_opts[@]}" "https://copr.fedorainfracloud.org/webhooks/custom/77569/${COPR_WEBHOOK}/hyprland-plugins"
     git branch "$newTag"
     git push origin "$newTag"
-    copr edit-package-scm --name hyprland --clone-url "https://github.com/solopasha/hyprlandRPM.git" --commit "$newTag" \
-        --subdir hyprland-git --spec hyprland.spec --type git --method make_srpm solopasha/hyprland
 fi

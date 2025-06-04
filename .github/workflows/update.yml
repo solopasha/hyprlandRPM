@@ -16,19 +16,14 @@ jobs:
     steps:
       - name: Prepare
         run: |
-          microdnf -y install --nodocs --setopt=install_weak_deps=0 \
+          dnf -y install --nodocs --setopt=install_weak_deps=0 \
             git-core rpm-build curl perl-interpreter jq rpmdevtools copr-cli parallel
-
-      - name: Copr config
-        env:
-          COPR_CONF: ${{ secrets.COPR_CONFIG }}
-        run: |
-          mkdir -p ~/.config
-          echo "$COPR_CONF" > ~/.config/copr
 
       - uses: actions/checkout@v4
 
-      - name: Run updater
+      - name: Run updaters
+        env:
+          COPR_WEBHOOK: ${{ secrets.COPR_WEBHOOK }}
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.name "github-actions[bot]"

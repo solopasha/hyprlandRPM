@@ -26,5 +26,4 @@ esac
 git diff --quiet || \
 { perl -pe 's/(?<=bumpver\s)(\d+)/$1 + 1/ge' -i $SPEC && \
 git commit -am "up rev eww-git-${newTag}+${newCommit:0:7}" && \
-git push && \
-copr-cli build-package solopasha/hyprland --name eww-git --nowait --enable-net on; }
+git push; }
