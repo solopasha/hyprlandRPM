@@ -1,6 +1,6 @@
-%global commit0 c203ffe80f4e7b68e22ba3fde0598622500f5add
+%global commit0 20532ee760fdf492afcf987ae091497a37878197
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 8
+%global bumpver 9
 
 %global debug_package %{nil}
 
@@ -25,8 +25,10 @@ Requires:       /usr/bin/wl-paste
 Requires:       aylurs-gtk-shell2
 Requires:       bluez
 Requires:       gnome-bluetooth
+Requires:       gtksourceview3
 Requires:       gvfs
 Requires:       libgtop2
+Requires:       libsoup3
 Requires:       NetworkManager
 Requires:       upower
 
