@@ -1,6 +1,6 @@
 Name:           hyprland-autoname-workspaces
 Version:        1.1.15
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Hyprland autoname workspaces
 
 License:        ISC

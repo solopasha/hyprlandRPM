@@ -17,7 +17,7 @@ Wayland clipboard manager with support for multimedia.}
 %global godocs          CHANGELOG.md version.txt readme.md
 
 Name:           cliphist
-Release:        %autorelease.1
+Release:        %autorelease -b2
 Summary:        Wayland clipboard manager with support for multimedia
 
 License:        GPL-3.0-only

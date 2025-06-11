@@ -2,7 +2,7 @@
 
 Name:           xcur2png
 Version:        0.7.1
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Convert X cursors to PNG images
 
 License:        GPL-3.0-or-later

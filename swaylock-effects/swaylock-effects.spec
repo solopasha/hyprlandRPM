@@ -2,7 +2,7 @@
 
 Name:           swaylock-effects
 Version:        1.7.0.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Swaylock, with fancy effects
 
 License:        MIT

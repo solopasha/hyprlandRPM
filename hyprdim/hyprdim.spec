@@ -5,7 +5,7 @@
 
 Name:           hyprdim
 Version:        3.0.1
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        Automatically dim windows in Hyprland when switching between them
 # 0BSD OR MIT OR Apache-2.0
 # Apache-2.0 OR BSL-1.0

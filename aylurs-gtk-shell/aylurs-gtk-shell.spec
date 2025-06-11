@@ -5,7 +5,7 @@
 
 Name:           aylurs-gtk-shell
 Version:        1.9.0
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        A customizable and extensible shell
 
 License:        GPL-3.0-or-later
