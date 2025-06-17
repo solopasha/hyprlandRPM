@@ -2,7 +2,7 @@
 %global astal_shortcommit %(c=%{astal_commit}; echo ${c:0:7})
 %global bumpver 7
 
-%bcond bootstrap 1
+%bcond bootstrap 0
 
 %global _vpath_srcdir lib/astal/gtk4
 
