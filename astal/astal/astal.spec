@@ -1,10 +1,10 @@
 %global astal_commit 7f2292f0792ffc9b127d4788b3dd3f104b5374b2
 %global astal_shortcommit %(c=%{astal_commit}; echo ${c:0:7})
-%global bumpver 9
+%global bumpver 10
 
 %global _vpath_srcdir lib/astal/gtk3
 
-%bcond bootstrap 0
+%bcond bootstrap 1
 
 Name:           astal
 Version:        0~%{bumpver}.git%{astal_shortcommit}
