@@ -1,6 +1,6 @@
-%global commit0 03b07176286ba66d8c55ed67ce9b904f7777f41d
+%global commit0 f49193f8e0b3eb167fc105107791a22fdb1d283f
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 1159
+%global bumpver 1160
 
 %global __provides_exclude_from ^(%{_libdir}/hyprland/.*\\.so)$
 
@@ -9,6 +9,7 @@
                 csgo-vulkan-fix
                 hyprbars
                 hyprexpo
+                hyprfocus
                 hyprscrolling
                 hyprtrails
                 hyprwinwrap
