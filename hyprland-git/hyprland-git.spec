@@ -195,7 +195,9 @@ sed -i \
 %build
 %cmake \
     -GNinja \
-    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_BUILD_TYPE=Release \
+    -DNO_TESTS=TRUE \
+    -DBUILD_TESTING=FALSE
 %cmake_build
 
 
