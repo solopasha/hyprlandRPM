@@ -3,7 +3,7 @@
 Name:           xdg-desktop-portal-hyprland
 Epoch:          1
 Version:        1.3.9
-Release:        %autorelease -b7
+Release:        %autorelease -b8
 Summary:        xdg-desktop-portal backend for hyprland
 
 License:        BSD-3-Clause
@@ -40,7 +40,6 @@ Requires:       qt6-qtwayland
 
 Enhances:       hyprland
 Supplements:    hyprland
-Supplements:    hyprland-legacyrenderer
 Supplements:    hyprland-git
 
 Provides:       bundled(sdbus-cpp) = %{sdbus_version}
@@ -50,10 +49,7 @@ Provides:       bundled(sdbus-cpp) = %{sdbus_version}
 
 
 %prep
-%autosetup -N
-%if %{fedora} < 41
-sed -i '/libpipewire/s/>=1.1.82//' CMakeLists.txt
-%endif
+%autosetup -p1
 tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
 
 
