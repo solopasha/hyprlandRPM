@@ -1,6 +1,6 @@
 Name:           pyprland
-Version:        2.4.5
-Release:        %autorelease -b2
+Version:        2.4.6
+Release:        %autorelease
 Summary:        Hyprland extensions made easy
 
 License:        MIT
