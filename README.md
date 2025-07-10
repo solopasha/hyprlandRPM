@@ -33,7 +33,7 @@ A collection of Hyprland and related packages:
 * **[uwsm](https://github.com/Vladimir-csp/uwsm)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/uwsm/uwsm.spec) - Universal Wayland Session Manager.
 * **[qt6ct-kde](https://github.com/ilya-fedin/qt6ct)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/qt6ct-kde/qt6ct.spec) - Qt6 Configuration Utility, patched for proper integration with KDE applications.
 
-## If you find this repository helpful, please consider supporting it with a donation (7 days left until deletion):
+## If you find this repository helpful, please consider supporting it with a donation:
 TJWXhcsoGQbbJTe9uxHd5QjdDu9yU7b2S3 (USDT TRC20)
 
 TJWXhcsoGQbbJTe9uxHd5QjdDu9yU7b2S3 (Tron)
