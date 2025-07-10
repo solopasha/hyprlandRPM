@@ -1,6 +1,6 @@
 Name:           hyprgraphics
-Version:        0.1.4
-Release:        %autorelease -b2
+Version:        0.1.5
+Release:        %autorelease
 Summary:        Hyprland graphics / resource utilities
 
 License:        BSD-3-Clause
