@@ -1,10 +1,12 @@
 Name:           aquamarine
 Version:        0.9.1
-Release:        %autorelease
+Release:        %autorelease -b2
 Summary:        A very light linux rendering backend library
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/aquamarine
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch:          https://github.com/hyprwm/aquamarine/commit/d04e01e70c8b24f7b8fb340a66464e6922e90b1a.patch
+Patch:          https://github.com/hyprwm/aquamarine/commit/8b22613953961cbea21a620d0559c7ea27dc7e15.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
