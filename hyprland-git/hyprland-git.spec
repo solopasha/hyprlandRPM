@@ -165,6 +165,7 @@ if string.match(rpm.expand('%{name}'), 'hyprland%-git$') then
 elseif string.match(rpm.expand('%{name}'), 'hyprland$') then
     print('Obsoletes: hyprland-nvidia-devel < 1:0.32.3-2'..'\n')
     print(rpm.expand('Provides: hyprland-nvidia-devel = %{version}-%{release}')..'\n')
+    print('Obsoletes: hyprland-legacyrenderer-devel < 0.49.0'..'\n')
 end
 end}
 %printbdeps -r
