@@ -1,6 +1,6 @@
 Name:           hyprsunset
-Version:        0.2.0
-Release:        %autorelease -b4
+Version:        0.3.0
+Release:        %autorelease
 Summary:        An application to enable a blue-light filter on Hyprland
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprsunset
@@ -14,6 +14,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  systemd-rpm-macros
 
 BuildRequires:  pkgconfig(hyprland-protocols)
+BuildRequires:  pkgconfig(hyprlang)
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(hyprwayland-scanner)
 BuildRequires:  pkgconfig(wayland-client)
