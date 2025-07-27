@@ -54,7 +54,7 @@ tar -xf %{SOURCE1} -C subprojects/sdbus-cpp --strip=1
 
 
 %build
-%cmake -DBUILD_SHARED_LIBS:BOOL=OFF
+%cmake -DBUILD_SHARED_LIBS:BOOL=OFF -DCMAKE_BUILD_TYPE=Release
 %cmake_build
 
 
