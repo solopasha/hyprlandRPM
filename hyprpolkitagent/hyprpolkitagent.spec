@@ -1,6 +1,6 @@
 Name:           hyprpolkitagent
-Version:        0.1.2
-Release:        %autorelease -b2
+Version:        0.1.3
+Release:        %autorelease
 Summary:        A simple polkit authentication agent for Hyprland
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprpolkitagent
@@ -45,7 +45,7 @@ A simple polkit authentication agent for Hyprland, written in QT/QML.
 %files
 %license LICENSE
 %doc README.md
-%{_datadir}/dbus-1/services/%{name}.service
+%{_datadir}/dbus-1/services/org.hyprland.%{name}.service
 %{_libexecdir}/%{name}
 %{_userunitdir}/%{name}.service
 
