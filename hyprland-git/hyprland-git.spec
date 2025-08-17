@@ -106,7 +106,7 @@ Requires:       aquamarine%{?_isa} >= 0.9.2
 Requires:       hyprcursor%{?_isa} >= 0.1.12
 Requires:       hyprgraphics%{?_isa} >= 0.1.5
 Requires:       hyprlang%{?_isa} >= 0.6.3
-Requires:       hyprutils%{?_isa} >= 0.8.2
+Requires:       hyprutils%{?_isa} >= 0.8.3
 
 %{lua:do
 if string.match(rpm.expand('%{name}'), '%-git$') then
