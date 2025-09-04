@@ -1,5 +1,5 @@
 Name:           hellwal
-Version:        1.0.5
+Version:        1.0.7
 Release:        %autorelease
 Summary:        Pywal-like color palette generator, but faster and in C
 
