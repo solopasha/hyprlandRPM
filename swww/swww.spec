@@ -2,7 +2,7 @@
 %bcond_with check
 
 Name:           swww
-Version:        0.10.3
+Version:        0.11.0
 Release:        %autorelease
 Summary:        Efficient animated wallpaper daemon for wayland, controlled at runtime
 # 0BSD OR MIT OR Apache-2.0
@@ -27,6 +27,7 @@ URL:            https://github.com/LGFae/swww
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cargo-rpm-macros >= 24
+BuildRequires:  pkgconfig(dav1d)
 BuildRequires:  pkgconfig(liblz4)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols)
@@ -43,7 +44,7 @@ cargo vendor
 %cargo_prep -v vendor
 
 %build
-%cargo_build
+%cargo_build -f avif
 ./doc/gen.sh
 %{cargo_license_summary}
 %{cargo_license} > LICENSE.dependencies
