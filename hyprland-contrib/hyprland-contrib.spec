@@ -1,6 +1,6 @@
 %global commit0 9c4057e6f667e7f7cd043bc8ec3ee4a473f360f0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global bumpver 73
+%global bumpver 74
 
 Name:           hyprland-contrib
 Version:        0.1%{?bumpver:^%{bumpver}.git%{shortcommit0}}
@@ -27,7 +27,7 @@ Recommends:     hdrop
 
 %package -n grimblast
 Summary:        A helper for screenshots within hyprland
-Requires:       grim slurp wl-clipboard jq /usr/bin/notify-send hyprpicker
+Requires:       grim slurp wl-clipboard jq /usr/bin/notify-send hyprpicker /usr/bin/gdbus
 
 %description -n grimblast
 %{summary}.
