@@ -1,3 +1,9 @@
+0.49.0 → last version for Fedora 41
+
+0.51.0 → likely the last version for Fedora 42 (as of 2025-09-15, hyprland-git fails to build on F42)
+
+0.51.0+ → would require Fedora 43
+
 A collection of Hyprland and related packages:
 
 * **[hyprland](https://wiki.hyprland.org/)** – A highly customizable dynamic tiling Wayland compositor that doesn't sacrifice on its looks.
@@ -32,8 +38,10 @@ A collection of Hyprland and related packages:
 * **[mpvpaper](https://github.com/GhostNaN/mpvpaper)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/mpvpaper/mpvpaper.spec) - A video wallpaper program for wlroots based wayland compositors.
 * **[uwsm](https://github.com/Vladimir-csp/uwsm)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/uwsm/uwsm.spec) - Universal Wayland Session Manager.
 * **[qt6ct-kde](https://github.com/ilya-fedin/qt6ct)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/qt6ct-kde/qt6ct.spec) - Qt6 Configuration Utility, patched for proper integration with KDE applications.
+* **[hyprqt6engine](https://github.com/hyprwm/hyprqt6engine)** [(spec)](https://github.com/solopasha/hyprlandRPM/blob/master/hyprqt6engine/hyprqt6engine.spec) - Qt6 Theme Provider for Hyprland.
 
-## If you find this repository helpful, please consider supporting it with a donation:
+## If you find this repository helpful, please consider supporting it with a donation
+
 TJWXhcsoGQbbJTe9uxHd5QjdDu9yU7b2S3 (USDT TRC20)
 
 TJWXhcsoGQbbJTe9uxHd5QjdDu9yU7b2S3 (Tron)
