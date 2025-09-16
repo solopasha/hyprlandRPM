@@ -1,6 +1,6 @@
 %global hyprland_commit 5e96fac52fbd353eaf51ac436d1ada16a021e5f2
 %global hyprland_shortcommit %(c=%{hyprland_commit}; echo ${c:0:7})
-%global bumpver 8
+%global bumpver 9
 %global commits_count 6429
 %global commit_date Mon Sep 15 11:09:30 2025
 
@@ -9,6 +9,8 @@
 
 %global udis86_commit 5336633af70f3917760a6d441ff02d93477b0c86
 %global udis86_shortcommit %(c=%{udis86_commit}; echo ${c:0:7})
+
+%global libxkbcommon_version 1.11.0
 
 Name:           hyprland-git
 Version:        0.51.0%{?bumpver:^%{bumpver}.git%{hyprland_shortcommit}}
@@ -32,6 +34,7 @@ Source3:        https://github.com/canihavesomecoffee/udis86/archive/%{udis86_co
 Source0:        %{url}/releases/download/v%{version}/source-v%{version}.tar.gz
 %endif
 Source4:        macros.hyprland
+Source5:        https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-%{libxkbcommon_version}/libxkbcommon-%{libxkbcommon_version}.tar.gz
 
 %{lua:
 hyprdeps = {
@@ -84,10 +87,12 @@ hyprdeps = {
     "pkgconfig(xcb-xinput)",
     "pkgconfig(xcb)",
     "pkgconfig(xcursor)",
-    "pkgconfig(xkbcommon)",
     "pkgconfig(xwayland)",
     }
 }
+%if 0%{?fedora} > 42
+BuildRequires:  pkgconfig(xkbcommon)
+%endif
 
 %define printbdeps(r) %{lua:
 for _, dep in ipairs(hyprdeps) do
@@ -97,9 +102,20 @@ end
 
 %printbdeps
 
+%if 0%{?fedora} < 43
+BuildRequires:  byacc flex bison
+BuildRequires:  xorg-x11-proto-devel libX11-devel
+BuildRequires:  xkeyboard-config-devel
+BuildRequires:  pkgconfig(xcb-xkb)
+BuildRequires:  libxml2-devel
+%endif
+
 # udis86 is packaged in Fedora, but the copy bundled here is actually a
 # modified fork.
 Provides:       bundled(udis86) = 1.7.2^1.%{udis86_shortcommit}
+%if 0%{?fedora} < 43
+Provides:       bundled(libxkbcommon) = %{libxkbcommon_version}
+%endif
 
 Requires:       xorg-x11-server-Xwayland%{?_isa}
 Requires:       aquamarine%{?_isa} >= 0.9.2
@@ -169,6 +185,7 @@ elseif string.match(rpm.expand('%{name}'), 'hyprland$') then
 end
 end}
 %printbdeps -r
+Requires:       pkgconfig(xkbcommon)
 
 %description    devel
 %{summary}.
@@ -176,6 +193,10 @@ end}
 
 %prep
 %autosetup -n %{?bumpver:Hyprland-%{hyprland_commit}} %{!?bumpver:hyprland-source} -N
+%if 0%{?fedora} < 43
+mkdir -p subprojects/libxkbcommon
+tar -xf %{SOURCE5} -C subprojects/libxkbcommon --strip=1
+%endif
 
 %if 0%{?bumpver}
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
@@ -197,6 +218,16 @@ sed -i \
 
 
 %build
+%if 0%{?fedora} < 43
+pushd subprojects/libxkbcommon > /dev/null
+%meson -Denable-tools=false -Ddefault_library=static
+%meson_build
+DESTDIR=%{_builddir}/libxkbcommon-build meson install -C %{_vpath_builddir} --no-rebuild
+popd > /dev/null
+export PKG_CONFIG_PATH=%{_builddir}/libxkbcommon-build/%{_libdir}/pkgconfig
+%global optflags %{optflags} -I%{_builddir}/libxkbcommon-build/%{_includedir} -L%{_builddir}/libxkbcommon-build/%{_libdir}
+%endif
+
 %cmake \
     -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
