@@ -1,0 +1,47 @@
+name: Repoclosure
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 9 * * *'
+
+jobs:
+  repoclosure:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - rawhide
+          - 43
+          - 42
+          - 41
+    container:
+      image: registry.fedoraproject.org/fedora:${{ matrix.version }}
+    steps:
+      - name: Prepare
+        run: |
+          cat << 'EOF' >> /etc/yum.repos.d/coprs.repo
+          [copr:copr.fedorainfracloud.org:solopasha:hyprland]
+          name=Copr repo for hyprland owned by solopasha
+          baseurl=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/fedora-$releasever-$basearch/
+          type=rpm-md
+          skip_if_unavailable=True
+          gpgcheck=1
+          gpgkey=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/pubkey.gpg
+          repo_gpgcheck=0
+          enabled=1
+          enabled_metadata=1
+          EOF
+
+      - name: Repoclosure
+        run: |
+          dnf repoclosure \
+            --check copr:copr.fedorainfracloud.org:solopasha:hyprland \
+            --newest
+
+      - name: Repoclosure (with --best)
+        run: |
+          dnf repoclosure \
+            --check copr:copr.fedorainfracloud.org:solopasha:hyprland \
+            --newest --best
