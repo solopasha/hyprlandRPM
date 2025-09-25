@@ -1,6 +1,6 @@
 Name:           python-imageio-ffmpeg
 Version:        0.6.0
-Release:        %autorelease -b3
+Release:        %autorelease -b4
 Summary:        FFMPEG wrapper for Python
 
 License:        BSD-2-Clause

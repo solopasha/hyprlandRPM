@@ -1,6 +1,6 @@
 Name:           python-screeninfo
 Version:        0.8.1
-Release:        %autorelease -b4
+Release:        %autorelease -b5
 Summary:        Fetch location and size of physical screens
 
 License:        MIT
