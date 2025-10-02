@@ -57,7 +57,7 @@ hyprdeps = {
     "pkgconfig(hyprwayland-scanner)",
     "pkgconfig(libdisplay-info)",
     "pkgconfig(libdrm)",
-    "pkgconfig(libinput)",
+    "pkgconfig(libinput) >= 1.28",
     "pkgconfig(libliftoff)",
     "pkgconfig(libseat)",
     "pkgconfig(libudev)",
@@ -69,7 +69,7 @@ hyprdeps = {
     "pkgconfig(tomlplusplus)",
     "pkgconfig(uuid)",
     "pkgconfig(wayland-client)",
-    "pkgconfig(wayland-protocols)",
+    "pkgconfig(wayland-protocols) >= 1.45",
     "pkgconfig(wayland-scanner)",
     "pkgconfig(wayland-server)",
     "pkgconfig(xcb-composite)",
@@ -101,6 +101,12 @@ end
 }
 
 %printbdeps
+
+%if 0%{?rhel} == 10
+BuildRequires:  gcc-toolset-15
+BuildRequires:  gcc-toolset-15-gcc-c++
+BuildRequires:  gcc-toolset-15-annobin-plugin-gcc
+%endif
 
 %if 0%{?fedora} < 43
 BuildRequires:  byacc flex bison
@@ -218,6 +224,11 @@ sed -i \
 
 
 %build
+
+%if 0%{?rhel} == 10
+source /usr/lib/gcc-toolset/15-env.source
+%endif
+
 %if 0%{?fedora} < 43
 pushd subprojects/libxkbcommon > /dev/null
 %meson -Denable-tools=false -Ddefault_library=static
@@ -237,6 +248,11 @@ export PKG_CONFIG_PATH=%{_builddir}/libxkbcommon-build/%{_libdir}/pkgconfig
 
 
 %install
+
+%if 0%{?rhel} == 10
+source /usr/lib/gcc-toolset/15-env.source
+%endif
+
 %cmake_install
 install -Dpm644 %{SOURCE4} -t %{buildroot}%{_rpmconfigdir}/macros.d
 
