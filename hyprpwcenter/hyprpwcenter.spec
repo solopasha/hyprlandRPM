@@ -7,7 +7,7 @@ Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
 Release:        %autorelease
 Summary:        A GUI Pipewire control center
 
-License:        BSD-3-Clause license
+License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprpwcenter
 Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 
