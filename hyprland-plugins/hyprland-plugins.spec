@@ -16,7 +16,9 @@
                 xtra-dispatchers
 }
 
+%if !%{defined build_for}
 %global build_for release
+%endif
 
 %define pluginsmeta %{lua:
 if rpm.expand("%build_for") == "git" then
