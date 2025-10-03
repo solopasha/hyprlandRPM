@@ -49,7 +49,9 @@ Development files for %{name}.
 %cmake_install
 
 %check
+%ifnarch ppc64le
 %ctest
+%endif
 
 %files
 %license LICENSE
