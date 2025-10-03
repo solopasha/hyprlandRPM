@@ -23,6 +23,7 @@ BuildRequires:  cmake(KF6IconThemes)
 BuildRequires:  cmake(Qt6BuildInternals)
 BuildRequires:  cmake(Qt6Core)
 BuildRequires:  cmake(Qt6Widgets)
+BuildRequires:  qt6-qtbase-private-devel
 
 %description
 %{summary}.
