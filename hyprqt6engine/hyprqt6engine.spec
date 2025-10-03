@@ -5,6 +5,7 @@ Summary:        Qt6 Theme Provider for Hyprland
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprqt6engine
 Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch:          fix-build.diff
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
