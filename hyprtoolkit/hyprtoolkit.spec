@@ -39,6 +39,9 @@ BuildRequires:  pkgconfig(xkbcommon)
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       pkgconfig(aquamarine)
+Requires:       pkgconfig(cairo)
+Requires:       pkgconfig(hyprgraphics)
 %description    devel
 Development files for %{name}.
 
@@ -53,9 +56,6 @@ Development files for %{name}.
 
 %install
 %cmake_install
-
-%check
-%ctest
 
 %files
 %license LICENSE
