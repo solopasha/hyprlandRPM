@@ -1,6 +1,6 @@
 Name:           qt6ct-kde
 Version:        0.10
-Release:        %autorelease -b2
+Release:        %autorelease -b3
 Summary:        Qt6 Configuration Utility, patched to work correctly with KDE applications
 License:        BSD-2-Clause
 URL:            https://github.com/ilya-fedin/qt6ct
