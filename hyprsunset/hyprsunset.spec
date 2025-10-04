@@ -1,6 +1,6 @@
 Name:           hyprsunset
-Version:        0.3.2
-Release:        %autorelease -b2
+Version:        0.3.3
+Release:        %autorelease
 Summary:        An application to enable a blue-light filter on Hyprland
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprsunset
@@ -25,7 +25,6 @@ BuildRequires:  pkgconfig(wayland-protocols)
 
 %prep
 %autosetup -p1
-sed '/hyprsunset.service/s/${CMAKE_INSTALL_LIBDIR}/lib/' -i CMakeLists.txt
 
 %build
 %cmake -DCMAKE_BUILD_TYPE=Release
