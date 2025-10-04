@@ -1,13 +1,11 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f0cf66f..db18a22 100644
+index f0cf66f..8016c97 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -9,7 +9,10 @@ project(hsi VERSION ${VER} LANGUAGES CXX)
- set(CMAKE_CXX_STANDARD 23)
+@@ -10,6 +10,9 @@ set(CMAKE_CXX_STANDARD 23)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
  
--find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Quick QuickControls2 WaylandClient)
-+find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Quick QuickControls2 WaylandClient WaylandClientPrivate)
+ find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Quick QuickControls2 WaylandClient)
 +if(Qt6WaylandClient_VERSION VERSION_GREATER_EQUAL "6.10.0")
 +    find_package(Qt6WaylandClientPrivate ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
 +endif()
