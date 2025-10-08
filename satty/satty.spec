@@ -5,7 +5,7 @@
 %global cargo_install_lib 0
 
 Name:           satty
-Version:        0.19.0
+Version:        0.20.0
 Release:        %autorelease
 Summary:        Modern Screenshot Annotation
 
@@ -54,7 +54,9 @@ BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(libadwaita-1)
 
+%if 0%{?fedora} < 43
 Recommends:     gdk-pixbuf2-modules-extra
+%endif
 
 %global _description %{expand:
 Modern Screenshot Annotation. A Screenshot Annotation Tool inspired by
