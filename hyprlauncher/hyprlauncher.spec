@@ -1,6 +1,6 @@
-%global commit0 d17b0b746992e81890dcaa623bf621ca9d5b875a
+%global commit0 43d2b694186fe5bb0547a81a7f7a2ca3f9cbac24
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 1
+%global bumpver 2
 
 Name:           hyprlauncher
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
@@ -25,6 +25,8 @@ BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(pixman-1)
 BuildRequires:  pkgconfig(xkbcommon)
+
+Requires:       wl-clipboard
 
 %description
 %{summary}.
