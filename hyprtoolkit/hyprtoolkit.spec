@@ -1,6 +1,6 @@
-%global commit0 262ff7752f3be841d207c2c83c8597bf5b5b8c69
+%global commit0 9a73d1a4449ced3a67cf8347046430229dbb5a08
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 3
+%global bumpver 4
 
 Name:           hyprtoolkit
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
