@@ -1,6 +1,6 @@
-%global commit0 36e15251079e06e4a8009fe2b86325ecb5b6d206
+%global commit0 0554b57f93400a74651b440220d9b964bf0475d3
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 3
+%global bumpver 4
 
 Name:           hyprlauncher
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
@@ -23,6 +23,7 @@ BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(hyprwire)
 BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:  pkgconfig(libdrm)
+BuildRequires:  pkgconfig(libqalculate)
 BuildRequires:  pkgconfig(pixman-1)
 BuildRequires:  pkgconfig(xkbcommon)
 
