@@ -4,7 +4,7 @@
 # https://github.com/sentriz/cliphist
 %global goipath         go.senan.xyz/cliphist
 %global forgeurl        https://github.com/sentriz/cliphist
-Version:                0.6.1
+Version:                0.7.0
 
 %gometa -L -f
 
@@ -17,7 +17,7 @@ Wayland clipboard manager with support for multimedia.}
 %global godocs          CHANGELOG.md version.txt readme.md
 
 Name:           cliphist
-Release:        %autorelease -b2
+Release:        %autorelease
 Summary:        Wayland clipboard manager with support for multimedia
 
 License:        GPL-3.0-only
@@ -51,7 +51,7 @@ install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
 %files
 %license LICENSE
 %license vendor/modules.txt
-%doc CHANGELOG.md version.txt readme.md
+%doc CHANGELOG.md readme.md
 %{_bindir}/cliphist
 
 %changelog
