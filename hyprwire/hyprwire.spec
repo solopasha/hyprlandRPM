@@ -1,6 +1,6 @@
-%global commit0 a1f146a59cce70161595933a5e8b435b6c090a97
+%global commit0 063d28bf531e50847ac91732a72d94d4ba8fb5df
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 2
+%global bumpver 3
 
 Name:           hyprwire
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
