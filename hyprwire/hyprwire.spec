@@ -1,15 +1,11 @@
-%global commit0 08a2f94f6d894411cb3b229c088b026d1a98df60
-%global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 4
-
 Name:           hyprwire
-Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
+Version:        0.1.0
 Release:        %autorelease
 Summary:        A fast and consistent wire protocol for IPC
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprwire
-Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -31,7 +27,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Development files for %{name}.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
 
 %build
 %cmake -GNinja \
@@ -49,12 +45,12 @@ Development files for %{name}.
 %{_libdir}/lib%{name}.so.1
 
 %files devel
-%{_bindir}/hyprwire-scanner
+%{_bindir}/%{name}-scanner
 %{_includedir}/%{name}/
-%{_libdir}/cmake/hyprwire-scanner/
+%{_libdir}/cmake/%{name}-scanner/
 %{_libdir}/lib%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
-%{_libdir}/pkgconfig/hyprwire-scanner.pc
+%{_libdir}/pkgconfig/%{name}-scanner.pc
 
 %changelog
 %autochangelog
