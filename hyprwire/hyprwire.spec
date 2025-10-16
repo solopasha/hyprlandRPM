@@ -1,6 +1,6 @@
-%global commit0 063d28bf531e50847ac91732a72d94d4ba8fb5df
+%global commit0 08a2f94f6d894411cb3b229c088b026d1a98df60
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 3
+%global bumpver 4
 
 Name:           hyprwire
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
@@ -19,6 +19,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  ninja-build
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(libffi)
+BuildRequires:  pkgconfig(pugixml)
 
 %description
 %{summary}.
@@ -34,7 +35,8 @@ Development files for %{name}.
 
 %build
 %cmake -GNinja \
-    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_TESTING=OFF
 %cmake_build
 
 %install
@@ -47,9 +49,12 @@ Development files for %{name}.
 %{_libdir}/lib%{name}.so.1
 
 %files devel
+%{_bindir}/hyprwire-scanner
 %{_includedir}/%{name}/
+%{_libdir}/cmake/hyprwire-scanner/
 %{_libdir}/lib%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/pkgconfig/hyprwire-scanner.pc
 
 %changelog
 %autochangelog
