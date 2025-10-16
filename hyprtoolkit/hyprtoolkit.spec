@@ -1,15 +1,11 @@
-%global commit0 a967ed67ef2e60a3f3cb03d600781129890c49b2
-%global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 6
-
 Name:           hyprtoolkit
-Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
+Version:        0.1.0
 Release:        %autorelease
 Summary:        A modern C++ Wayland-native GUI toolkit
 
 License:        BSD-3-Clause
 URL:            https://github.com/hyprwm/hyprtoolkit
-Source:         %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -47,12 +43,12 @@ Requires:       pkgconfig(hyprgraphics)
 Development files for %{name}.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
-
+%autosetup -p1
 
 %build
 %cmake -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_TESTING=OFF
 %cmake_build
 
 %install
@@ -61,13 +57,13 @@ Development files for %{name}.
 %files
 %license LICENSE
 %doc README.md
-%{_libdir}/libhyprtoolkit.so.0.1.0
-%{_libdir}/libhyprtoolkit.so.1
+%{_libdir}/lib%{name}.so.0.1.0
+%{_libdir}/lib%{name}.so.1
 
 %files devel
-%{_includedir}/hyprtoolkit/
-%{_libdir}/libhyprtoolkit.so
-%{_libdir}/pkgconfig/hyprtoolkit.pc
+%{_includedir}/%{name}/
+%{_libdir}/lib%{name}.so
+%{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
 %autochangelog
