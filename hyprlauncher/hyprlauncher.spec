@@ -1,6 +1,6 @@
-%global commit0 9fd3b096e97bbcffc7cb4ad0ed1fbe856421c2f9
+%global commit0 7b7688ed8072bcd9055abc91193eec3961fe7087
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 5
+%global bumpver 6
 
 Name:           hyprlauncher
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
