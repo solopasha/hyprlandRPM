@@ -1,6 +1,6 @@
 %global commit0 9ebd1d6299eebfdcfa545c873515984344bbcebf
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 5
+%global bumpver 6
 
 Name:           hyprpwcenter
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
