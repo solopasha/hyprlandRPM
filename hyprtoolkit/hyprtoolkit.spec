@@ -1,6 +1,6 @@
-%global commit0 10f3eb385c4a5f506bc6dc476f92ab0f1a551cc0
+%global commit0 a967ed67ef2e60a3f3cb03d600781129890c49b2
 %global shortcommit0 %{sub %{commit0} 1 7}
-%global bumpver 5
+%global bumpver 6
 
 Name:           hyprtoolkit
 Version:        0.1.0%{?bumpver:~%{bumpver}.git%{shortcommit0}}
@@ -26,6 +26,7 @@ BuildRequires:  pkgconfig(hyprgraphics)
 BuildRequires:  pkgconfig(hyprlang)
 BuildRequires:  pkgconfig(hyprutils)
 BuildRequires:  pkgconfig(hyprutils)
+BuildRequires:  pkgconfig(iniparser)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(pango)
 BuildRequires:  pkgconfig(pixman-1)
