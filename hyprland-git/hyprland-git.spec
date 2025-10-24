@@ -40,7 +40,6 @@ Source5:        https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-%{li
 hyprdeps = {
     "cmake",
     "gcc-c++",
-    "git-core",
     "meson",
     "glaze-static",
     "pkgconfig(aquamarine)",
@@ -191,6 +190,7 @@ elseif string.match(rpm.expand('%{name}'), 'hyprland$') then
 end
 end}
 %printbdeps -r
+Requires:       git-core
 Requires:       pkgconfig(xkbcommon)
 
 %description    devel
@@ -207,12 +207,13 @@ tar -xf %{SOURCE5} -C subprojects/libxkbcommon --strip=1
 %if 0%{?bumpver}
 tar -xf %{SOURCE2} -C subprojects/hyprland-protocols --strip=1
 tar -xf %{SOURCE3} -C subprojects/udis86 --strip=1
-sed -e 's|^HASH=.*|HASH=%{hyprland_commit}|' \
-    -e 's|^DIRTY=.*|DIRTY=|' \
-    -e 's|^BRANCH=.*|BRANCH=main|' \
-    -e 's|^DATE=.*|DATE="%{commit_date}"|' \
-    -e 's|^COMMITS=.*|COMMITS=%{commits_count}|' \
-    -i scripts/generateVersion.sh
+sed -e '/GIT_COMMIT_HASH/s/unknown/%{hyprland_commit}/' \
+    -e '/GIT_BRANCH/s/unknown/main/' \
+    -e '/GIT_COMMIT_DATE/s/unknown/%{commit_date}/' \
+    -e '/GIT_TAG/s/unknown/%{lua:print((macros.version:gsub('[%^~].*', '')))}/' \
+    -e '/GIT_DIRTY/s/unknown/clean/' \
+    -e '/GIT_COMMITS/s/0/%{commits_count}/' \
+    -i CMakeLists.txt
 %endif
 
 cp -p subprojects/hyprland-protocols/LICENSE LICENSE-hyprland-protocols
