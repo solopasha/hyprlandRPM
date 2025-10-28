@@ -11,6 +11,7 @@ Source:         %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 ExcludeArch:    %{ix86}
 
 BuildRequires:  cmake
+BuildRequires:  desktop-file-utils
 BuildRequires:  gcc-c++
 BuildRequires:  ninja-build
 BuildRequires:  pkgconfig(hyprtoolkit)
@@ -34,10 +35,14 @@ BuildRequires:  pkgconfig(pixman-1)
 %install
 %cmake_install
 
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
+
 %files
 %license LICENSE
 %doc README.md
 %{_bindir}/hyprpwcenter
+%{_datadir}/applications/hyprpwcenter.desktop
 
 %changelog
 %autochangelog
